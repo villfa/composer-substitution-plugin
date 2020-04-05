@@ -1,6 +1,6 @@
 # Composer Substitution Plugin
 
-Composer plugin replacing placeholders the scripts section by dynamic values
+Composer plugin replacing placeholders in the scripts section by dynamic values
 
 ## Installation
 
