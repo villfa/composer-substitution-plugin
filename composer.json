@@ -1,5 +1,5 @@
 {
-    "name": "villfa/substitution-plugin",
+    "name": "villfa/composer-substitution-plugin",
     "description": "Composer plugin replacing placeholders in the scripts section by dynamic values",
     "type": "composer-plugin",
     "keywords": [
