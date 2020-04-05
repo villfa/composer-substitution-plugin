@@ -1,0 +1,13 @@
+composer
+composer.phar
+composer.lock
+/vendor/
+
+phpunit.xml
+phpstan.neon
+
+.phpunit.result.cache
+.php_cs.cache
+
+# IDE-specific files must be in a different .gitignore:
+# https://help.github.com/en/github/using-git/ignoring-files#create-a-global-gitignore

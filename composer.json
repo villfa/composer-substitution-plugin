@@ -1,0 +1,47 @@
+{
+    "name": "villfa/substitution-plugin",
+    "description": "Composer plugin replacing placeholders the scripts section by dynamic values",
+    "type": "composer-plugin",
+    "keywords": [
+        "composer",
+        "plugin",
+        "substitution",
+        "replacement",
+        "scripts"
+    ],
+    "license": ["MIT"],
+    "authors": [
+        {
+            "name": "Fabien VILLEPINTE",
+            "email": "fabien.villepinte@gmail.com"
+        }
+    ],
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": { "SubstitutionPlugin\\": "src/" }
+    },
+    "require": {
+        "php": "^5.3.2 || ^7.0",
+        "composer-plugin-api": "^1.1",
+        "psr/log": "^1.1"
+    },
+    "require-dev": {
+        "composer/composer": "^1.10"
+    },
+    "extra": {
+        "class": "SubstitutionPlugin\\SubstitutionPlugin"
+    },
+    "scripts": {
+        "test": [
+            "@composer validate --no-interaction --strict"
+        ]
+    },
+    "scripts-descriptions": {
+        "test": "Validates and tests the plugin."
+    }
+}
