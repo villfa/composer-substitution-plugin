@@ -2,6 +2,9 @@
 
 Composer plugin replacing placeholders in the scripts section by dynamic values
 
+[![Latest Stable Version](https://poser.pugx.org/villfa/composer-substitution-plugin/v/stable)](https://packagist.org/packages/villfa/composer-substitution-plugin)
+[![License](https://poser.pugx.org/villfa/composer-substitution-plugin/license)](./LICENSE)
+
 ## Installation
 
 ```sh
