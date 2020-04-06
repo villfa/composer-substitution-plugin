@@ -6,6 +6,11 @@ use PHPUnit\Framework\TestCase;
 
 class BaseTestCase extends TestCase
 {
+    protected static function getProjectDir()
+    {
+        return realpath(__DIR__ . '/../');
+    }
+
     protected static function getFixturesDir()
     {
         return __DIR__ . '/Fixtures';

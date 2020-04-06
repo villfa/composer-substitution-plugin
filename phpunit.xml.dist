@@ -9,7 +9,14 @@
          stopOnFailure="false"
          bootstrap="vendor/autoload.php"
 >
+    <php>
+        <env name="COMPOSER_PATH" value="composer" />
+    </php>
+
     <testsuites>
+        <testsuite name="e2e_tests">
+            <directory>tests/e2e</directory>
+        </testsuite>
         <testsuite name="unit_tests">
             <directory>tests/unit</directory>
         </testsuite>

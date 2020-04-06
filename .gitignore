@@ -1,7 +1,7 @@
 composer
 composer.phar
 composer.lock
-/vendor/
+vendor/
 
 phpunit.xml
 phpstan.neon

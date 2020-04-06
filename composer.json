@@ -30,7 +30,12 @@
         "files": [
             "tests/BaseTestCase.php"
         ],
-        "psr-4": { "SubstitutionPlugin\\": "tests/unit/" }
+        "psr-4": {
+            "SubstitutionPlugin\\": [
+                "tests/e2e/",
+                "tests/unit/"
+            ]
+        }
     },
     "require": {
         "php": ">=5.3.2",
@@ -47,12 +52,15 @@
     "scripts": {
         "test": [
             "@composer validate --no-interaction --strict",
-            "@unit_test"
+            "@test:unit",
+            "@test:e2e"
         ],
-        "unit_test": "phpunit --testsuite unit_tests"
+        "test:e2e": "phpunit --testsuite e2e_tests",
+        "test:unit": "phpunit --testsuite unit_tests"
     },
     "scripts-descriptions": {
         "test": "Validates and tests the plugin.",
-        "unit_test": "Runs unit tests"
+        "test:e2e": "Runs end to end tests",
+        "test:unit": "Runs unit tests"
     }
 }
