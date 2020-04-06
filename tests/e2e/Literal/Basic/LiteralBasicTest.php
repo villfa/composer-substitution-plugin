@@ -13,6 +13,6 @@ class LiteralBasicTest extends BaseEndToEndTestCase
         list($output, $exitCode) = $this->runComposer(__DIR__, $args);
 
         self::assertEquals(0, $exitCode);
-        self::assertEquals(array('foo'), $output);
+        self::assertEquals('foo', array_pop($output));
     }
 }

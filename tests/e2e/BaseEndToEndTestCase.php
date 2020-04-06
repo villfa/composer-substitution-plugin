@@ -14,7 +14,7 @@ class BaseEndToEndTestCase extends BaseTestCase
         list($output, $exitCode) = $this->runComposer($dir, $args);
 
         if ($exitCode > 0) {
-            echo $output, PHP_EOL;
+            echo implode(PHP_EOL, $output), PHP_EOL;
             throw new \RuntimeException('Cannot install in ' . $dir, $exitCode);
         }
     }
