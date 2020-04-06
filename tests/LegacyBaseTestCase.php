@@ -2,6 +2,7 @@
 
 namespace SubstitutionPlugin;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 class LegacyBaseTestCase extends TestCase
@@ -36,6 +37,11 @@ class LegacyBaseTestCase extends TestCase
         static::doAssertPostConditions();
     }
 
+    protected function onNotSuccessfulTest(Exception $e)
+    {
+        static::doOnNotSuccessfulTest($e);
+    }
+
     public static function doSetUpBeforeClass()
     {
     }
@@ -58,5 +64,10 @@ class LegacyBaseTestCase extends TestCase
 
     protected function doAssertPostConditions()
     {
+    }
+
+    protected function doOnNotSuccessfulTest(Exception $e)
+    {
+        throw $e;
     }
 }
