@@ -36,7 +36,6 @@ class CallbackProvider implements ProviderInterface
      */
     public function getValue()
     {
-        // TODO check returned type (must be string)
         return call_user_func($this->callback);
     }
 }

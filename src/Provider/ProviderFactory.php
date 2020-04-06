@@ -61,6 +61,8 @@ class ProviderFactory
                 return null;
         }
 
+        $provider = new ProviderProxyLogger($this->logger, $configuration, $provider);
+
         if ($configuration->isCached()) {
             $provider = new ProviderProxyCache($provider);
         }
