@@ -10,6 +10,7 @@
         "scripts"
     ],
     "license": ["MIT"],
+    "homepage": "https://github.com/villfa/composer-substitution-plugin",
     "authors": [
         {
             "name": "Fabien VILLEPINTE",
@@ -26,7 +27,7 @@
         "psr-4": { "SubstitutionPlugin\\": "src/" }
     },
     "require": {
-        "php": "^5.3.2 || ^7.0",
+        "php": ">=5.3.2",
         "composer-plugin-api": "^1.1",
         "psr/log": "^1.1"
     },

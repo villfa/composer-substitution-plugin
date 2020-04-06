@@ -57,6 +57,6 @@ extra.substitution.mapping.*.cached | false | bool | false | Indicates whether t
 For each type of substitution the value replacing the placeholder comes from a different source.
 
 * `literal`: The value in configuration is used directly.
-* `callback`: The value is the string returned by a callback. 
+* `callback`: The value is the string returned by a callback.
 * `include`: The value is the string returned by a PHP file.
 * `env`: The value is an ENV variable.
