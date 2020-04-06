@@ -4,7 +4,7 @@ namespace SubstitutionPlugin\Literal\Basic;
 
 use SubstitutionPlugin\BaseEndToEndTestCase;
 
-class LiteralBasicTest extends BaseEndToEndTestCase
+class LiteralComposedTest extends BaseEndToEndTestCase
 {
     public static function doSetUpBeforeClass()
     {
@@ -17,7 +17,7 @@ class LiteralBasicTest extends BaseEndToEndTestCase
         list($output, $exitCode) = self::runComposer(__DIR__, 'test');
 
         self::assertEquals(0, $exitCode);
-        self::assertEquals('foo', array_pop($output));
+        self::assertEquals('_success_', array_pop($output));
     }
 
     public static function doTearDownAfterClass()

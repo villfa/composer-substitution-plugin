@@ -6,12 +6,12 @@ use Composer\Util\Filesystem;
 
 class BaseEndToEndTestCase extends BaseTestCase
 {
-    protected function install($dir)
+    protected static function install($dir)
     {
-        $this->cleanDir($dir);
-        $args = $this->getArgInstall();
+        self::cleanDir($dir);
+        $args = self::getArgInstall();
 
-        list($output, $exitCode) = $this->runComposer($dir, $args);
+        list($output, $exitCode) = self::runComposer($dir, $args);
 
         if ($exitCode > 0) {
             echo implode(PHP_EOL, $output), PHP_EOL;
@@ -24,12 +24,12 @@ class BaseEndToEndTestCase extends BaseTestCase
      * @param string $args
      * @return array
      */
-    protected function runComposer($dir, $args)
+    protected static function runComposer($dir, $args)
     {
         chdir(self::getProjectDir());
         $command = getenv('COMPOSER_PATH')
             . ' --no-ansi '
-            . $this->getArgWorkingDir($dir)
+            . self::getArgWorkingDir($dir)
             . $args;
 
         exec($command, $output, $exitCode);
@@ -39,7 +39,19 @@ class BaseEndToEndTestCase extends BaseTestCase
     /**
      * @param string $dir
      */
-    protected function cleanDir($dir)
+    protected static function safeCleanDir($dir)
+    {
+        try {
+            @self::cleanDir($dir);
+        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+        }
+    }
+
+    /**
+     * @param string $dir
+     */
+    protected static function cleanDir($dir)
     {
         $fs = new Filesystem();
         foreach (array('composer.lock', 'vendor') as $toDelete) {
@@ -52,12 +64,12 @@ class BaseEndToEndTestCase extends BaseTestCase
      * @param string $dir
      * @return string
      */
-    protected function getArgWorkingDir($dir)
+    protected static function getArgWorkingDir($dir)
     {
         return sprintf('--working-dir=%s ', escapeshellarg($dir));
     }
 
-    protected function getArgInstall()
+    protected static function getArgInstall()
     {
         return 'install --no-interaction --no-progress --no-suggest --no-dev';
     }
