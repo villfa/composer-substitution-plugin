@@ -24,10 +24,15 @@ class IncludeProvider implements ProviderInterface
      */
     public function getValue()
     {
-        $path = $this->path;
+        return self::returnInclude($this->path);
+    }
 
-        return call_user_func(static function () use ($path) {
-            return include $path;
-        });
+    /**
+     * @param string $path
+     * @return mixed
+     */
+    private static function returnInclude($path)
+    {
+        return include $path;
     }
 }

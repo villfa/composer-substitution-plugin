@@ -22,4 +22,11 @@ class IncludeProviderTest extends BaseUnitTestCase
         $provider = new IncludeProvider($path);
         self::assertEquals('foo', $provider->getValue());
     }
+
+    public function testStaticContext()
+    {
+        $path = self::getFixturesDir() . '/check-static-context.php';
+        $provider = new IncludeProvider($path);
+        self::assertEquals('false', $provider->getValue());
+    }
 }
