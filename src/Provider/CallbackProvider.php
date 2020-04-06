@@ -7,6 +7,9 @@ class CallbackProvider implements ProviderInterface
     /** @var callable */
     private $callback;
 
+    /**
+     * @param string $callback
+     */
     public function __construct($callback)
     {
         if (is_callable($callback)) {
@@ -19,7 +22,7 @@ class CallbackProvider implements ProviderInterface
             $class = substr($callback, 0, $pos);
             $method = substr($callback, $pos + 2);
             // triggers autoloading
-            if (method_exists($class, $method)) {
+            if (method_exists($class, $method) && is_callable(array($class, $method))) {
                 $this->callback = array($class, $method);
                 return;
             }
@@ -33,6 +36,7 @@ class CallbackProvider implements ProviderInterface
      */
     public function getValue()
     {
+        // TODO check returned type (must be string)
         return call_user_func($this->callback);
     }
 }

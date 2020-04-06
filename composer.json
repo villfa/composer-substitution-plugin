@@ -26,23 +26,33 @@
     "autoload": {
         "psr-4": { "SubstitutionPlugin\\": "src/" }
     },
+    "autoload-dev": {
+        "files": [
+            "tests/BaseTestCase.php"
+        ],
+        "psr-4": { "SubstitutionPlugin\\": "tests/unit/" }
+    },
     "require": {
         "php": ">=5.3.2",
         "composer-plugin-api": "^1.1",
         "psr/log": "^1.1"
     },
     "require-dev": {
-        "composer/composer": "^1.10"
+        "composer/composer": "^1.10",
+        "phpunit/phpunit": "^4.8.35 || ^5.7 || 6.5 - 8"
     },
     "extra": {
         "class": "SubstitutionPlugin\\SubstitutionPlugin"
     },
     "scripts": {
         "test": [
-            "@composer validate --no-interaction --strict"
-        ]
+            "@composer validate --no-interaction --strict",
+            "@unit_test"
+        ],
+        "unit_test": "phpunit --testsuite unit_tests"
     },
     "scripts-descriptions": {
-        "test": "Validates and tests the plugin."
+        "test": "Validates and tests the plugin.",
+        "unit_test": "Runs unit tests"
     }
 }
