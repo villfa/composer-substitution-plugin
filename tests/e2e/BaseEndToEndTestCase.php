@@ -14,7 +14,7 @@ class BaseEndToEndTestCase extends BaseTestCase
      * @param string $dir
      * @param string $package
      */
-    protected static function forceUpdateOnce($dir, $package)
+    private static function forceUpdateOnce($dir, $package)
     {
         if (!isset(self::$updatedPackages[$package])) {
             self::$updatedPackages[$package] = false;
@@ -37,7 +37,7 @@ class BaseEndToEndTestCase extends BaseTestCase
     protected static function install($dir)
     {
         self::cleanDir($dir);
-        $args = self::getArgInstall();
+        $args = 'install --no-progress --no-suggest --no-dev';
 
         list($output, $exitCode) = self::runComposer($dir, $args);
 
@@ -50,16 +50,18 @@ class BaseEndToEndTestCase extends BaseTestCase
     }
 
     /**
-     * @param string $dir
+     * @param string|null $dir
      * @param string $args
+     * @param string $envVars
      * @return array
      */
-    protected static function runComposer($dir, $args)
+    protected static function runComposer($dir, $args, $envVars = '')
     {
         chdir(self::getProjectDir());
-        $command = self::getVendorBinDir()
+        $command = (empty($envVars) ? '' : "$envVars ")
+            . self::getVendorBinDir()
             . '/composer --no-ansi  --no-interaction '
-            . self::getArgWorkingDir($dir)
+            . ($dir === null ? '' : self::getArgWorkingDir($dir))
             . $args;
 
         exec($command, $output, $exitCode);
@@ -97,10 +99,5 @@ class BaseEndToEndTestCase extends BaseTestCase
     protected static function getArgWorkingDir($dir)
     {
         return sprintf('--working-dir=%s ', escapeshellarg($dir));
-    }
-
-    protected static function getArgInstall()
-    {
-        return 'install --no-progress --no-suggest --no-dev';
     }
 }
