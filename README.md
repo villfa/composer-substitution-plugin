@@ -45,8 +45,25 @@ Here an example:
 }
 ```
 
-Configuration | Mandatory | Type | Default value | Description
-------------- | --------- | ---- | ------------- | -----------
+Then you can add the configured placeholders in the *scripts* section:
+
+```json
+"scripts": {
+    "welcome": "echo 'Hi {MY_NAME}, the database is {DB_STATUS}.'"
+}
+```
+
+And now if you run the command:
+
+```sh
+$ composer run-script welcome
+Hi John Doe, the database is OK.
+```
+
+### Configuration
+
+Configuration key | Mandatory | Type | Default value | Description
+----------------- | --------- | ---- | ------------- | -----------
 extra.substitution.enable | yes | bool | false | Enables the plugin when true
 extra.substitution.mapping | yes | object | empty object | Mapping between placeholders (the keys) and substitution rules (the values). There is no restriction with the placeholders format.
 extra.substitution.mapping.*.type | yes | string | n/a | Substitution type (see the related section below)
