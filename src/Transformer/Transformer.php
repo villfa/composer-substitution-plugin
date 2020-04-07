@@ -27,7 +27,7 @@ class Transformer implements TransformerInterface
      */
     public function transform($value)
     {
-        if ($this->placeholder !== '' && strpos($value, $this->placeholder) === false) {
+        if ($this->placeholder === '' || strpos($value, $this->placeholder) === false) {
             return $value;
         }
 

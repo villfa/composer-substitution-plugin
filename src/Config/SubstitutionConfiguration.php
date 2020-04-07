@@ -43,6 +43,11 @@ class SubstitutionConfiguration extends AbstractConfiguration
     {
         self::setLogger($logger);
 
+        if ($placeholder === '') {
+            self::$logger->warning("Configuration extra.substitution.mapping doesn't accept empty keys.");
+            return null;
+        }
+
         if (!is_array($conf)) {
             self::$logger->warning("Configuration extra.substitution.mapping.$placeholder must be an object.");
             return null;

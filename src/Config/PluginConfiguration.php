@@ -65,7 +65,7 @@ class PluginConfiguration extends AbstractConfiguration
         $mapping = array();
 
         foreach ($conf as $placeholder => $value) {
-            $substitution = SubstitutionConfiguration::parseConfiguration($placeholder, $value, self::$logger);
+            $substitution = SubstitutionConfiguration::parseConfiguration((string)$placeholder, $value, self::$logger);
             if ($substitution !== null) {
                 $mapping[] = $substitution;
             }
