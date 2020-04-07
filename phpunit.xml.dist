@@ -10,7 +10,6 @@
          bootstrap="vendor/autoload.php"
 >
     <php>
-        <env name="COMPOSER_PATH" value="composer" />
     </php>
 
     <testsuites>

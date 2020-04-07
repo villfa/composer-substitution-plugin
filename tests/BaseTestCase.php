@@ -19,6 +19,11 @@ class BaseTestCase extends TestCase
         return realpath(__DIR__ . '/../');
     }
 
+    protected static function getVendorBinDir()
+    {
+        return self::getProjectDir() . '/vendor/bin';
+    }
+
     protected static function getFixturesDir()
     {
         return __DIR__ . '/Fixtures';
