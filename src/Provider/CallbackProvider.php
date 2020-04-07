@@ -17,17 +17,6 @@ class CallbackProvider implements ProviderInterface
             return;
         }
 
-        $pos = strpos($callback, '::');
-        if ($pos !== false) {
-            $class = substr($callback, 0, $pos);
-            $method = substr($callback, $pos + 2);
-            // triggers autoloading
-            if (method_exists($class, $method) && is_callable(array($class, $method))) {
-                $this->callback = array($class, $method);
-                return;
-            }
-        }
-
         throw new \InvalidArgumentException("Value is not callable: $callback");
     }
 
