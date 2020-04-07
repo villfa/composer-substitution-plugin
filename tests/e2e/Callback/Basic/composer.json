@@ -1,0 +1,40 @@
+{
+    "autoload": {
+        "files": [
+            "function-bar.php"
+        ]
+    },
+    "require": {
+        "villfa/composer-substitution-plugin": "*"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../../."
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true
+    },
+    "scripts": {
+        "test-native-func": "echo '#PHP_VERSION'",
+        "test-ud-func": "echo '#BAR'"
+    },
+    "extra": {
+        "substitution": {
+            "enable": true,
+            "mapping": {
+                "#PHP_VERSION": {
+                    "type": "callback",
+                    "value": "phpversion"
+                },
+                "#BAR": {
+                    "type": "callback",
+                    "value": "barFunc"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "require": {
+        "villfa/composer-substitution-plugin": "*"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../../."
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test01": "echo _{text}_01",
+        "test02": "echo _{text}_02"
+    },
+    "extra": {
+        "substitution": {
+            "enable": true,
+            "mapping": {
+                "{text}": {
+                    "type": "literal",
+                    "value": "foo"
+                }
+            }
+        }
+    }
+}

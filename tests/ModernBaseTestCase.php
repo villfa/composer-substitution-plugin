@@ -31,16 +31,6 @@ class ModernBaseTestCase extends TestCase
         static::doAssertPreConditions();
     }
 
-    protected function assertPostConditions(): void
-    {
-        static::doAssertPostConditions();
-    }
-
-    protected function onNotSuccessfulTest(\Throwable $t): void
-    {
-        static::doOnNotSuccessfulTest($t);
-    }
-
     public static function doSetUpBeforeClass()
     {
     }
@@ -59,14 +49,5 @@ class ModernBaseTestCase extends TestCase
 
     protected function doAssertPreConditions()
     {
-    }
-
-    protected function doAssertPostConditions()
-    {
-    }
-
-    protected function doOnNotSuccessfulTest(\Throwable $t): void
-    {
-        throw $t;
     }
 }

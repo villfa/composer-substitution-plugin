@@ -17,6 +17,7 @@ class ProviderProxyLoggerTest extends BaseUnitTestCase
 
     public static function doSetUpBeforeClass()
     {
+        parent::doSetUpBeforeClass();
         self::$logger = new NullLogger();
         self::$configuration = new SubstitutionConfiguration(
             '{placeholder}',

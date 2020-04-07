@@ -9,6 +9,7 @@ class TransformerCollectionTest extends BaseUnitTestCase
 {
     public static function doSetUpBeforeClass()
     {
+        parent::doSetUpBeforeClass();
         require_once self::getFixturesDir() . '/DummyTransformer.php';
     }
 
