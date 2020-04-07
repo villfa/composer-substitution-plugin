@@ -12,12 +12,11 @@ class CallbackProvider implements ProviderInterface
      */
     public function __construct($callback)
     {
-        if (is_callable($callback)) {
-            $this->callback = $callback;
-            return;
+        if (!is_callable($callback)) {
+            throw new \InvalidArgumentException("Value is not callable: $callback");
         }
 
-        throw new \InvalidArgumentException("Value is not callable: $callback");
+        $this->callback = $callback;
     }
 
     /**

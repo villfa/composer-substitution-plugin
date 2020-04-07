@@ -16,7 +16,8 @@ class ProviderProxyCacheTest extends BaseUnitTestCase
 
     public function testCache()
     {
-        $innerProvider = new DummyProvider('foo');
+        require_once self::getFixturesDir() . '/DummyProvider.php';
+        $innerProvider = new \DummyProvider('foo');
         $provider = new ProviderProxyCache($innerProvider);
 
         self::assertEquals(0, $innerProvider->getCount());

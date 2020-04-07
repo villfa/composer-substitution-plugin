@@ -1,6 +1,6 @@
 <?php
 
-namespace SubstitutionPlugin\Provider;
+use SubstitutionPlugin\Provider\ProviderInterface;
 
 class DummyProvider implements ProviderInterface
 {
