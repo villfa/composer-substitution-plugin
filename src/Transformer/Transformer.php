@@ -18,7 +18,7 @@ class Transformer implements TransformerInterface
      */
     public function __construct($placeholder, ProviderInterface $provider)
     {
-        $this->placeholder = $placeholder;
+        $this->placeholder = (string) $placeholder;
         $this->provider = $provider;
     }
 
@@ -27,7 +27,7 @@ class Transformer implements TransformerInterface
      */
     public function transform($value)
     {
-        if (strpos($value, $this->placeholder) === false) {
+        if ($this->placeholder !== '' && strpos($value, $this->placeholder) === false) {
             return $value;
         }
 
