@@ -9,6 +9,9 @@ class PluginConfiguration extends AbstractConfiguration
     /** @var bool */
     private $enabled = false;
 
+    /** @var int */
+    private $priority = 0;
+
     /** @var array<string, SubstitutionConfiguration> */
     private $mapping = array();
 
@@ -28,7 +31,7 @@ class PluginConfiguration extends AbstractConfiguration
     private function parseConfiguration(array $conf)
     {
         if (isset($conf['enable'])) {
-            $this->enabled = self::parseBool('enable', $conf['enable']);
+            $this->enabled = self::parseBool('enable', $conf['enable'], $this->enabled);
         }
         if (!$this->enabled) {
             // no need to go further
@@ -51,6 +54,10 @@ class PluginConfiguration extends AbstractConfiguration
             self::$logger->notice('Configuration extra.substitution.mapping empty. Plugin disabled.');
             return;
         }
+
+        if (isset($conf['priority'])) {
+            $this->priority = self::parseInt('priority', $conf['priority'], $this->priority);
+        }
     }
 
     private function parseMapping(array $conf)
@@ -70,6 +77,14 @@ class PluginConfiguration extends AbstractConfiguration
     public function isEnabled()
     {
         return $this->enabled;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 
     /**

@@ -8,32 +8,6 @@ class BaseEndToEndTestCase extends BaseTestCase
 {
     const PACKAGE = 'villfa/composer-substitution-plugin';
 
-    private static $updatedPackages = array();
-
-    /**
-     * @param string $dir
-     * @param string $package
-     */
-    private static function forceUpdateOnce($dir, $package)
-    {
-        if (!isset(self::$updatedPackages[$package])) {
-            self::$updatedPackages[$package] = false;
-        }
-        if (self::$updatedPackages[$package]) {
-            return;
-        }
-
-        $args = "update $package --no-cache --no-progress --no-suggest --no-dev";
-        list($output, $exitCode) = self::runComposer($dir, $args);
-
-        if ($exitCode > 0) {
-            echo implode(PHP_EOL, $output), PHP_EOL;
-            throw new \RuntimeException("Cannot update $package in $dir", $exitCode);
-        }
-
-        self::$updatedPackages[$package] = true;
-    }
-
     protected static function install($dir)
     {
         self::cleanDir($dir);
@@ -45,8 +19,6 @@ class BaseEndToEndTestCase extends BaseTestCase
             echo implode(PHP_EOL, $output), PHP_EOL;
             throw new \RuntimeException("Cannot install in $dir", $exitCode);
         }
-
-        self::forceUpdateOnce($dir, self::PACKAGE);
     }
 
     /**

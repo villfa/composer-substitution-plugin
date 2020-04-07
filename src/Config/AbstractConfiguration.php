@@ -88,6 +88,37 @@ abstract class AbstractConfiguration
                 },
             )
         );
+
+        return $defaultValue;
+    }
+
+    protected static function parseInt($key, $value, $defaultValue = null)
+    {
+        if (is_int($value)) {
+            return $value;
+        }
+        if (is_float($value)) {
+            if ($value != (int) $value) {
+                self::$logger->notice("Configuration extra.substitution.$key must be an integer.");
+            }
+            return (int) $value;
+        }
+        if (is_string($value) && is_numeric($value)) {
+            if (!ctype_digit($value)) {
+                self::$logger->notice("Configuration extra.substitution.$key must be an integer.");
+            }
+            return (int) $value;
+        }
+
+        self::$logger->warning(
+            "Invalid value for configuration extra.substitution.$key. It must be an integer. {default}",
+            array(
+                'default' => function () use ($defaultValue) {
+                    return $defaultValue === null ? '' : "Default to $defaultValue.";
+                },
+            )
+        );
+
         return $defaultValue;
     }
 }

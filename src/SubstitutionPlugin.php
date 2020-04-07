@@ -18,6 +18,11 @@ use SubstitutionPlugin\Transformer\TransformerFactory;
 
 final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterface
 {
+    /**
+     * @var int PreCommandRunEvent priority
+     */
+    private static $priority = 0;
+
     /** @var Composer */
     private $composer;
 
@@ -34,8 +39,16 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
     {
         $this->composer = $composer;
         $this->logger = LoggerFactory::getLogger($io);
-        $this->config = new PluginConfiguration($this->composer->getPackage()->getExtra(), $this->logger);
-        $this->logger->info('Plugin ' . ($this->config->isEnabled() ? 'enabled' : 'disabled'));
+        $this->config = $config = new PluginConfiguration($this->composer->getPackage()->getExtra(), $this->logger);
+        self::$priority = $this->config->getPriority();
+        $this->logger->info(
+            'Plugin ' . ($this->config->isEnabled() ? 'enabled. {priority}' : 'disabled.'),
+            array(
+                'priority' => function () use ($config) {
+                    return 'Priority set to ' . strval($config->getPriority()) . '.';
+                },
+            )
+        );
     }
 
     /**
@@ -45,7 +58,7 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
     {
         return array(
             PluginEvents::PRE_COMMAND_RUN => array(
-                array('onPreCommandRun', 0),
+                array('onPreCommandRun', self::$priority),
             ),
         );
     }

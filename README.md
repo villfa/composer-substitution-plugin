@@ -69,6 +69,7 @@ extra.substitution.mapping | yes | object | empty object | Mapping between place
 extra.substitution.mapping.*.type | yes | string | n/a | Substitution type (see the related section below)
 extra.substitution.mapping.*.value | yes | string | n/a | Substitution value (depends on the type)
 extra.substitution.mapping.*.cached | false | bool | false | Indicates whether the value provided after the first substitution must be cached
+extra.substitution.priority | false | integer | 0 | Plugin's event handler priority (see [Composer documentation](https://getcomposer.org/doc/articles/plugins.md#event-handler))
 
 ### Substitution types
 
