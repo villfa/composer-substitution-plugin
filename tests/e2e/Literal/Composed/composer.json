@@ -1,5 +1,4 @@
 {
-    "name": "test/001-literal",
     "require": {
         "villfa/composer-substitution-plugin": "*"
     },
