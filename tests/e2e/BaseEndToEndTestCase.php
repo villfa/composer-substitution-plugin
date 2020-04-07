@@ -8,10 +8,15 @@ class BaseEndToEndTestCase extends BaseTestCase
 {
     const PACKAGE = 'villfa/composer-substitution-plugin';
 
-    protected static function install($dir)
+    /**
+     * @param string $dir
+     * @param bool $dev
+     */
+    protected static function install($dir, $dev = false)
     {
         self::cleanDir($dir);
-        $args = 'install --no-progress --no-suggest --no-dev';
+        $args = 'install --no-progress --no-suggest';
+        $args .= $dev ? '' : ' --no-dev';
 
         list($output, $exitCode) = self::runComposer($dir, $args);
 

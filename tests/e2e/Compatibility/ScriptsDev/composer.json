@@ -1,0 +1,28 @@
+{
+    "require-dev": {
+        "neronmoon/scriptsdev": "*",
+        "villfa/composer-substitution-plugin": "*"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../../."
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "scripts-dev": {
+            "test": "echo {text}"
+        },
+        "substitution": {
+            "enable": true,
+            "mapping": {
+                "{text}": {
+                    "type": "literal",
+                    "value": "foo"
+                }
+            }
+        }
+    }
+}
