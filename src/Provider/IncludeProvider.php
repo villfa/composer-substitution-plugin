@@ -24,15 +24,18 @@ class IncludeProvider implements ProviderInterface
      */
     public function getValue()
     {
-        return self::returnInclude($this->path);
+        return returnInclude($this->path);
     }
+}
 
-    /**
-     * @param string $path
-     * @return mixed
-     */
-    private static function returnInclude($path)
-    {
-        return include $path;
-    }
+/**
+ * Scope isolated include.
+ *
+ * Prevents access to $this/self from included files.
+ *
+ * @return mixed
+ */
+function returnInclude($file)
+{
+    return include $file;
 }
