@@ -1,6 +1,6 @@
 <?php
 
-namespace SubstitutionPlugin\Literal\Basic;
+namespace SubstitutionPlugin\Literal\MultiScripts;
 
 use SubstitutionPlugin\BaseEndToEndTestCase;
 

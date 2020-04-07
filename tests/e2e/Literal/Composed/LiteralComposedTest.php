@@ -1,6 +1,6 @@
 <?php
 
-namespace SubstitutionPlugin\Literal\Basic;
+namespace SubstitutionPlugin\Literal\Composed;
 
 use SubstitutionPlugin\BaseEndToEndTestCase;
 
