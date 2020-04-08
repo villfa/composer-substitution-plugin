@@ -16,20 +16,21 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "test-native-func": "echo '#PHP_VERSION'",
-        "test-ud-func": "echo '#BAR'"
+        "test": "echo 'count: (COUNT)'"
     },
     "extra": {
         "substitution": {
             "enable": true,
             "mapping": {
-                "#PHP_VERSION": {
+                "(UNUSED)": {
                     "type": "callback",
-                    "value": "phpversion"
+                    "value": "SubstitutionPlugin\\Callback\\UnusedSubstitution\\CountCallback::inc",
+                    "cached": false
                 },
-                "#BAR": {
+                "(COUNT)": {
                     "type": "callback",
-                    "value": "barFunc"
+                    "value": "SubstitutionPlugin\\Callback\\UnusedSubstitution\\CountCallback::inc",
+                    "cached": false
                 }
             }
         }
