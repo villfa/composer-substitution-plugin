@@ -1,0 +1,32 @@
+{
+    "autoload": {
+        "files": [
+            "function-baz.php"
+        ]
+    },
+    "require": {
+        "villfa/composer-substitution-plugin": "*"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../../."
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "echo PLACEHOLDER"
+    },
+    "extra": {
+        "substitution": {
+            "enable": true,
+            "mapping": {
+                "PLACEHOLDER": {
+                    "type": "include",
+                    "value": "./script.php"
+                }
+            }
+        }
+    }
+}
