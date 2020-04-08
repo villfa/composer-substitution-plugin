@@ -12,7 +12,7 @@ class CommonPriorityTest extends BaseEndToEndTestCase
         self::install(__DIR__);
     }
 
-    public function testMaxVerbosity()
+    public function testPriority()
     {
         list($output, $exitCode) = self::runComposer(__DIR__, '-vvv test');
         $output = implode(PHP_EOL, $output);

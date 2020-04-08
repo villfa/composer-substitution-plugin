@@ -12,7 +12,7 @@ class EnvBasicTest extends BaseEndToEndTestCase
         self::install(__DIR__);
     }
 
-    public function testScriptFoo()
+    public function testEnvVariable()
     {
         list($output, $exitCode) = self::runComposer(__DIR__, 'test', 'FOO=foo');
 

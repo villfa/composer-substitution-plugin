@@ -12,7 +12,7 @@ class LiteralComposedTest extends BaseEndToEndTestCase
         self::install(__DIR__);
     }
 
-    public function testScriptFoo()
+    public function testComposedSubstitution()
     {
         list($output, $exitCode) = self::runComposer(__DIR__, 'test');
 

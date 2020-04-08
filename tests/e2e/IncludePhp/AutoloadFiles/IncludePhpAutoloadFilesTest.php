@@ -15,7 +15,7 @@ class IncludePhpAutoloadFilesTest extends BaseEndToEndTestCase
     /**
      * @see https://github.com/villfa/composer-substitution-plugin/issues/1
      */
-    public function testScriptFoo()
+    public function testAutoloadedFile()
     {
         list($output, $exitCode) = self::runComposer(__DIR__, 'test');
 

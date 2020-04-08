@@ -12,7 +12,7 @@ class LiteralDisabledTest extends BaseEndToEndTestCase
         self::install(__DIR__);
     }
 
-    public function testScriptFoo()
+    public function testNoSubstitutionWhenDisabled()
     {
         list($output, $exitCode) = self::runComposer(__DIR__, 'test');
 
