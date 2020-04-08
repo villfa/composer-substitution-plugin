@@ -2,7 +2,7 @@
 
 namespace SubstitutionPlugin\Provider;
 
-class IncludeProvider implements ProviderInterface
+class IncludeProvider implements AutoloadDependentProviderInterface
 {
     /** @var string */
     private $path;
@@ -12,10 +12,6 @@ class IncludeProvider implements ProviderInterface
      */
     public function __construct($path)
     {
-        if (stream_resolve_include_path($path) === false) {
-            throw new \InvalidArgumentException('Cannot include file ' . $path);
-        }
-
         $this->path = $path;
     }
 
@@ -24,7 +20,19 @@ class IncludeProvider implements ProviderInterface
      */
     public function getValue()
     {
+        if (stream_resolve_include_path($this->path) === false) {
+            throw new \InvalidArgumentException('Cannot include file ' . $this->path);
+        }
+
         return returnInclude($this->path);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function mustAutoload()
+    {
+        return true;
     }
 }
 

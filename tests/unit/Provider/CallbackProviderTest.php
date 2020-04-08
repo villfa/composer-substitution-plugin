@@ -35,7 +35,8 @@ class CallbackProviderTest extends BaseUnitTestCase
     public function testInvalidCallback()
     {
         $callback = 'not_a_valid_callback';
+        $provider = new CallbackProvider($callback);
         $this->setExpectedException('\\InvalidArgumentException', "Value is not callable: $callback");
-        new CallbackProvider($callback);
+        $provider->getValue();
     }
 }

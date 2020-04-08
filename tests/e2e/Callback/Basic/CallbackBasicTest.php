@@ -25,10 +25,6 @@ class CallbackBasicTest extends BaseEndToEndTestCase
      */
     public function testUserDefinedFunction()
     {
-        self::markTestSkipped(
-            'Files are not yet autoloaded when the plugin runs. '
-            . 'See: https://github.com/villfa/composer-substitution-plugin/issues/1'
-        );
         list($output, $exitCode) = self::runComposer(__DIR__, 'test-ud-func');
 
         self::assertEquals(0, $exitCode);

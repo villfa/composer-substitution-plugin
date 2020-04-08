@@ -2,7 +2,7 @@
 
 namespace SubstitutionPlugin\Provider;
 
-class CallbackProvider implements ProviderInterface
+class CallbackProvider implements AutoloadDependentProviderInterface
 {
     /** @var callable */
     private $callback;
@@ -12,10 +12,6 @@ class CallbackProvider implements ProviderInterface
      */
     public function __construct($callback)
     {
-        if (!is_callable($callback)) {
-            throw new \InvalidArgumentException("Value is not callable: $callback");
-        }
-
         $this->callback = $callback;
     }
 
@@ -24,6 +20,18 @@ class CallbackProvider implements ProviderInterface
      */
     public function getValue()
     {
+        if (!is_callable($this->callback)) {
+            throw new \InvalidArgumentException('Value is not callable: ' . $this->callback);
+        }
+
         return call_user_func($this->callback);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function mustAutoload()
+    {
+        return true;
     }
 }

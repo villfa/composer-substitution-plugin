@@ -17,10 +17,6 @@ class IncludePhpAutoloadFilesTest extends BaseEndToEndTestCase
      */
     public function testScriptFoo()
     {
-        self::markTestSkipped(
-            'Files are not yet autoloaded when the plugin runs. '
-            . 'See: https://github.com/villfa/composer-substitution-plugin/issues/1'
-        );
         list($output, $exitCode) = self::runComposer(__DIR__, 'test');
 
         self::assertEquals(0, $exitCode);
