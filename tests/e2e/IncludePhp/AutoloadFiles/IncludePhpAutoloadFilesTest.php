@@ -1,10 +1,10 @@
 <?php
 
-namespace SubstitutionPlugin\Callback\Basic;
+namespace SubstitutionPlugin\IncludePhp\AutoloadFiles;
 
 use SubstitutionPlugin\BaseEndToEndTestCase;
 
-class CallbackBasicTest extends BaseEndToEndTestCase
+class IncludePhpAutoloadFilesTest extends BaseEndToEndTestCase
 {
     public static function doSetUpBeforeClass()
     {
@@ -12,27 +12,19 @@ class CallbackBasicTest extends BaseEndToEndTestCase
         self::install(__DIR__);
     }
 
-    public function testNativeFunction()
-    {
-        list($output, $exitCode) = self::runComposer(__DIR__, 'test-native-func');
-
-        self::assertEquals(0, $exitCode);
-        self::assertEquals(PHP_VERSION, array_pop($output));
-    }
-
     /**
      * @see https://github.com/villfa/composer-substitution-plugin/issues/1
      */
-    public function testUserDefinedFunction()
+    public function testScriptFoo()
     {
         self::markTestSkipped(
             'Files are not yet autoloaded when the plugin runs. '
             . 'See: https://github.com/villfa/composer-substitution-plugin/issues/1'
         );
-        list($output, $exitCode) = self::runComposer(__DIR__, 'test-ud-func');
+        list($output, $exitCode) = self::runComposer(__DIR__, 'test');
 
         self::assertEquals(0, $exitCode);
-        self::assertEquals('bar', array_pop($output));
+        self::assertEquals('baz', array_pop($output));
     }
 
     public static function doTearDownAfterClass()
