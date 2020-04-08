@@ -60,6 +60,9 @@ class ProviderFactory
             case ProviderType::INCLUDE_PHP:
                 $provider = new IncludeProvider($configuration->getValue());
                 break;
+            case ProviderType::CONSTANT:
+                $provider = new ConstantProvider($configuration->getValue());
+                break;
             default:
                 // not supposed to happen
                 $this->logger->critical('Invalid type: ' . $configuration->getType());

@@ -11,6 +11,7 @@ class ProviderType
     const CALLBACK = 'callback';
     const INCLUDE_PHP = 'include';
     const ENV = 'env';
+    const CONSTANT = 'constant';
 
     public static function all()
     {
@@ -19,6 +20,7 @@ class ProviderType
             self::CALLBACK,
             self::INCLUDE_PHP,
             self::ENV,
+            self::CONSTANT,
         );
     }
 }

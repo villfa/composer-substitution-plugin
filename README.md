@@ -39,6 +39,10 @@ Here an example:
             "{HOME}": {
                 "type": "env",
                 "value": "HOME"
+            },
+            "{COMPOSER_VERSION}": {
+                "type": "constant",
+                "value": "Composer\\Composer::VERSION"
             }
         }
     }
@@ -79,3 +83,4 @@ For each type of substitution the value replacing the placeholder comes from a d
 * `callback`: The value is the string returned by a callback.
 * `include`: The value is the string returned by a PHP file.
 * `env`: The value is an ENV variable.
+* `constant`: The value comes from a constant or a class constant.

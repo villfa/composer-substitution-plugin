@@ -1,0 +1,37 @@
+{
+    "autoload": {
+        "files": [
+            "constant.php"
+        ]
+    },
+    "require": {
+        "villfa/composer-substitution-plugin": "*"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../../."
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "class-const": "echo '{COMPOSER_VERSION}'",
+        "autoload-const": "echo '{FOO}'"
+    },
+    "extra": {
+        "substitution": {
+            "enable": true,
+            "mapping": {
+                "{COMPOSER_VERSION}": {
+                    "type": "constant",
+                    "value": "Composer\\Composer::VERSION"
+                },
+                "{FOO}": {
+                    "type": "constant",
+                    "value": "FOO"
+                }
+            }
+        }
+    }
+}
