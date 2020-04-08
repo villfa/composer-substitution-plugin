@@ -89,7 +89,8 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
 
     private function applySubstitutions(array $scripts)
     {
-        $transformerFactory = new TransformerFactory(new ProviderFactory($this->logger), $this->logger);
+        $providerFactory = new ProviderFactory($this->composer, $this->logger);
+        $transformerFactory = new TransformerFactory($providerFactory, $this->logger);
         $transformer = $transformerFactory->getTransformer($this->config);
 
         foreach ($scripts as &$script) {

@@ -9,11 +9,12 @@ class IncludeProviderTest extends BaseUnitTestCase
     public function testWithInvalidPath()
     {
         $path = __DIR__ . '/invalid/path.php';
+        $provider = new IncludeProvider($path);
         $this->setExpectedException(
             '\\InvalidArgumentException',
             'Cannot include file ' . $path
         );
-        new IncludeProvider($path);
+        $provider->getValue();
     }
 
     public function testWithValidPath()

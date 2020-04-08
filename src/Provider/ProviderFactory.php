@@ -2,16 +2,21 @@
 
 namespace SubstitutionPlugin\Provider;
 
+use Composer\Composer;
 use Psr\Log\LoggerInterface;
 use SubstitutionPlugin\Config\SubstitutionConfiguration;
 
 class ProviderFactory
 {
+    /** @var Composer */
+    private $composer;
+
     /** @var LoggerInterface */
     private $logger;
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(Composer $composer, LoggerInterface $logger)
     {
+        $this->composer = $composer;
         $this->logger = $logger;
     }
 
@@ -59,6 +64,10 @@ class ProviderFactory
                 // not supposed to happen
                 $this->logger->critical('Invalid type: ' . $configuration->getType());
                 return null;
+        }
+
+        if ($provider instanceof AutoloadDependentProviderInterface && $provider->mustAutoload()) {
+            $provider = new ProviderProxyAutoloader($this->composer, $this->logger, $provider);
         }
 
         $provider = new ProviderProxyLogger($this->logger, $configuration, $provider);
