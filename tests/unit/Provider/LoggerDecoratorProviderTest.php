@@ -7,7 +7,7 @@ use Psr\Log\NullLogger;
 use SubstitutionPlugin\BaseUnitTestCase;
 use SubstitutionPlugin\Config\SubstitutionConfiguration;
 
-class ProviderProxyLoggerTest extends BaseUnitTestCase
+class LoggerDecoratorProviderTest extends BaseUnitTestCase
 {
     /** @var LoggerInterface */
     private static $logger;
@@ -30,7 +30,7 @@ class ProviderProxyLoggerTest extends BaseUnitTestCase
     public function testWithString()
     {
         $innerProvider = new LiteralProvider('foo');
-        $provider = new ProviderProxyLogger(
+        $provider = new LoggerDecoratorProvider(
             self::$logger,
             self::$configuration,
             $innerProvider
@@ -46,7 +46,7 @@ class ProviderProxyLoggerTest extends BaseUnitTestCase
     public function testWithInvalidValues($value)
     {
         $innerProvider = new LiteralProvider($value);
-        $provider = new ProviderProxyLogger(
+        $provider = new LoggerDecoratorProvider(
             self::$logger,
             self::$configuration,
             $innerProvider

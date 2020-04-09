@@ -73,17 +73,17 @@ final class ProviderFactory implements ProviderFactoryInterface
         }
 
         if ($configuration->getEscapeCallback() !== null) {
-            $provider = new ProviderProxyEscape($configuration->getEscapeCallback(), $provider);
+            $provider = new EscapeDecoratorProvider($configuration->getEscapeCallback(), $provider);
         }
 
         if ($provider instanceof AutoloadDependentProviderInterface && $provider->mustAutoload()) {
-            $provider = new ProviderProxyAutoloader($this->composer, $this->logger, $provider);
+            $provider = new AutoloaderDecoratorProvider($this->composer, $this->logger, $provider);
         }
 
-        $provider = new ProviderProxyLogger($this->logger, $configuration, $provider);
+        $provider = new LoggerDecoratorProvider($this->logger, $configuration, $provider);
 
         if ($configuration->isCached()) {
-            $provider = new ProviderProxyCache($provider);
+            $provider = new CacheDecoratorProvider($provider);
         }
 
         return $provider;

@@ -4,7 +4,7 @@ namespace SubstitutionPlugin\Provider;
 
 use SubstitutionPlugin\BaseUnitTestCase;
 
-class ProviderProxyEscapeTest extends BaseUnitTestCase
+class EscapeDecoratorProviderTest extends BaseUnitTestCase
 {
     public static function doSetUpBeforeClass()
     {
@@ -15,7 +15,7 @@ class ProviderProxyEscapeTest extends BaseUnitTestCase
     public function testGetValue()
     {
         $innerProvider = new \DummyProvider('   trimmed   ');
-        $provider = new ProviderProxyEscape('trim', $innerProvider);
+        $provider = new EscapeDecoratorProvider('trim', $innerProvider);
         self::assertEquals('trimmed', $provider->getValue());
     }
 
@@ -23,7 +23,7 @@ class ProviderProxyEscapeTest extends BaseUnitTestCase
     {
         $callback = 'not_a_valid_callback';
         $innerProvider = new \DummyProvider('foo');
-        $provider = new ProviderProxyEscape($callback, $innerProvider);
+        $provider = new EscapeDecoratorProvider($callback, $innerProvider);
         $this->setExpectedException('\\InvalidArgumentException', "The escape callback is not callable: $callback");
         $provider->getValue();
     }

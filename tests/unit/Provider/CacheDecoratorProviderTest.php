@@ -4,12 +4,12 @@ namespace SubstitutionPlugin\Provider;
 
 use SubstitutionPlugin\BaseUnitTestCase;
 
-class ProviderProxyCacheTest extends BaseUnitTestCase
+class CacheDecoratorProviderTest extends BaseUnitTestCase
 {
     public function testGetValue()
     {
         $innerProvider = new LiteralProvider('foo');
-        $provider = new ProviderProxyCache($innerProvider);
+        $provider = new CacheDecoratorProvider($innerProvider);
 
         self::assertEquals('foo', $provider->getValue());
     }
@@ -18,7 +18,7 @@ class ProviderProxyCacheTest extends BaseUnitTestCase
     {
         require_once self::getFixturesDir() . '/DummyProvider.php';
         $innerProvider = new \DummyProvider('foo');
-        $provider = new ProviderProxyCache($innerProvider);
+        $provider = new CacheDecoratorProvider($innerProvider);
 
         self::assertEquals(0, $innerProvider->getCount());
         for ($i = 0; $i < 3; $i++) {

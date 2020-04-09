@@ -2,7 +2,7 @@
 
 namespace SubstitutionPlugin\Provider;
 
-final class ProviderProxyEscape implements AutoloadDependentProviderInterface
+final class EscapeDecoratorProvider implements AutoloadDependentProviderInterface
 {
     /** @var callable */
     private $callback;

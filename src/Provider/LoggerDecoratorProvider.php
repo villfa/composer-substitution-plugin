@@ -5,7 +5,7 @@ namespace SubstitutionPlugin\Provider;
 use Psr\Log\LoggerInterface;
 use SubstitutionPlugin\Config\SubstitutionConfigurationInterface;
 
-final class ProviderProxyLogger implements ProviderInterface
+final class LoggerDecoratorProvider implements ProviderInterface
 {
     /** @var LoggerInterface */
     private $logger;
