@@ -57,8 +57,8 @@
             "@test:unit",
             "@test:e2e"
         ],
-        "test:e2e": "phpunit --testsuite e2e_tests --stop-on-failure --debug",
-        "test:unit": "phpunit --testsuite unit_tests"
+        "test:e2e": "vendor/bin/phpunit --testsuite e2e_tests --stop-on-failure --debug",
+        "test:unit": "vendor/bin/phpunit --testsuite unit_tests"
     },
     "scripts-descriptions": {
         "test": "Validates and tests the plugin.",
