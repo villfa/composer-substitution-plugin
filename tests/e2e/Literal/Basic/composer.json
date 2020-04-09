@@ -11,7 +11,15 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "test": "echo {text}"
+        "test": "echo {text}",
+        "composed": "echo _#SECOND_#FIRST_KEY_",
+        "test_multi_01": "echo _{text_multi}_01",
+        "test_multi_02": "echo _{text_multi}_02",
+        "indirect-test": "@test",
+        "test_list": [
+            "echo 'First echo'",
+            "echo {text_list}"
+        ]
     },
     "extra": {
         "substitution": {
@@ -20,6 +28,22 @@
                 "{text}": {
                     "type": "literal",
                     "value": "foo"
+                },
+                "#FIRST_KEY": {
+                    "type": "literal",
+                    "value": "KEY"
+                },
+                "#SECOND_KEY": {
+                    "type": "literal",
+                    "value": "success"
+                },
+                "{text_multi}": {
+                    "type": "literal",
+                    "value": "MULTI"
+                },
+                "{text_list}": {
+                    "type": "literal",
+                    "value": "LIST"
                 }
             }
         }

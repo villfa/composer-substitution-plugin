@@ -1,10 +1,10 @@
 <?php
 
-namespace SubstitutionPlugin\Literal\Composed;
+namespace SubstitutionPlugin\Common\Disabled;
 
 use SubstitutionPlugin\BaseEndToEndTestCase;
 
-class LiteralComposedTest extends BaseEndToEndTestCase
+class CommonDisabledTest extends BaseEndToEndTestCase
 {
     public static function doSetUpBeforeClass()
     {
@@ -12,12 +12,12 @@ class LiteralComposedTest extends BaseEndToEndTestCase
         self::install(__DIR__);
     }
 
-    public function testComposedSubstitution()
+    public function testNoSubstitutionWhenDisabled()
     {
         list($output, $exitCode) = self::runComposer(__DIR__, 'test');
 
         self::assertEquals(0, $exitCode);
-        self::assertEquals('_success_', array_pop($output));
+        self::assertEquals('{text}', array_pop($output));
     }
 
     public static function doTearDownAfterClass()

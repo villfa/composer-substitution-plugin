@@ -36,12 +36,52 @@ class LiteralBasicTest extends BaseEndToEndTestCase
         self::assertEquals('foo', array_pop($output));
     }
 
+    public function testIndirectScript()
+    {
+        list($output, $exitCode) = self::runComposer(__DIR__, 'indirect-test');
+
+        self::assertEquals(0, $exitCode);
+        self::assertEquals('foo', array_pop($output));
+    }
+
     public function testMaxVerbosity()
     {
         list($output, $exitCode) = self::runComposer(__DIR__, '-vvv test');
 
         self::assertEquals(0, $exitCode);
         self::assertEquals('foo', array_pop($output));
+    }
+
+    public function testComposedSubstitution()
+    {
+        list($output, $exitCode) = self::runComposer(__DIR__, 'composed');
+
+        self::assertEquals(0, $exitCode);
+        self::assertEquals('_success_', array_pop($output));
+    }
+
+    public function testMultiSubstitutions01()
+    {
+        list($output, $exitCode) = self::runComposer(__DIR__, 'test_multi_01');
+
+        self::assertEquals(0, $exitCode);
+        self::assertEquals('_MULTI_01', array_pop($output));
+    }
+
+    public function testMultiSubstitutions02()
+    {
+        list($output, $exitCode) = self::runComposer(__DIR__, 'test_multi_02');
+
+        self::assertEquals(0, $exitCode);
+        self::assertEquals('_MULTI_02', array_pop($output));
+    }
+
+    public function testListScript()
+    {
+        list($output, $exitCode) = self::runComposer(__DIR__, 'test_list');
+
+        self::assertEquals(0, $exitCode);
+        self::assertEquals('LIST', array_pop($output));
     }
 
     public static function doTearDownAfterClass()
