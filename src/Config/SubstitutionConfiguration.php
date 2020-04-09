@@ -5,7 +5,7 @@ namespace SubstitutionPlugin\Config;
 use Psr\Log\LoggerInterface;
 use SubstitutionPlugin\Provider\ProviderType;
 
-class SubstitutionConfiguration extends AbstractConfiguration
+final class SubstitutionConfiguration extends AbstractConfiguration implements SubstitutionConfigurationInterface
 {
     /** @var string */
     private $placeholder;
@@ -76,7 +76,7 @@ class SubstitutionConfiguration extends AbstractConfiguration
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getPlaceholder()
     {
@@ -84,7 +84,7 @@ class SubstitutionConfiguration extends AbstractConfiguration
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getType()
     {
@@ -92,7 +92,7 @@ class SubstitutionConfiguration extends AbstractConfiguration
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getValue()
     {
@@ -100,7 +100,7 @@ class SubstitutionConfiguration extends AbstractConfiguration
     }
 
     /**
-     * @return bool
+     * @inheritDoc
      */
     public function isCached()
     {

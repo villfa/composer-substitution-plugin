@@ -3,14 +3,14 @@
 namespace SubstitutionPlugin\Provider;
 
 use Psr\Log\LoggerInterface;
-use SubstitutionPlugin\Config\SubstitutionConfiguration;
+use SubstitutionPlugin\Config\SubstitutionConfigurationInterface;
 
-class ProviderProxyLogger implements ProviderInterface
+final class ProviderProxyLogger implements ProviderInterface
 {
     /** @var LoggerInterface */
     private $logger;
 
-    /** @var SubstitutionConfiguration */
+    /** @var SubstitutionConfigurationInterface */
     private $configuration;
 
     /** @var ProviderInterface */
@@ -18,7 +18,7 @@ class ProviderProxyLogger implements ProviderInterface
 
     public function __construct(
         LoggerInterface $logger,
-        SubstitutionConfiguration $configuration,
+        SubstitutionConfigurationInterface $configuration,
         ProviderInterface $provider
     ) {
         $this->logger = $logger;

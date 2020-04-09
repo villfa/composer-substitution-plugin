@@ -4,7 +4,7 @@ namespace SubstitutionPlugin\Config;
 
 use Psr\Log\LoggerInterface;
 
-class PluginConfiguration extends AbstractConfiguration
+final class PluginConfiguration extends AbstractConfiguration implements PluginConfigurationInterface
 {
     /** @var bool */
     private $enabled = false;
@@ -12,7 +12,7 @@ class PluginConfiguration extends AbstractConfiguration
     /** @var int */
     private $priority = 0;
 
-    /** @var array<string, SubstitutionConfiguration> */
+    /** @var SubstitutionConfigurationInterface[] */
     private $mapping = array();
 
     public function __construct(array $extra, LoggerInterface $logger = null)
@@ -74,13 +74,16 @@ class PluginConfiguration extends AbstractConfiguration
         return $mapping;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isEnabled()
     {
         return $this->enabled;
     }
 
     /**
-     * @return int
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -88,7 +91,7 @@ class PluginConfiguration extends AbstractConfiguration
     }
 
     /**
-     * @return array<string, SubstitutionConfiguration>|SubstitutionConfiguration[]
+     * @inheritDoc
      */
     public function getMapping()
     {

@@ -2,7 +2,7 @@
 
 namespace SubstitutionPlugin\Transformer;
 
-class TransformerCollection implements TransformerInterface
+final class TransformerCollection implements TransformerInterface
 {
     /** @var TransformerInterface[] */
     private $transformers;

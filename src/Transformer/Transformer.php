@@ -4,7 +4,7 @@ namespace SubstitutionPlugin\Transformer;
 
 use SubstitutionPlugin\Provider\ProviderInterface;
 
-class Transformer implements TransformerInterface
+final class Transformer implements TransformerInterface
 {
     /** @var string */
     private $placeholder;

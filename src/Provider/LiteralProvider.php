@@ -2,7 +2,7 @@
 
 namespace SubstitutionPlugin\Provider;
 
-class LiteralProvider implements ProviderInterface
+final class LiteralProvider implements ProviderInterface
 {
     /** @var string */
     private $value;

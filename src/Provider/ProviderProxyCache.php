@@ -2,7 +2,7 @@
 
 namespace SubstitutionPlugin\Provider;
 
-class ProviderProxyCache implements ProviderInterface
+final class ProviderProxyCache implements ProviderInterface
 {
     /** @var ProviderInterface */
     private $provider;

@@ -15,6 +15,7 @@ use SubstitutionPlugin\Config\PluginConfiguration;
 use SubstitutionPlugin\Logger\LoggerFactory;
 use SubstitutionPlugin\Provider\ProviderFactory;
 use SubstitutionPlugin\Transformer\TransformerFactory;
+use SubstitutionPlugin\Transformer\TransformerManager;
 
 final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterface
 {
@@ -110,38 +111,8 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
     {
         $providerFactory = new ProviderFactory($this->composer, $this->logger);
         $transformerFactory = new TransformerFactory($providerFactory, $this->logger);
-        $transformer = $transformerFactory->getTransformer($this->config);
+        $transformerManager = new TransformerManager($transformerFactory, $this->config, $this->logger);
 
-        $transformedScripts = array($scriptName => false);
-
-        do {
-            foreach ($transformedScripts as $scriptName => &$transformed) {
-                if ($transformed || !isset($scripts[$scriptName])) {
-                    $transformed = true;
-                    continue;
-                }
-
-                $listeners = &$scripts[$scriptName];
-                foreach ($listeners as &$listener) {
-                    $listener = $transformer->transform($listener);
-
-                    if (isset($listener[0]) && $listener[0] === '@') {
-                        list($script) = explode(' ', $listener, 2);
-                        $transformedScripts[substr($script, 1)] = false;
-                    }
-                }
-                $transformed = true;
-            }
-
-            $needTransformation = false;
-            foreach ($transformedScripts as $transformed) {
-                if (!$transformed) {
-                    $needTransformation = true;
-                    break;
-                }
-            }
-        } while ($needTransformation);
-
-        return $scripts;
+        return $transformerManager->applySubstitutions($scripts, $scriptName);
     }
 }

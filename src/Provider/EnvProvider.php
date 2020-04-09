@@ -2,7 +2,7 @@
 
 namespace SubstitutionPlugin\Provider;
 
-class EnvProvider implements ProviderInterface
+final class EnvProvider implements ProviderInterface
 {
     /** @var string */
     private $envVarName;

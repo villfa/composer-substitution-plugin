@@ -2,7 +2,7 @@
 
 namespace SubstitutionPlugin\Transformer;
 
-class NullTransformer implements TransformerInterface
+final class NullTransformer implements TransformerInterface
 {
     /**
      * @inheritDoc

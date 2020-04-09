@@ -4,9 +4,9 @@ namespace SubstitutionPlugin\Provider;
 
 use Composer\Composer;
 use Psr\Log\LoggerInterface;
-use SubstitutionPlugin\Config\SubstitutionConfiguration;
+use SubstitutionPlugin\Config\SubstitutionConfigurationInterface;
 
-class ProviderFactory
+final class ProviderFactory implements ProviderFactoryInterface
 {
     /** @var Composer */
     private $composer;
@@ -20,7 +20,10 @@ class ProviderFactory
         $this->logger = $logger;
     }
 
-    public function getProvider(SubstitutionConfiguration $configuration)
+    /**
+     * @inheritDoc
+     */
+    public function getProvider(SubstitutionConfigurationInterface $configuration)
     {
         try {
             $this->logger->debug(
@@ -42,10 +45,10 @@ class ProviderFactory
     }
 
     /**
-     * @param SubstitutionConfiguration $configuration
+     * @param SubstitutionConfigurationInterface $configuration
      * @return ProviderInterface|null
      */
-    private function buildProvider(SubstitutionConfiguration $configuration)
+    private function buildProvider(SubstitutionConfigurationInterface $configuration)
     {
         switch ($configuration->getType()) {
             case ProviderType::LITERAL:

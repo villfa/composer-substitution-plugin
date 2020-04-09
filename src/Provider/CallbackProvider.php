@@ -2,7 +2,7 @@
 
 namespace SubstitutionPlugin\Provider;
 
-class CallbackProvider implements AutoloadDependentProviderInterface
+final class CallbackProvider implements AutoloadDependentProviderInterface
 {
     /** @var callable */
     private $callback;

@@ -3,29 +3,30 @@
 namespace SubstitutionPlugin\Transformer;
 
 use Psr\Log\LoggerInterface;
-use SubstitutionPlugin\Config\PluginConfiguration;
-use SubstitutionPlugin\Config\SubstitutionConfiguration;
-use SubstitutionPlugin\Provider\ProviderFactory;
+use SubstitutionPlugin\Config\PluginConfigurationInterface;
+use SubstitutionPlugin\Config\SubstitutionConfigurationInterface;
+use SubstitutionPlugin\Provider\ProviderFactoryInterface;
 
-class TransformerFactory
+final class TransformerFactory implements TransformerFactoryInterface
 {
-    /** @var ProviderFactory */
+    /** @var ProviderFactoryInterface */
     private $providerFactory;
 
     /** @var LoggerInterface */
     private $logger;
 
-    public function __construct(ProviderFactory $providerFactory, LoggerInterface $logger)
-    {
+    public function __construct(
+        ProviderFactoryInterface $providerFactory,
+        LoggerInterface $logger
+    ) {
         $this->providerFactory = $providerFactory;
         $this->logger = $logger;
     }
 
     /**
-     * @param PluginConfiguration $configuration
-     * @return TransformerInterface
+     * @inheritDoc
      */
-    public function getTransformer(PluginConfiguration $configuration)
+    public function getTransformer(PluginConfigurationInterface $configuration)
     {
         $nbSubstitutions = count($configuration->getMapping());
         if ($nbSubstitutions > 1) {
@@ -46,10 +47,10 @@ class TransformerFactory
     }
 
     /**
-     * @param SubstitutionConfiguration $configuration
+     * @param SubstitutionConfigurationInterface $configuration
      * @return TransformerInterface
      */
-    private function buildTransformer(SubstitutionConfiguration $configuration)
+    private function buildTransformer(SubstitutionConfigurationInterface $configuration)
     {
         $provider = $this->providerFactory->getProvider($configuration);
 

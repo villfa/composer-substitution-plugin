@@ -5,7 +5,7 @@ namespace SubstitutionPlugin\Provider;
 use Composer\Composer;
 use Psr\Log\LoggerInterface;
 
-class ProviderProxyAutoloader implements ProviderInterface
+final class ProviderProxyAutoloader implements ProviderInterface
 {
     private static $autoload = false;
 
