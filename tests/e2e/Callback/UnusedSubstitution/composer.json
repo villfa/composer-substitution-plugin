@@ -11,7 +11,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "test": "echo 'count: (COUNT)'"
+        "test": "echo 'count: (COUNT)'",
+        "uncalled": "echo 'count: (COUNT)'",
+        "redirect-test": "@test"
     },
     "extra": {
         "substitution": {
