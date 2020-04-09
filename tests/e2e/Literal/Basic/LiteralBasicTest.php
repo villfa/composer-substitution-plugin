@@ -84,6 +84,14 @@ class LiteralBasicTest extends BaseEndToEndTestCase
         self::assertEquals('LIST', array_pop($output));
     }
 
+    public function testEscapeCallback()
+    {
+        list($output, $exitCode) = self::runComposer(__DIR__, 'test_escape');
+
+        self::assertEquals(0, $exitCode);
+        self::assertEquals('test #not a comment', array_pop($output));
+    }
+
     public static function doTearDownAfterClass()
     {
         parent::doTearDownAfterClass();

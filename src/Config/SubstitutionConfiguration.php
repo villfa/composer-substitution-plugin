@@ -20,17 +20,26 @@ final class SubstitutionConfiguration extends AbstractConfiguration implements S
     private $cached = false;
 
     /**
+     * Callback to a function/method to escape the value
+     *
+     * @var string|null
+     */
+    private $escapeCallback;
+
+    /**
      * @param string $placeholder
      * @param string $type
      * @param string $value
      * @param bool $cached
+     * @param string|null $escapeCallback
      */
-    public function __construct($placeholder, $type, $value, $cached)
+    public function __construct($placeholder, $type, $value, $cached, $escapeCallback = null)
     {
         $this->placeholder = $placeholder;
         $this->type = $type;
         $this->value = $value;
         $this->cached = $cached;
+        $this->escapeCallback = $escapeCallback;
     }
 
     /**
@@ -71,8 +80,9 @@ final class SubstitutionConfiguration extends AbstractConfiguration implements S
         }
 
         $cached = isset($conf['cached']) && self::parseBool("mapping.$placeholder.cached", $conf['cached']);
+        $escape = isset($conf['escape']) ? self::parseString("mapping.$placeholder.escape", $conf['escape']) : null;
 
-        return new SubstitutionConfiguration($placeholder, $type, $value, $cached);
+        return new SubstitutionConfiguration($placeholder, $type, $value, $cached, $escape);
     }
 
     /**
@@ -105,5 +115,13 @@ final class SubstitutionConfiguration extends AbstractConfiguration implements S
     public function isCached()
     {
         return $this->cached;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getEscapeCallback()
+    {
+        return $this->escapeCallback;
     }
 }

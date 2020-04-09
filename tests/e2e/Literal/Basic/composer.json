@@ -19,7 +19,8 @@
         "test_list": [
             "echo 'First echo'",
             "echo {text_list}"
-        ]
+        ],
+        "test_escape": "echo {text_escape}"
     },
     "extra": {
         "substitution": {
@@ -44,6 +45,11 @@
                 "{text_list}": {
                     "type": "literal",
                     "value": "LIST"
+                },
+                "{text_escape}": {
+                    "type": "literal",
+                    "value": "test #not a comment",
+                    "escape": "escapeshellarg"
                 }
             }
         }

@@ -72,6 +72,10 @@ final class ProviderFactory implements ProviderFactoryInterface
                 return null;
         }
 
+        if ($configuration->getEscapeCallback() !== null) {
+            $provider = new ProviderProxyEscape($configuration->getEscapeCallback(), $provider);
+        }
+
         if ($provider instanceof AutoloadDependentProviderInterface && $provider->mustAutoload()) {
             $provider = new ProviderProxyAutoloader($this->composer, $this->logger, $provider);
         }

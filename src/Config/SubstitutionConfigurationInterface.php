@@ -23,4 +23,9 @@ interface SubstitutionConfigurationInterface
      * @return bool
      */
     public function isCached();
+
+    /**
+     * @return string|null
+     */
+    public function getEscapeCallback();
 }

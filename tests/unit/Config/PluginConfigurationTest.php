@@ -98,6 +98,7 @@ class PluginConfigurationTest extends BaseUnitTestCase
                 'ph' => array(
                     'value' => 'foo',
                     'type' => 'literal',
+                    'escape' => 'addslashes',
                 ),
             ),
         ));
@@ -109,6 +110,7 @@ class PluginConfigurationTest extends BaseUnitTestCase
         self::assertEquals('ph', $subConf->getPlaceholder());
         self::assertEquals('foo', $subConf->getValue());
         self::assertEquals('literal', $subConf->getType());
+        self::assertEquals('addslashes', $subConf->getEscapeCallback());
         self::assertFalse($subConf->isCached());
     }
 }
