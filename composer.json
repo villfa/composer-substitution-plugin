@@ -24,6 +24,9 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "autoload": {
+        "files": [
+            "src/utils-functions.php"
+        ],
         "psr-4": { "SubstitutionPlugin\\": "src/" }
     },
     "autoload-dev": {

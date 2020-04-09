@@ -39,4 +39,24 @@ class CallbackProviderTest extends BaseUnitTestCase
         $this->setExpectedException('\\InvalidArgumentException', "Value is not callable: $callback");
         $provider->getValue();
     }
+
+    /**
+     * @dataProvider provideMustAutoload
+     * @param string $callback
+     * @param bool $expectedResult
+     */
+    public function testMustAutoload($callback, $expectedResult)
+    {
+        $provider = new CallbackProvider($callback);
+        self::assertEquals($expectedResult, $provider->mustAutoload());
+    }
+
+    public function provideMustAutoload()
+    {
+        return array(
+            array('phpversion', false),
+            array('PHPVERSION', false),
+            array('\\SubstitutionPlugin\\isInternalFunction', true),
+        );
+    }
 }

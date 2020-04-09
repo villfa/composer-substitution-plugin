@@ -32,6 +32,6 @@ final class CallbackProvider implements AutoloadDependentProviderInterface
      */
     public function mustAutoload()
     {
-        return true;
+        return !\SubstitutionPlugin\isInternalFunction($this->callback);
     }
 }
