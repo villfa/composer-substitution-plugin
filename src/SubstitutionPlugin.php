@@ -114,7 +114,20 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
         }
 
         if ($package instanceof CompletePackage) {
+            $this->includeRequiredFiles();
             $package->setScripts($this->applySubstitutions($package->getScripts(), $scriptName));
+        }
+    }
+
+    private function includeRequiredFiles()
+    {
+        $files = array(
+            __DIR__ . '/utils-functions.php',
+        );
+
+        foreach ($files as $file) {
+            $this->logger->debug('Include file: ' . $file);
+            require_once $file;
         }
     }
 
@@ -125,6 +138,7 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
      */
     private function applySubstitutions(array $scripts, $scriptName)
     {
+        $this->logger->info('Start applying substitutions');
         $providerFactory = new ProviderFactory($this->composer, $this->logger);
         $transformerFactory = new TransformerFactory($providerFactory, $this->logger);
         $transformerManager = new TransformerManager($transformerFactory, $this->config, $this->logger);
