@@ -54,7 +54,7 @@ class BackwardCompatibilityTest extends BaseTestCase
     {
         echo "\nTest with Composer $version\n";
         $dir = $this->setupRepo($version);
-        self::runComposer($dir, 'install --no-progress --no-suggest --no-dev');
+        self::runComposer($dir, 'install --no-progress --no-dev');
 
         // callback
         $output = self::runComposer($dir, 'test-phpversion');
@@ -64,6 +64,7 @@ class BackwardCompatibilityTest extends BaseTestCase
     public function provideComposerVersions()
     {
         return array(
+            //array('snapshot'),
             array('1.10.5'),
             array('1.9.3'),
             array('1.8.6'),
@@ -93,7 +94,12 @@ class BackwardCompatibilityTest extends BaseTestCase
 
         $this->createComposerJson(realpath(__DIR__ . '/../..'), $this->currentTestDir);
 
-        $url = "https://getcomposer.org/download/$version/composer.phar";
+        if ($version === 'snapshot') {
+            $url = 'https://getcomposer.org/composer.phar';
+        } else {
+            $url = "https://getcomposer.org/download/$version/composer.phar";
+        }
+
         file_put_contents($this->currentTestDir . '/composer.phar', fopen($url, 'r'));
 
         return $this->currentTestDir;
