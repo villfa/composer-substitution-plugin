@@ -1,6 +1,6 @@
 # Composer Substitution Plugin
 
-Composer plugin replacing placeholders in the scripts section by dynamic values
+[Composer](https://getcomposer.org/) plugin replacing placeholders in the scripts section by dynamic values
 
 [![Build Status](https://secure.travis-ci.org/villfa/composer-substitution-plugin.png?branch=master)](http://travis-ci.org/villfa/composer-substitution-plugin)
 [![Latest Stable Version](https://poser.pugx.org/villfa/composer-substitution-plugin/v/stable)](https://packagist.org/packages/villfa/composer-substitution-plugin)
@@ -26,7 +26,7 @@ Here an example:
             "{MY_NAME}": {
                 "type": "literal",
                 "value": "John Doe",
-                "escape": "escapeshellarg"
+                "escape": "addslashes"
             },
             "{PHP_VERSION}": {
                 "type": "callback",
