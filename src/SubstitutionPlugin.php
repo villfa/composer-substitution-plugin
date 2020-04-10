@@ -57,6 +57,22 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
     /**
      * @inheritDoc
      */
+    public function deactivate(Composer $composer, IOInterface $io)
+    {
+        // nothing to do
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function uninstall(Composer $composer, IOInterface $io)
+    {
+        // nothing to do
+    }
+
+    /**
+     * @inheritDoc
+     */
     public static function getSubscribedEvents()
     {
         if (!self::$enabled) {
