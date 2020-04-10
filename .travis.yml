@@ -25,6 +25,7 @@ matrix:
       php: 7.3
     - dist: bionic
       php: 7.4
+      env: BC_TESTS=true
     - dist: bionic
       php: nightly
       env: platform=ignore
@@ -44,3 +45,4 @@ install:
 script:
   - ( set -e; for f in $(find src/ -name *.php); do php -l "$f" || exit 1; done )
   - composer run-script test
+  - if [ "$BC_TESTS" == "true" ]; then composer run-script test:bc; fi

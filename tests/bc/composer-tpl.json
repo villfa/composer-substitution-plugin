@@ -1,0 +1,30 @@
+{
+    "require": {
+        "villfa/composer-substitution-plugin": "*"
+    },
+    "repositories": [
+        {
+            "packagist.org": false
+        },
+        {
+            "type": "path",
+            "url": "{{PLUGIN_PATH}}"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test-phpversion": "echo '{phpversion}'"
+    },
+    "extra": {
+        "substitution": {
+            "enable": true,
+            "mapping": {
+                "{phpversion}": {
+                    "type": "callback",
+                    "value": "phpversion"
+                }
+            }
+        }
+    }
+}

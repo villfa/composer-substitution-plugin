@@ -13,6 +13,9 @@
     </php>
 
     <testsuites>
+        <testsuite name="bc_tests">
+            <directory>tests/bc</directory>
+        </testsuite>
         <testsuite name="e2e_tests">
             <directory>tests/e2e</directory>
         </testsuite>

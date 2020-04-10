@@ -12,6 +12,11 @@
 composer require villfa/composer-substitution-plugin
 ```
 
+## Requirements
+
+* PHP >= 5.3.2
+* Composer >= 1.7.0
+
 ## Usage
 
 You need to configure the plugin in the *extra* section of `composer.json`.

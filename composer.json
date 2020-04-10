@@ -61,11 +61,13 @@
             "@test:unit",
             "@test:e2e"
         ],
+        "test:bc": "phpunit --testsuite bc_tests",
         "test:e2e": "phpunit --testsuite e2e_tests --stop-on-failure --debug",
         "test:unit": "phpunit --testsuite unit_tests"
     },
     "scripts-descriptions": {
         "test": "Validates and tests the plugin.",
+        "test:bc": "Runs backward compatibility tests",
         "test:e2e": "Runs end to end tests",
         "test:unit": "Runs unit tests"
     }

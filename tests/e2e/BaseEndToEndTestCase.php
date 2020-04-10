@@ -37,7 +37,7 @@ class BaseEndToEndTestCase extends BaseTestCase
         chdir(self::getProjectDir());
         $command = (empty($envVars) ? '' : "$envVars ")
             . self::getVendorBinDir()
-            . '/composer --no-ansi  --no-interaction '
+            . '/composer --no-ansi --no-interaction '
             . ($dir === null ? '' : self::getArgWorkingDir($dir))
             . $args;
 
