@@ -4,11 +4,12 @@ namespace SubstitutionPlugin\Transformer;
 
 use Psr\Log\LoggerInterface;
 use SubstitutionPlugin\Config\PluginConfigurationInterface;
+use SubstitutionPlugin\Utils\NonRewindableIterator;
 
 final class TransformerManager
 {
-    /** @var array<string, bool> */
-    private static $transformedScripts = array();
+    /** @var NonRewindableIterator */
+    private static $transformedScripts;
 
     /** @var TransformerInterface */
     private $transformer;
@@ -23,57 +24,32 @@ final class TransformerManager
     ) {
         $this->transformer = $transformerFactory->getTransformer($config);
         $this->logger = $logger;
+        if (self::$transformedScripts === null) {
+            self::$transformedScripts = new NonRewindableIterator();
+        }
     }
 
     public function applySubstitutions(array $scripts, $scriptName)
     {
-        $this->toTransform($scriptName);
+        self::$transformedScripts->add($scriptName);
 
-        do {
-            foreach (self::$transformedScripts as $scriptName => &$transformed) {
-                if ($transformed || !isset($scripts[$scriptName])) {
-                    $transformed = true;
-                    continue;
-                }
+        foreach (self::$transformedScripts as $scriptName) {
+            if (!isset($scripts[$scriptName])) {
+                continue;
+            }
 
-                $this->logger->debug('Apply substitution on script ' . $scriptName);
-                $transformed = true;
-                $listeners = &$scripts[$scriptName];
-                foreach ($listeners as &$listener) {
-                    $listener = $this->transformer->transform($listener);
+            $this->logger->debug('Apply substitution on script ' . $scriptName);
+            $listeners = &$scripts[$scriptName];
+            foreach ($listeners as &$listener) {
+                $listener = $this->transformer->transform($listener);
 
-                    if (self::tryExtractScript($listener, $script)) {
-                        $this->toTransform($script);
-                    }
+                if (self::tryExtractScript($listener, $script)) {
+                    self::$transformedScripts->add($script);
                 }
             }
-        } while ($this->hasPendingTransformations());
+        }
 
         return $scripts;
-    }
-
-    /**
-     * @param string $scriptName
-     */
-    private function toTransform($scriptName)
-    {
-        if (!isset(self::$transformedScripts[$scriptName])) {
-            self::$transformedScripts[$scriptName] = false;
-        }
-    }
-
-    /**
-     * @return bool
-     */
-    private function hasPendingTransformations()
-    {
-        foreach (self::$transformedScripts as $transformed) {
-            if (!$transformed) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**
