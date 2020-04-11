@@ -5,12 +5,17 @@ namespace SubstitutionPlugin\Utils;
 final class NonRewindableIterator implements \Iterator
 {
     private $values = array();
-    private $key = 0;
+    private $value = null;
+    private $total = 0;
 
     public function add($value)
     {
-        if (!in_array($value, $this->values)) {
-            $this->values[] = $value;
+        if (!isset($this->values[$value])) {
+            if ($this->value === null) {
+                $this->value = $value;
+            }
+            $this->values[$value] = $this->total;
+            $this->total++;
         }
     }
 
@@ -19,7 +24,7 @@ final class NonRewindableIterator implements \Iterator
      */
     public function current()
     {
-        return $this->values[$this->key];
+        return $this->value;
     }
 
     /**
@@ -27,7 +32,8 @@ final class NonRewindableIterator implements \Iterator
      */
     public function next()
     {
-        $this->key++;
+        next($this->values);
+        $this->value = key($this->values);
     }
 
     /**
@@ -35,7 +41,7 @@ final class NonRewindableIterator implements \Iterator
      */
     public function key()
     {
-        return $this->key;
+        return $this->values[$this->value];
     }
 
     /**
@@ -43,7 +49,7 @@ final class NonRewindableIterator implements \Iterator
      */
     public function valid()
     {
-        return isset($this->values[$this->key]);
+        return $this->value !== null;
     }
 
     /**
