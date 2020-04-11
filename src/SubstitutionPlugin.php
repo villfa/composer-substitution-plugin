@@ -52,6 +52,7 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
                 },
             )
         );
+        self::$enabled && $this->includeRequiredFiles();
     }
 
     /**
@@ -79,12 +80,10 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
             return array();
         }
 
-        $callback = array(
-            array('onPreCommandRun', self::$priority),
-        );
-
         return array(
-            PluginEvents::PRE_COMMAND_RUN => $callback,
+            PluginEvents::PRE_COMMAND_RUN => array(
+                array('onPreCommandRun', self::$priority),
+            ),
         );
     }
 
@@ -114,7 +113,6 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
         }
 
         if ($package instanceof CompletePackage) {
-            $this->includeRequiredFiles();
             $package->setScripts($this->applySubstitutions($package->getScripts(), $scriptName));
         }
     }
@@ -138,7 +136,7 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
      */
     private function applySubstitutions(array $scripts, $scriptName)
     {
-        $this->logger->info('Start applying substitutions');
+        $this->logger->info('Substitutions triggered by ' . $scriptName);
         $providerFactory = new ProviderFactory($this->composer, $this->logger);
         $transformerFactory = new TransformerFactory($providerFactory, $this->logger);
         $transformerManager = new TransformerManager($transformerFactory, $this->config, $this->logger);

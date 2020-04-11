@@ -96,3 +96,7 @@ For each type of substitution the value replacing the placeholder comes from a d
 * `env`: The value is an ENV variable.
 * `constant`: The value comes from a constant or a class constant.
 * `process`: The value is the output of the processed command.
+
+### Limitation
+
+For now the substitutions can not be applied on Composer's commands like `pre-install-cmd` or `post-install-cmd`.

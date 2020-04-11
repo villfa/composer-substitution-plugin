@@ -7,11 +7,11 @@ use SubstitutionPlugin\Config\PluginConfigurationInterface;
 
 final class TransformerManager
 {
-    /** @var TransformerFactoryInterface */
-    private $transformerFactory;
+    /** @var array<string, bool> */
+    private static $transformedScripts = array();
 
-    /** @var PluginConfigurationInterface */
-    private $config;
+    /** @var TransformerInterface */
+    private $transformer;
 
     /** @var LoggerInterface */
     private $logger;
@@ -21,18 +21,16 @@ final class TransformerManager
         PluginConfigurationInterface $config,
         LoggerInterface $logger
     ) {
-        $this->transformerFactory = $transformerFactory;
-        $this->config = $config;
+        $this->transformer = $transformerFactory->getTransformer($config);
         $this->logger = $logger;
     }
 
     public function applySubstitutions(array $scripts, $scriptName)
     {
-        $transformer = $this->transformerFactory->getTransformer($this->config);
-        $transformedScripts = array($scriptName => false);
+        $this->toTransform($scriptName);
 
         do {
-            foreach ($transformedScripts as $scriptName => &$transformed) {
+            foreach (self::$transformedScripts as $scriptName => &$transformed) {
                 if ($transformed || !isset($scripts[$scriptName])) {
                     $transformed = true;
                     continue;
@@ -42,24 +40,40 @@ final class TransformerManager
                 $transformed = true;
                 $listeners = &$scripts[$scriptName];
                 foreach ($listeners as &$listener) {
-                    $listener = $transformer->transform($listener);
+                    $listener = $this->transformer->transform($listener);
 
                     if (self::tryExtractScript($listener, $script)) {
-                        $transformedScripts[$script] = false;
+                        $this->toTransform($script);
                     }
                 }
             }
-
-            $needTransformation = false;
-            foreach ($transformedScripts as $transformed) {
-                if (!$transformed) {
-                    $needTransformation = true;
-                    break;
-                }
-            }
-        } while ($needTransformation);
+        } while ($this->hasPendingTransformations());
 
         return $scripts;
+    }
+
+    /**
+     * @param string $scriptName
+     */
+    private function toTransform($scriptName)
+    {
+        if (!isset(self::$transformedScripts[$scriptName])) {
+            self::$transformedScripts[$scriptName] = false;
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    private function hasPendingTransformations()
+    {
+        foreach (self::$transformedScripts as $transformed) {
+            if (!$transformed) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

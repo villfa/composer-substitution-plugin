@@ -1,0 +1,36 @@
+{
+    "require": {
+        "villfa/composer-substitution-plugin": "*"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../../."
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "pre-update-cmd": [
+            "echo {pre-update-cmd}"
+        ],
+        "post-update-cmd": [
+            "echo {post-update-cmd}"
+        ]
+    },
+    "extra": {
+        "substitution": {
+            "enable": true,
+            "mapping": {
+                "{pre-update-cmd}": {
+                    "type": "literal",
+                    "value": "PRE UPDATE SUBSTITUTION"
+                },
+                "{post-update-cmd}": {
+                    "type": "literal",
+                    "value": "POST UPDATE SUBSTITUTION"
+                }
+            }
+        }
+    }
+}
