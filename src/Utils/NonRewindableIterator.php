@@ -8,6 +8,9 @@ final class NonRewindableIterator implements \Iterator
     private $value = null;
     private $total = 0;
 
+    /**
+     * @param string $value
+     */
     public function add($value)
     {
         if (!isset($this->values[$value])) {
