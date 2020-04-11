@@ -66,6 +66,9 @@ final class ProviderFactory implements ProviderFactoryInterface
             case ProviderType::CONSTANT:
                 $provider = new ConstantProvider($configuration->getValue());
                 break;
+            case ProviderType::PROCESS:
+                $provider = new ProcessProvider($configuration->getValue());
+                break;
             default:
                 // not supposed to happen
                 $this->logger->critical('Invalid type: ' . $configuration->getType());

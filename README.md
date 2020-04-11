@@ -49,6 +49,10 @@ Here an example:
             "{COMPOSER_VERSION}": {
                 "type": "constant",
                 "value": "Composer\\Composer::VERSION"
+            },
+            "{NPROC}": {
+                "type": "process",
+                "value": "nproc"
             }
         }
     }
@@ -91,3 +95,4 @@ For each type of substitution the value replacing the placeholder comes from a d
 * `include`: The value is the string returned by a PHP file.
 * `env`: The value is an ENV variable.
 * `constant`: The value comes from a constant or a class constant.
+* `process`: The value is the output of the processed command.

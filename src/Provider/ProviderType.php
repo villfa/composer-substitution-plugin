@@ -12,6 +12,7 @@ class ProviderType
     const INCLUDE_PHP = 'include';
     const ENV = 'env';
     const CONSTANT = 'constant';
+    const PROCESS = 'process';
 
     public static function all()
     {
@@ -21,6 +22,7 @@ class ProviderType
             self::INCLUDE_PHP,
             self::ENV,
             self::CONSTANT,
+            self::PROCESS,
         );
     }
 }
