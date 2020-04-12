@@ -20,7 +20,8 @@
             "echo 'First echo'",
             "echo {text_list}"
         ],
-        "test_escape": "echo {text_escape}"
+        "test_escape": "echo {text_escape}",
+        "test_recursion": "@{test_cmd}"
     },
     "extra": {
         "substitution": {
@@ -50,6 +51,10 @@
                     "type": "literal",
                     "value": "test #not a comment",
                     "escape": "escapeshellarg"
+                },
+                "{test_cmd}": {
+                    "type": "literal",
+                    "value": "test"
                 }
             }
         }

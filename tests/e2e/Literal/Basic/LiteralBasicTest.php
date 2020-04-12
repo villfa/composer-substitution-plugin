@@ -92,6 +92,14 @@ class LiteralBasicTest extends BaseEndToEndTestCase
         self::assertEquals('test #not a comment', array_pop($output));
     }
 
+    public function testRecursion()
+    {
+        list($output, $exitCode) = self::runComposer(__DIR__, 'test_recursion');
+
+        self::assertEquals(0, $exitCode);
+        self::assertEquals('foo', array_pop($output));
+    }
+
     public static function doTearDownAfterClass()
     {
         parent::doTearDownAfterClass();
