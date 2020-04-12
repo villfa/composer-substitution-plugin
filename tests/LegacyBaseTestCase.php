@@ -4,11 +4,22 @@ namespace SubstitutionPlugin;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @method static self assertStringContainsString($needle, $haystack, $message = '')
+ */
 class LegacyBaseTestCase extends TestCase
 {
-    public static function assertStringContainsString($needle, $haystack, $message = '')
+    public static function __callStatic($name, $arguments)
     {
-        self::assertContains($needle, $haystack, $message);
+        if ($name === 'assertStringContainsString') {
+            return call_user_func_array('self::assertContains', $arguments);
+        }
+
+        throw new \BadMethodCallException(sprintf(
+            'Call to undefined method %s::%s()',
+            get_called_class(),
+            $name
+        ));
     }
 
     public static function setUpBeforeClass()
