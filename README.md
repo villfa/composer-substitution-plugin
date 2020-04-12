@@ -1,6 +1,8 @@
 # Composer Substitution Plugin
 
-[Composer](https://getcomposer.org/) plugin replacing placeholders in the scripts section by dynamic values
+The [Composer](https://getcomposer.org/) Substitution plugin replaces placeholders in the scripts section by dynamic values.
+
+It also permits to cache these values during the command execution and adds the ability to escape them with the function of your choice.
 
 [![Build Status](https://secure.travis-ci.org/villfa/composer-substitution-plugin.png?branch=master)](http://travis-ci.org/villfa/composer-substitution-plugin)
 [![Latest Stable Version](https://poser.pugx.org/villfa/composer-substitution-plugin/v/stable)](https://packagist.org/packages/villfa/composer-substitution-plugin)
