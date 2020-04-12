@@ -14,15 +14,46 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "test-phpversion": "echo '{phpversion}'"
+        "test-foo": "echo '{foo}'",
+        "test-bar": "echo '{bar}'",
+        "test-baz": "echo '{baz}'",
+        "test-atom": "echo '{atom}'",
+        "test-phpversion": "echo '{phpversion}'",
+        "test-md5": "echo {md5}",
+        "test-cache": "echo -n '{cached-date}' && sleep 0.1 && echo -n '/' && echo -n '{cached-date}'"
     },
     "extra": {
         "substitution": {
             "enable": true,
             "mapping": {
+                "{foo}": {
+                    "type": "literal",
+                    "value": "foo"
+                },
+                "{bar}": {
+                    "type": "env",
+                    "value": "BAR"
+                },
+                "{baz}": {
+                    "type": "include",
+                    "value": "./return-baz.php"
+                },
+                "{atom}": {
+                    "type": "constant",
+                    "value": "DateTime::ATOM"
+                },
                 "{phpversion}": {
                     "type": "callback",
                     "value": "phpversion"
+                },
+                "{md5}": {
+                    "type": "process",
+                    "value": "php -r 'echo md5(\"test\");'"
+                },
+                "{cached-date}": {
+                    "type": "process",
+                    "value": "date +%N",
+                    "escape": "trim"
                 }
             }
         }

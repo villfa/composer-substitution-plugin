@@ -56,9 +56,38 @@ class BackwardCompatibilityTest extends BaseTestCase
         $dir = $this->setupRepo($version);
         self::runComposer($dir, 'install --no-progress --no-dev');
 
+        // literal
+        $output = self::runComposer($dir, 'test-foo');
+        self::assertEquals('foo', array_pop($output));
+
+        // env
+        $output = self::runComposer($dir, 'test-bar', 'BAR=bar-value');
+        self::assertEquals('bar-value', array_pop($output));
+
+        // constant
+        $output = self::runComposer($dir, 'test-atom');
+        self::assertEquals(\DateTime::ATOM, array_pop($output));
+
         // callback
         $output = self::runComposer($dir, 'test-phpversion');
         self::assertEquals(PHP_VERSION, array_pop($output));
+
+        // process
+        $output = self::runComposer($dir, 'test-md5');
+        self::assertEquals(md5('test'), array_pop($output));
+
+        // include
+        copy(__DIR__ . '/return-baz.php', $this->currentTestDir . '/return-baz.php');
+        $output = self::runComposer($dir, 'test-baz');
+        self::assertEquals('baz', array_pop($output));
+
+        // cache + escape
+        $output = self::runComposer($dir, 'test-cache');
+        $output = array_pop($output);
+        self::assertStringContainsString('/', $output);
+        self::assertTrue(strlen($output) > 3);
+        list($a, $b) = explode('/', $output);
+        self::assertEquals($a, $b);
     }
 
     public function provideComposerVersions()
@@ -95,10 +124,14 @@ class BackwardCompatibilityTest extends BaseTestCase
         );
     }
 
-    private static function runComposer($dir, $args)
+    private static function runComposer($dir, $args, $envVars = '')
     {
         chdir($dir);
         $command = 'php '. $dir . '/composer.phar --no-ansi --no-interaction ' . $args;
+        if (!empty($envVars)) {
+            $command = $envVars . ' ' . $command;
+        }
+
         exec($command, $output, $exitCode);
 
         if ($exitCode > 0) {
