@@ -33,6 +33,6 @@ final class EscapeDecoratorProvider implements AutoloadDependentProviderInterfac
      */
     public function mustAutoload()
     {
-        return !\SubstitutionPlugin\isInternalFunction($this->callback);
+        return !\SubstitutionPlugin\isInternalCallback($this->callback);
     }
 }

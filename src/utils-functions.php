@@ -3,16 +3,24 @@
 namespace SubstitutionPlugin;
 
 /**
- * @param string $functionName
+ * @param string $callback
  * @return bool
  */
-function isInternalFunction($functionName)
+function isInternalCallback($callback)
 {
-    if (!is_string($functionName) || !function_exists($functionName)) {
+    if (!is_callable($callback)) {
         return false;
     }
 
-    $functions = get_defined_functions();
+    try {
+        if (strpos($callback, '::', 1) !== false) {
+            $r = new \ReflectionMethod($callback);
+        } else {
+            $r = new \ReflectionFunction($callback);
+        }
 
-    return in_array(strtolower($functionName), $functions['internal']);
+        return $r->isInternal();
+    } catch (\ReflectionException $e) {
+        return false;
+    }
 }
