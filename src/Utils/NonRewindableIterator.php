@@ -23,6 +23,16 @@ final class NonRewindableIterator implements \Iterator
     }
 
     /**
+     * @param string[] $values
+     */
+    public function addAll(array $values)
+    {
+        foreach ($values as $value) {
+            $this->add($value);
+        }
+    }
+
+    /**
      * @inheritDoc
      */
     public function current()

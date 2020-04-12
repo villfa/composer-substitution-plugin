@@ -31,9 +31,7 @@ final class TransformerManager
 
     public function applySubstitutions(array $scripts, array $scriptNames)
     {
-        foreach ($scriptNames as $scriptName) {
-            self::$transformedScripts->add($scriptName);
-        }
+        self::$transformedScripts->addAll($scriptNames);
 
         foreach (self::$transformedScripts as $scriptName) {
             if (!isset($scripts[$scriptName])) {
