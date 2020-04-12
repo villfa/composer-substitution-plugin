@@ -12,15 +12,27 @@ class CommonScriptEventsTest extends BaseEndToEndTestCase
         self::install(__DIR__);
     }
 
-    public function testPostUpdateCmd()
+    public function testUpdateCmd()
     {
-        $this->markTestSkipped('Substitutions don\'t apply on Composer`s commands');
-        list($output, $exitCode) = self::runComposer(__DIR__, '-vvv update --no-dev');
-
-        echo PHP_EOL, implode(PHP_EOL, $output), PHP_EOL;
+        list($output, $exitCode) = self::runComposer(__DIR__, 'update --no-dev');
 
         self::assertEquals(0, $exitCode);
         self::assertEquals('POST UPDATE SUBSTITUTION', array_pop($output));
+        self::assertContains('PRE UPDATE SUBSTITUTION', $output);
+    }
+
+    public function testStatusCmd()
+    {
+        list($output, $exitCode) = self::runComposer(__DIR__, 'status');
+
+        self::assertEquals(0, $exitCode);
+        self::assertContains('PRE STATUS SUBSTITUTION', $output);
+        /**
+         * Doesn't work because of problem with Composer
+         * See: https://github.com/composer/composer/issues/8771
+         *
+         * self::assertEquals('POST STATUS SUBSTITUTION', array_pop($output));
+         */
     }
 
     public static function doTearDownAfterClass()

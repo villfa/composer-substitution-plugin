@@ -90,30 +90,71 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
     public function onPreCommandRun(PreCommandRunEvent $event)
     {
         if ($event->getCommand() === 'run-script' || $event->getCommand() === 'run') {
-            $scriptName = $event->getInput()->getArgument('script');
+            $scriptNames = array($event->getInput()->getArgument('script'));
         } else {
-            $scriptName = $event->getCommand();
+            $scriptByCmd = array(
+                'install' => array(
+                    'pre-install-cmd',
+                    'post-install-cmd',
+                    'pre-autoload-dump',
+                    'post-autoload-dump',
+                    'pre-dependencies-solving',
+                    'post-dependencies-solving',
+                    'pre-package-install',
+                    'post-package-install',
+                ),
+                'update' => array(
+                    'pre-update-cmd',
+                    'post-update-cmd',
+                    'pre-autoload-dump',
+                    'post-autoload-dump',
+                    'pre-package-update',
+                    'post-package-update',
+                    'pre-package-uninstall',
+                    'post-package-uninstall',
+                    ),
+                'remove' => array(
+                    'pre-package-uninstall',
+                    'post-package-uninstall',
+                ),
+                'dump-autoload' => array(
+                    'pre-autoload-dump',
+                    'post-autoload-dump'
+                ),
+                'status' => array(
+                    'pre-status-cmd',
+                    'post-status-cmd',
+                ),
+                'archive' => array(
+                    'pre-archive-cmd',
+                    'post-archive-cmd',
+                ),
+            );
+
+            if (isset($scriptByCmd[$event->getCommand()])) {
+                $scriptNames = $scriptByCmd[$event->getCommand()];
+            } else {
+                $scriptNames = array($event->getCommand());
+            }
         }
 
-        if (empty($scriptName)) {
-            // Not a script so no substitution
-            return;
-        }
+        $scriptNames = array_filter($scriptNames);
+        $scriptNames[] = 'command';
 
-        $this->execute($scriptName);
+        $this->execute($scriptNames);
     }
 
     /**
-     * @param string $scriptName
+     * @param string[] $scriptNames
      */
-    private function execute($scriptName) {
+    private function execute($scriptNames) {
         $package = $this->composer->getPackage();
         if ($package instanceof AliasPackage) {
             $package = $package->getAliasOf();
         }
 
         if ($package instanceof CompletePackage) {
-            $package->setScripts($this->applySubstitutions($package->getScripts(), $scriptName));
+            $package->setScripts($this->applySubstitutions($package->getScripts(), $scriptNames));
         }
     }
 
@@ -131,16 +172,16 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
 
     /**
      * @param array $scripts
-     * @param string $scriptName
+     * @param string[] $scriptNames
      * @return array
      */
-    private function applySubstitutions(array $scripts, $scriptName)
+    private function applySubstitutions(array $scripts, array $scriptNames)
     {
-        $this->logger->info('Substitutions triggered by ' . $scriptName);
+        $this->logger->info('Substitutions triggered by ' . implode(', ', $scriptNames));
         $providerFactory = new ProviderFactory($this->composer, $this->logger);
         $transformerFactory = new TransformerFactory($providerFactory, $this->logger);
         $transformerManager = new TransformerManager($transformerFactory, $this->config, $this->logger);
 
-        return $transformerManager->applySubstitutions($scripts, $scriptName);
+        return $transformerManager->applySubstitutions($scripts, $scriptNames);
     }
 }

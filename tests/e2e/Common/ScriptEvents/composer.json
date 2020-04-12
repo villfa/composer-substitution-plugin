@@ -16,6 +16,12 @@
         ],
         "post-update-cmd": [
             "echo {post-update-cmd}"
+        ],
+        "pre-status-cmd": [
+            "echo {pre-status-cmd}"
+        ],
+        "post-status-cmd": [
+            "echo {post-status-cmd}"
         ]
     },
     "extra": {
@@ -29,6 +35,14 @@
                 "{post-update-cmd}": {
                     "type": "literal",
                     "value": "POST UPDATE SUBSTITUTION"
+                },
+                "{pre-status-cmd}": {
+                    "type": "literal",
+                    "value": "PRE STATUS SUBSTITUTION"
+                },
+                "{post-status-cmd}": {
+                    "type": "literal",
+                    "value": "POST STATUS SUBSTITUTION"
                 }
             }
         }
