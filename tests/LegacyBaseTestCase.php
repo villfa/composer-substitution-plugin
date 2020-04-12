@@ -6,6 +6,11 @@ use PHPUnit\Framework\TestCase;
 
 class LegacyBaseTestCase extends TestCase
 {
+    public static function assertStringContainsString($needle, $haystack, $message = '')
+    {
+        self::assertContains($needle, $haystack, $message);
+    }
+
     public static function setUpBeforeClass()
     {
         static::doSetUpBeforeClass();

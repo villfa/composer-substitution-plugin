@@ -73,6 +73,28 @@ class BackwardCompatibilityTest extends BaseTestCase
         );
     }
 
+    /**
+     * @dataProvider provideComposerNonSupportedVersions
+     * @param string $version
+     */
+    public function testComposerNonSupportedVersion($version)
+    {
+        echo "\nTest with Composer $version\n";
+        $dir = $this->setupRepo($version);
+        $output = self::runComposer($dir, '-vv install --no-progress --no-dev');
+        $output = implode(PHP_EOL, $output);
+
+        self::assertStringContainsString('Plugin disabled.', $output);
+        self::assertStringContainsString('Your version of Composer is not supported by the plugin.', $output);
+    }
+
+    public function provideComposerNonSupportedVersions()
+    {
+        return array(
+            array('1.6.5'),
+        );
+    }
+
     private static function runComposer($dir, $args)
     {
         chdir($dir);

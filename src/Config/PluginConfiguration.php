@@ -19,6 +19,11 @@ final class PluginConfiguration extends AbstractConfiguration implements PluginC
     {
         self::setLogger($logger);
 
+        if (!defined('Composer\\Plugin\\PluginEvents::PRE_COMMAND_RUN')) {
+            self::$logger->warning('Your version of Composer is not supported by the plugin.');
+            return;
+        }
+
         if (!isset($extra['substitution'])) {
             self::$logger->debug('Configuration extra.substitution is missing.');
         } elseif (!is_array($extra['substitution'])) {
