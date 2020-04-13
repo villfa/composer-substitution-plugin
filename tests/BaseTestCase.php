@@ -14,6 +14,11 @@ if (class_exists('\\PHPUnit\\Runner\\Version') && version_compare(Version::serie
 
 class BaseTestCase extends TestCase
 {
+    protected static function isWindows()
+    {
+        return substr(PHP_OS, 0, 3) == 'WIN';
+    }
+
     protected static function getProjectDir()
     {
         return realpath(__DIR__ . '/../');

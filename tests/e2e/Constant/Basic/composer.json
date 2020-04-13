@@ -16,8 +16,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "class-const": "echo '{COMPOSER_VERSION}'",
-        "autoload-const": "echo '{FOO}'"
+        "class-const": "echo {COMPOSER_VERSION}",
+        "autoload-const": "echo {FOO}"
     },
     "extra": {
         "substitution": {

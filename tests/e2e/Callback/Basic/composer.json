@@ -16,8 +16,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "test-native-func": "echo '#PHP_VERSION'",
-        "test-ud-func": "echo '#BAR'"
+        "test-native-func": "echo #PHP_VERSION",
+        "test-ud-func": "echo #BAR"
     },
     "extra": {
         "substitution": {
