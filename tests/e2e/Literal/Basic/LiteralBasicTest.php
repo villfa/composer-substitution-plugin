@@ -88,8 +88,13 @@ class LiteralBasicTest extends BaseEndToEndTestCase
     {
         list($output, $exitCode) = self::runComposer(__DIR__, 'test_escape');
 
+        $output = array_pop($output);
+        if (self::isWindows()) {
+            $output = trim($output, '"');
+        }
+
         self::assertEquals(0, $exitCode);
-        self::assertEquals('test #not a comment', array_pop($output));
+        self::assertEquals('test #not a comment', $output);
     }
 
     public function testRecursion()

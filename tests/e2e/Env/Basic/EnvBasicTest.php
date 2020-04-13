@@ -14,7 +14,13 @@ class EnvBasicTest extends BaseEndToEndTestCase
 
     public function testEnvVariable()
     {
-        list($output, $exitCode) = self::runComposer(__DIR__, 'test', 'FOO=foo');
+        if (self::isWindows()) {
+            $envVars = 'SET FOO=foo &&';
+        } else {
+            $envVars = 'FOO=foo';
+        }
+
+        list($output, $exitCode) = self::runComposer(__DIR__, 'test', $envVars);
 
         self::assertEquals(0, $exitCode);
         self::assertEquals('foo', array_pop($output));

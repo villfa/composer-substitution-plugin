@@ -17,7 +17,7 @@
         "test_multi_02": "echo _{text_multi}_02",
         "indirect-test": "@test",
         "test_list": [
-            "echo 'First echo'",
+            "echo First echo",
             "echo {text_list}"
         ],
         "test_escape": "echo {text_escape}",

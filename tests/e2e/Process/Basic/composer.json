@@ -11,7 +11,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "test-process": "echo '{PHP_VERSION}'"
+        "test-process": "echo {PHP_VERSION}"
     },
     "extra": {
         "substitution": {
@@ -19,7 +19,7 @@
             "mapping": {
                 "{PHP_VERSION}": {
                     "type": "process",
-                    "value": "php -r 'echo \"FOO\";'"
+                    "value": "php -r \"echo 'FOO';\""
                 }
             }
         }
