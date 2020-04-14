@@ -98,7 +98,14 @@ class BackwardCompatibilityTest extends BaseTestCase
             array('1.9.3'),
             array('1.8.6'),
             array('1.7.3'),
-            // PRE_COMMAND_RUN doesn't exist with Composer < 1.7.0
+            array('1.6.5'),
+            array('1.5.6'),
+            array('1.4.3'),
+            array('1.3.3'),
+            array('1.2.4'),
+            array('1.1.3'),
+            // Psr\Log\LoggerInterface is missing in 1.0.3
+            //array('1.0.3'),
         );
     }
 
@@ -113,14 +120,13 @@ class BackwardCompatibilityTest extends BaseTestCase
         $output = self::runComposer($dir, '-vv install --no-progress --no-dev');
         $output = implode(PHP_EOL, $output);
 
-        self::assertStringContainsString('Plugin disabled.', $output);
         self::assertStringContainsString('Your version of Composer is not supported by the plugin.', $output);
     }
 
     public function provideComposerNonSupportedVersions()
     {
         return array(
-            array('1.6.5'),
+            array('1.0.3'),
         );
     }
 

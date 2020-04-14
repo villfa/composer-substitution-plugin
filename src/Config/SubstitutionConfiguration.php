@@ -48,7 +48,7 @@ final class SubstitutionConfiguration extends AbstractConfiguration implements S
      * @param LoggerInterface $logger
      * @return SubstitutionConfiguration|null
      */
-    public static function parseConfiguration($placeholder, $conf, LoggerInterface $logger)
+    public static function parseConfiguration($placeholder, $conf, $logger)
     {
         self::setLogger($logger);
 

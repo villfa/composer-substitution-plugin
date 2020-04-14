@@ -19,7 +19,7 @@ composer require villfa/composer-substitution-plugin
 ## Requirements
 
 * PHP >= 5.3.2
-* Composer >= 1.7.0
+* Composer >= 1.1.0
 
 ## Usage
 
