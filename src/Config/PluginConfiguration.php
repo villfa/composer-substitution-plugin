@@ -15,14 +15,9 @@ final class PluginConfiguration extends AbstractConfiguration implements PluginC
     /** @var SubstitutionConfigurationInterface[] */
     private $mapping = array();
 
-    public function __construct(array $extra, LoggerInterface $logger = null)
+    public function __construct(array $extra, $logger = null)
     {
         self::setLogger($logger);
-
-        if (!defined('Composer\\Plugin\\PluginEvents::PRE_COMMAND_RUN')) {
-            self::$logger->warning('Your version of Composer is not supported by the plugin.');
-            return;
-        }
 
         if (!isset($extra['substitution'])) {
             self::$logger->debug('Configuration extra.substitution is missing.');

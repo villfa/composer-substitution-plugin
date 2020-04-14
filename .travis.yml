@@ -21,11 +21,11 @@ matrix:
       php: 7.1
     - dist: bionic
       php: 7.2
+      env: BC_TESTS=true
     - dist: bionic
       php: 7.3
     - dist: bionic
       php: 7.4
-      env: BC_TESTS=true
     - dist: bionic
       php: nightly
       env: platform=ignore

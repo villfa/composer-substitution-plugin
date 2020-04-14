@@ -10,7 +10,7 @@ abstract class AbstractConfiguration
     /** @var LoggerInterface */
     protected static $logger;
 
-    protected static function setLogger(LoggerInterface $logger = null)
+    protected static function setLogger($logger = null)
     {
         self::$logger = $logger === null ? new NullLogger() : $logger;
     }
