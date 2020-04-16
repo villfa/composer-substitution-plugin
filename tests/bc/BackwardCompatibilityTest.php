@@ -93,7 +93,7 @@ class BackwardCompatibilityTest extends BaseTestCase
     public function provideComposerVersions()
     {
         return array(
-            //array('snapshot'),
+            array('snapshot'),
             array('1.10.5'),
             array('1.9.3'),
             array('1.8.6'),
