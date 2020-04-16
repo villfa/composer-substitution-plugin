@@ -15,7 +15,7 @@ class BaseEndToEndTestCase extends BaseTestCase
     protected static function install($dir, $dev = false)
     {
         self::cleanDir($dir);
-        $args = 'install --no-progress --no-suggest';
+        $args = 'install --no-progress';
         $args .= $dev ? '' : ' --no-dev';
 
         list($output, $exitCode) = self::runComposer($dir, $args);

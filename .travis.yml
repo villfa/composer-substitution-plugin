@@ -27,6 +27,9 @@ matrix:
     - dist: bionic
       php: 7.4
     - dist: bionic
+      php: 7.4
+      env: COMPOSER_SNAPSHOT=true
+    - dist: bionic
       php: nightly
       env: platform=ignore
   fast_finish: true
@@ -38,7 +41,8 @@ before_install:
   - phpenv config-rm xdebug.ini || echo "Xdebug not present"
 
 install:
-  - flags="--ansi --prefer-dist --no-interaction --optimize-autoloader --no-suggest --no-progress"
+  - if [ "$COMPOSER_SNAPSHOT" == "true" ]; then composer self-update --no-interaction --snapshot --no-progress;fi
+  - flags="--ansi --prefer-dist --no-interaction --optimize-autoloader --no-progress"
   - if [ "$platform" == "ignore" ]; then flags="$flags --ignore-platform-reqs"; fi
   - composer install $flags
 
