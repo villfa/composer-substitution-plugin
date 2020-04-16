@@ -39,4 +39,31 @@ class ConstantProviderTest extends BaseUnitTestCase
         $provider = new ConstantProvider('ClassConstant::FOO');
         self::assertEquals('foo', $provider->getValue());
     }
+
+    public function testInvalidCallback()
+    {
+        $constantName = 'not_a_valid_constant';
+        $provider = new ConstantProvider($constantName);
+        $this->setExpectedException('\\InvalidArgumentException', "Value is not a constant: $constantName");
+        $provider->getValue();
+    }
+
+    /**
+     * @dataProvider provideMustAutoload
+     * @param string $constantName
+     * @param bool $expectedResult
+     */
+    public function testMustAutoload($constantName, $expectedResult)
+    {
+        $provider = new ConstantProvider($constantName);
+        self::assertEquals($expectedResult, $provider->mustAutoload());
+    }
+
+    public function provideMustAutoload()
+    {
+        return array(
+            array('PHP_VERSION', false),
+            array('\\My\\Own::CONSTANT', true),
+        );
+    }
 }

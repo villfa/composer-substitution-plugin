@@ -27,4 +27,24 @@ class EscapeDecoratorProviderTest extends BaseUnitTestCase
         $this->setExpectedException('\\InvalidArgumentException', "The escape callback is not callable: $callback");
         $provider->getValue();
     }
+
+    /**
+     * @dataProvider provideMustAutoload
+     * @param string $callback
+     * @param bool $expectedResult
+     */
+    public function testMustAutoload($callback, $expectedResult)
+    {
+        $innerProvider = new \DummyProvider('foo');
+        $provider = new EscapeDecoratorProvider($callback, $innerProvider);
+        self::assertEquals($expectedResult, $provider->mustAutoload());
+    }
+
+    public function provideMustAutoload()
+    {
+        return array(
+            array('trim', false),
+            array('my_own_escape_function', true),
+        );
+    }
 }

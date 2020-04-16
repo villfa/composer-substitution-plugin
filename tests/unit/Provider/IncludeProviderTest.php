@@ -22,6 +22,7 @@ class IncludeProviderTest extends BaseUnitTestCase
         $path = self::getFixturesDir() . '/return-foo.php';
         $provider = new IncludeProvider($path);
         self::assertEquals('foo', $provider->getValue());
+        self::assertTrue($provider->mustAutoload());
     }
 
     public function testScope()

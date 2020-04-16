@@ -34,6 +34,6 @@ final class ProcessProvider implements ProviderInterface
             throw new \RuntimeException($message, $exitCode);
         }
 
-        return is_array($output) ? implode(PHP_EOL, $output) : (string) $output;
+        return $output;
     }
 }
