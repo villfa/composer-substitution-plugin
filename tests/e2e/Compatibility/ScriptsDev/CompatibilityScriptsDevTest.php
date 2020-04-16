@@ -14,7 +14,6 @@ class CompatibilityScriptsDevTest extends BaseEndToEndTestCase
 
     public function testPluginCompatibility()
     {
-        self::markTestSkipped('See: https://github.com/neronmoon/scriptsdev/pull/17');
         list($output, $exitCode) = self::runComposer(__DIR__, 'test');
 
         self::assertEquals(0, $exitCode);
