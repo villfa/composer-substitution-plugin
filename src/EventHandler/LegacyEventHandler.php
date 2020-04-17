@@ -3,6 +3,7 @@
 namespace SubstitutionPlugin\EventHandler;
 
 use SubstitutionPlugin\Config\PluginConfiguration;
+use SubstitutionPlugin\Utils\CommandHelper;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -91,48 +92,8 @@ final class LegacyEventHandler implements EventHandlerInterface
 
             $scriptNames = array($input->getArgument('script'));
         } else {
-            $scriptByCmd = array(
-                'install' => array(
-                    'pre-install-cmd',
-                    'post-install-cmd',
-                    'pre-autoload-dump',
-                    'post-autoload-dump',
-                    'pre-dependencies-solving',
-                    'post-dependencies-solving',
-                    'pre-package-install',
-                    'post-package-install',
-                ),
-                'update' => array(
-                    'pre-update-cmd',
-                    'post-update-cmd',
-                    'pre-autoload-dump',
-                    'post-autoload-dump',
-                    'pre-package-update',
-                    'post-package-update',
-                    'pre-package-uninstall',
-                    'post-package-uninstall',
-                ),
-                'remove' => array(
-                    'pre-package-uninstall',
-                    'post-package-uninstall',
-                ),
-                'dump-autoload' => array(
-                    'pre-autoload-dump',
-                    'post-autoload-dump'
-                ),
-                'status' => array(
-                    'pre-status-cmd',
-                    'post-status-cmd',
-                ),
-                'archive' => array(
-                    'pre-archive-cmd',
-                    'post-archive-cmd',
-                ),
-            );
-
-            if (isset($scriptByCmd[$cmd])) {
-                $scriptNames = $scriptByCmd[$cmd];
-            } else {
+            $cmdHelper = new CommandHelper();
+            if (!$cmdHelper->tryGetScriptsFromCommand($cmd, $scriptNames)) {
                 $scriptNames = array($cmd);
             }
         }
