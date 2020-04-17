@@ -100,3 +100,35 @@ For each type of substitution the value replacing the placeholder comes from a d
 * `env`: The value is an ENV variable.
 * `constant`: The value comes from a constant or a class constant.
 * `process`: The value is the output of the processed command.
+
+## Real-life examples
+
+### [PHPUnit Extra Constraints](https://github.com/villfa/phpunit-extra-constraints)
+
+This library defines a Composer script which uses [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) this way:
+```sh
+"scripts": {
+    "phpcs": "phpcs --standard=PSR12 --parallel=$(nproc) src/ tests/",
+```
+Unfortunately because of the usage of `nproc` it is not cross-platform.
+
+This is solved by the substitution plugin in combination with [Linfo](https://github.com/jrgp/linfo)
+(See also the tiny script [nproc.php](https://github.com/villfa/phpunit-extra-constraints/blob/a2c8e5a6f5079f4a2c9d83f45283ad25330ae16b/scripts/nproc.php)).
+Here how it is configured:
+
+```json
+"extra": {
+    "substitution": {
+        "enable": true,
+        "mapping": {
+            "$(nproc)": {
+                "type": "include",
+                "value": "./scripts/nproc.php",
+                "cached": true
+            }
+        }
+    }
+}
+```
+
+So now it also works on Windows without even touching the *scripts* section.
