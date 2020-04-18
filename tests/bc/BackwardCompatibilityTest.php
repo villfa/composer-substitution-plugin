@@ -3,7 +3,6 @@
 namespace SubstitutionPlugin;
 
 use Composer\Util\Filesystem;
-use Symfony\Component\Process\PhpExecutableFinder;
 
 class BackwardCompatibilityTest extends BaseTestCase
 {
@@ -112,28 +111,6 @@ class BackwardCompatibilityTest extends BaseTestCase
             array('1.3.3'),
             array('1.2.4'),
             array('1.1.3'),
-            // Psr\Log\LoggerInterface is missing in 1.0.3
-            //array('1.0.3'),
-        );
-    }
-
-    /**
-     * @dataProvider provideComposerNonSupportedVersions
-     * @param string $version
-     */
-    public function testComposerNonSupportedVersion($version)
-    {
-        echo "\nTest with Composer $version\n";
-        $dir = $this->setupRepo($version);
-        $output = self::runComposer($dir, '-vv install --no-progress --no-dev');
-        $output = implode(PHP_EOL, $output);
-
-        self::assertStringContainsString('Your version of Composer is not supported by the plugin.', $output);
-    }
-
-    public function provideComposerNonSupportedVersions()
-    {
-        return array(
             array('1.0.3'),
         );
     }

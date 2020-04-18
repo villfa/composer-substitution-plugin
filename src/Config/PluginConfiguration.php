@@ -15,7 +15,7 @@ final class PluginConfiguration extends AbstractConfiguration implements PluginC
     /** @var SubstitutionConfigurationInterface[] */
     private $mapping = array();
 
-    public function __construct(array $extra, $logger = null)
+    public function __construct(array $extra, LoggerInterface $logger = null)
     {
         self::setLogger($logger);
 

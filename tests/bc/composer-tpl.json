@@ -4,9 +4,6 @@
     },
     "repositories": [
         {
-            "packagist.org": false
-        },
-        {
             "type": "path",
             "url": "{{PLUGIN_PATH}}"
         }

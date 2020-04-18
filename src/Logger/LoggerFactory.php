@@ -14,8 +14,6 @@ class LoggerFactory
     public static function getLogger(IOInterface $io)
     {
         switch (true) {
-            case !interface_exists('Psr\\Log\\LoggerInterface', true):
-                return new LegacyLogger($io);
             case $io->isDebug():
             case $io->isVeryVerbose():
                 return new VeryVerboseLogger($io);
