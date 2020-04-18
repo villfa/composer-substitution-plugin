@@ -28,8 +28,8 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
     /** @var LoggerInterface */
     private $logger;
 
-    /** @var PluginConfiguration */
-    private $config;
+    /** @var TransformerManager */
+    private $transformerManager;
 
     /**
      * @inheritDoc
@@ -39,7 +39,7 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
         $this->includeRequiredFiles();
         $this->composer = $composer;
         $this->logger = $logger = LoggerFactory::getLogger($io);
-        $this->config = $config = new PluginConfiguration($composer->getPackage()->getExtra(), $logger);
+        $config = new PluginConfiguration($composer->getPackage()->getExtra(), $logger);
 
         $this->logger->info(
             'Plugin ' . ($config->isEnabled() ? 'enabled. {priority}' : 'disabled.'),
@@ -49,7 +49,9 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
                 },
             )
         );
-
+        $providerFactory = new ProviderFactory($composer, $logger);
+        $transformerFactory = new TransformerFactory($providerFactory, $logger);
+        $this->transformerManager = new TransformerManager($transformerFactory, $config, $logger);
         $eventHandlerFactory = new EventHandlerFactory(array($this, 'execute'), $config, $logger);
         self::$eventHandler = $eventHandlerFactory->getEventHandler();
         self::$eventHandler->activate();
@@ -117,11 +119,8 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
     private function applySubstitutions(array $scripts, array $scriptNames)
     {
         $this->logger->info('Start applying substitutions on scripts: ' . implode(', ', $scriptNames));
-        $providerFactory = new ProviderFactory($this->composer, $this->logger);
-        $transformerFactory = new TransformerFactory($providerFactory, $this->logger);
-        $transformerManager = new TransformerManager($transformerFactory, $this->config, $this->logger);
 
-        return $transformerManager->applySubstitutions($scripts, $scriptNames);
+        return $this->transformerManager->applySubstitutions($scripts, $scriptNames);
     }
 
     private function includeRequiredFiles()

@@ -26,6 +26,10 @@ class DummyTransformer implements TransformerInterface
         $this->count++;
 
         if ($this->value !== null) {
+            if (is_callable($this->value)) {
+                return call_user_func($this->value, $value);
+            }
+
             return $this->value;
         }
 

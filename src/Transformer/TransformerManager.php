@@ -9,7 +9,7 @@ use SubstitutionPlugin\Utils\NonRewindableIterator;
 final class TransformerManager
 {
     /** @var NonRewindableIterator */
-    private static $transformedScripts;
+    private $transformedScripts;
 
     /** @var TransformerInterface */
     private $transformer;
@@ -24,16 +24,14 @@ final class TransformerManager
     ) {
         $this->transformer = $transformerFactory->getTransformer($config);
         $this->logger = $logger;
-        if (self::$transformedScripts === null) {
-            self::$transformedScripts = new NonRewindableIterator();
-        }
+        $this->transformedScripts = new NonRewindableIterator();
     }
 
     public function applySubstitutions(array $scripts, array $scriptNames)
     {
-        self::$transformedScripts->addAll($scriptNames);
+        $this->transformedScripts->addAll($scriptNames);
 
-        foreach (self::$transformedScripts as $scriptName) {
+        foreach ($this->transformedScripts as $scriptName) {
             if (!isset($scripts[$scriptName])) {
                 continue;
             }
@@ -44,7 +42,7 @@ final class TransformerManager
                 $listener = $this->transformer->transform($listener);
 
                 if (self::tryExtractScript($listener, $script)) {
-                    self::$transformedScripts->add($script);
+                    $this->transformedScripts->add($script);
                 }
             }
         }
