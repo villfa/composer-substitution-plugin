@@ -35,6 +35,14 @@ class CommonScriptEventsTest extends BaseEndToEndTestCase
          */
     }
 
+    public function testStatusAliasCmd()
+    {
+        list($output, $exitCode) = self::runComposer(__DIR__, 'st');
+
+        self::assertEquals(0, $exitCode);
+        self::assertContains('PRE STATUS SUBSTITUTION', $output);
+    }
+
     public static function doTearDownAfterClass()
     {
         parent::doTearDownAfterClass();

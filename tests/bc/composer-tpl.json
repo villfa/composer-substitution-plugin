@@ -20,7 +20,10 @@
         "test-atom": "echo '{atom}'",
         "test-phpversion": "echo '{phpversion}'",
         "test-md5": "echo {md5}",
-        "test-cache": "echo -n '{cached-date}' && sleep 0.1 && echo -n '/' && echo -n '{cached-date}'"
+        "test-cache": "echo -n '{cached-date}' && sleep 0.1 && echo -n '/' && echo -n '{cached-date}'",
+        "pre-status-cmd": [
+            "echo {pre-status-cmd}"
+        ]
     },
     "extra": {
         "substitution": {
@@ -54,6 +57,10 @@
                     "type": "process",
                     "value": "date +%N",
                     "escape": "trim"
+                },
+                "{pre-status-cmd}": {
+                    "type": "literal",
+                    "value": "PRE STATUS SUBSTITUTION"
                 }
             }
         }

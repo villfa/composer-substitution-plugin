@@ -48,16 +48,17 @@ final class PreCommandRunHandler implements EventHandlerInterface
      */
     private function getScripts(PreCommandRunEvent $event)
     {
-        if ($event->getCommand() === 'run-script' || $event->getCommand() === 'run') {
+        $cmdHelper = new CommandHelper();
+        $cmd = $cmdHelper->normalizeCommand($event->getCommand());
+        if ($cmd === 'run-script') {
             if ($event->getInput()->getOption('list')) {
                 return array();
             }
 
             $scriptNames = array($event->getInput()->getArgument('script'));
         } else {
-            $cmdHelper = new CommandHelper();
-            if (!$cmdHelper->tryGetScriptsFromCommand($event->getCommand(), $scriptNames)) {
-                $scriptNames = array($event->getCommand());
+            if (!$cmdHelper->tryGetScriptsFromCommand($cmd, $scriptNames)) {
+                $scriptNames = array($cmd);
             }
         }
 

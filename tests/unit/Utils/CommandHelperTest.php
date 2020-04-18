@@ -29,7 +29,6 @@ class CommandHelperTest extends BaseUnitTestCase
         );
     }
 
-
     public function testTryGetScriptsFromCommandWithInvalidCommand()
     {
         $cmdHelper = new CommandHelper();

@@ -85,14 +85,16 @@ final class LegacyEventHandler implements EventHandlerInterface
             return array();
         }
 
-        if ($cmd === 'run-script' || $cmd === 'run') {
+        $cmdHelper = new CommandHelper();
+        $cmd = $cmdHelper->normalizeCommand($cmd);
+
+        if ($cmd === 'run-script') {
             if ($input->getOption('list')) {
                 return array();
             }
 
             $scriptNames = array($input->getArgument('script'));
         } else {
-            $cmdHelper = new CommandHelper();
             if (!$cmdHelper->tryGetScriptsFromCommand($cmd, $scriptNames)) {
                 $scriptNames = array($cmd);
             }

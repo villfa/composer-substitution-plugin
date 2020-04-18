@@ -2,8 +2,25 @@
 
 namespace SubstitutionPlugin\Utils;
 
+use Composer\Console\Application;
+use Symfony\Component\Console\Exception\CommandNotFoundException;
+
 final class CommandHelper
 {
+    public function normalizeCommand($command)
+    {
+        global $application;
+        if ($application === null) {
+            $application = new Application();
+        }
+
+        try {
+            return $application->find($command)->getName();
+        } catch (CommandNotFoundException $e) {
+            return $command;
+        }
+    }
+
     /**
      * @param string $command
      * @param array $scriptNames

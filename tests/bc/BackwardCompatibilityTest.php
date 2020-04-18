@@ -88,6 +88,14 @@ class BackwardCompatibilityTest extends BaseTestCase
         self::assertTrue(strlen($output) > 3);
         list($a, $b) = explode('/', $output);
         self::assertEquals($a, $b);
+
+        // composer command
+        $output = self::runComposer($dir, 'status');
+        self::assertContains('PRE STATUS SUBSTITUTION', $output);
+
+        // composer command alias
+        $output = self::runComposer($dir, 'st');
+        self::assertContains('PRE STATUS SUBSTITUTION', $output);
     }
 
     public function provideComposerVersions()
@@ -142,7 +150,6 @@ class BackwardCompatibilityTest extends BaseTestCase
 
         if ($exitCode > 0) {
             echo implode(PHP_EOL, $output), PHP_EOL;
-            throw new \RuntimeException("Exec error: $command", $exitCode);
         }
 
         return $output;
