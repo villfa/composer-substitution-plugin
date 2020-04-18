@@ -4,10 +4,37 @@ namespace SubstitutionPlugin\Utils;
 
 use Composer\Console\Application;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
+use Symfony\Component\Console\Input\InputInterface;
 
 final class CommandHelper
 {
-    public function normalizeCommand($command)
+    public function getScripts($command, InputInterface $input)
+    {
+        $command = $this->normalizeName($command);
+
+        if ($command === 'run-script') {
+            if ($input->getOption('list')) {
+                return array();
+            }
+
+            $scriptNames = array($input->getArgument('script'));
+        } else {
+            if (!$this->tryGetScriptsFromCommand($command, $scriptNames)) {
+                $scriptNames = array($command);
+            }
+        }
+
+        $scriptNames = array_filter($scriptNames);
+        $scriptNames[] = 'command';
+
+        return $scriptNames;
+    }
+
+    /**
+     * @param string|null $commandName
+     * @return string
+     */
+    private function normalizeName($commandName)
     {
         global $application;
         if ($application === null) {
@@ -15,10 +42,18 @@ final class CommandHelper
         }
 
         try {
-            return $application->find($command)->getName();
+            $cmd = $application->find($commandName);
+            $name = $cmd->getName();
+            if ($name === null && is_callable(array($cmd, 'getDefaultName'))) {
+                $name = call_user_func(array($cmd, 'getDefaultName'));
+            }
+            if ($name !== null) {
+                return $name;
+            }
         } catch (CommandNotFoundException $e) {
-            return $command;
         }
+
+        return $commandName;
     }
 
     /**
@@ -26,7 +61,7 @@ final class CommandHelper
      * @param array $scriptNames
      * @return bool
      */
-    public function tryGetScriptsFromCommand($command, &$scriptNames = array())
+    private function tryGetScriptsFromCommand($command, &$scriptNames = array())
     {
         switch ($command) {
             case 'install':

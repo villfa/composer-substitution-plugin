@@ -17,6 +17,9 @@ final class LegacyEventHandler implements EventHandlerInterface
     /** @var PluginConfiguration */
     private $configuration;
 
+    /** @var CommandHelper */
+    private $cmdHelper;
+
     /**
      * @param callable $callback
      * @param PluginConfiguration $configuration
@@ -25,6 +28,7 @@ final class LegacyEventHandler implements EventHandlerInterface
     {
         $this->callback = $callback;
         $this->configuration = $configuration;
+        $this->cmdHelper = new CommandHelper();
     }
 
     /**
@@ -85,25 +89,7 @@ final class LegacyEventHandler implements EventHandlerInterface
             return array();
         }
 
-        $cmdHelper = new CommandHelper();
-        $cmd = $cmdHelper->normalizeCommand($cmd);
-
-        if ($cmd === 'run-script') {
-            if ($input->getOption('list')) {
-                return array();
-            }
-
-            $scriptNames = array($input->getArgument('script'));
-        } else {
-            if (!$cmdHelper->tryGetScriptsFromCommand($cmd, $scriptNames)) {
-                $scriptNames = array($cmd);
-            }
-        }
-
-        $scriptNames = array_filter($scriptNames);
-        $scriptNames[] = 'command';
-
-        return $scriptNames;
+        return $this->cmdHelper->getScripts($cmd, $input);
     }
 
     public function deactivate()

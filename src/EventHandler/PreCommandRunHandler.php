@@ -15,6 +15,9 @@ final class PreCommandRunHandler implements EventHandlerInterface
     /** @var PluginConfiguration */
     private $configuration;
 
+    /** @var CommandHelper */
+    private $cmdHelper;
+
     /**
      * @param callable $callback
      * @param PluginConfiguration $configuration
@@ -23,6 +26,7 @@ final class PreCommandRunHandler implements EventHandlerInterface
     {
         $this->callback = $callback;
         $this->configuration = $configuration;
+        $this->cmdHelper = new CommandHelper();
     }
 
     /**
@@ -48,24 +52,7 @@ final class PreCommandRunHandler implements EventHandlerInterface
      */
     private function getScripts(PreCommandRunEvent $event)
     {
-        $cmdHelper = new CommandHelper();
-        $cmd = $cmdHelper->normalizeCommand($event->getCommand());
-        if ($cmd === 'run-script') {
-            if ($event->getInput()->getOption('list')) {
-                return array();
-            }
-
-            $scriptNames = array($event->getInput()->getArgument('script'));
-        } else {
-            if (!$cmdHelper->tryGetScriptsFromCommand($cmd, $scriptNames)) {
-                $scriptNames = array($cmd);
-            }
-        }
-
-        $scriptNames = array_filter($scriptNames);
-        $scriptNames[] = 'command';
-
-        return $scriptNames;
+        return $this->cmdHelper->getScripts($event->getCommand(), $event->getInput());
     }
 
     /**
