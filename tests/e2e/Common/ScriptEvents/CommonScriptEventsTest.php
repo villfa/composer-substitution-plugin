@@ -21,6 +21,15 @@ class CommonScriptEventsTest extends BaseEndToEndTestCase
         self::assertContains('PRE UPDATE SUBSTITUTION', $output);
     }
 
+    public function testUpdateAliasCmd()
+    {
+        list($output, $exitCode) = self::runComposer(__DIR__, 'upgrade --no-dev');
+
+        self::assertEquals(0, $exitCode);
+        self::assertEquals('POST UPDATE SUBSTITUTION', array_pop($output));
+        self::assertContains('PRE UPDATE SUBSTITUTION', $output);
+    }
+
     public function testStatusCmd()
     {
         list($output, $exitCode) = self::runComposer(__DIR__, 'status');

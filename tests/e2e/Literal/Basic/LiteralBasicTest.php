@@ -105,6 +105,14 @@ class LiteralBasicTest extends BaseEndToEndTestCase
         self::assertEquals('foo', array_pop($output));
     }
 
+    public function testCommandAbbreviation()
+    {
+        list($output, $exitCode) = self::runComposer(__DIR__, 'test_abbr');
+
+        self::assertEquals(0, $exitCode);
+        self::assertEquals('ABBREVIATION', array_pop($output));
+    }
+
     public static function doTearDownAfterClass()
     {
         parent::doTearDownAfterClass();

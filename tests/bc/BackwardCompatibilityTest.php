@@ -93,7 +93,7 @@ class BackwardCompatibilityTest extends BaseTestCase
         $output = self::runComposer($dir, 'status');
         self::assertContains('PRE STATUS SUBSTITUTION', $output);
 
-        // composer command alias
+        // composer command abbreviation
         $output = self::runComposer($dir, 'st');
         self::assertContains('PRE STATUS SUBSTITUTION', $output);
     }

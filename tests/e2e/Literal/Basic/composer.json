@@ -21,7 +21,8 @@
             "echo {text_list}"
         ],
         "test_escape": "echo {text_escape}",
-        "test_recursion": "@{test_cmd}"
+        "test_recursion": "@{test_cmd}",
+        "test_abbreviation": "echo {test_abbreviation}"
     },
     "extra": {
         "substitution": {
@@ -55,6 +56,10 @@
                 "{test_cmd}": {
                     "type": "literal",
                     "value": "test"
+                },
+                "{test_abbreviation}": {
+                    "type": "literal",
+                    "value": "ABBREVIATION"
                 }
             }
         }
