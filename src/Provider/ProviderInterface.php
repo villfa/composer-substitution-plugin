@@ -5,7 +5,7 @@ namespace SubstitutionPlugin\Provider;
 interface ProviderInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
     public function getValue();
 }
