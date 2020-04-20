@@ -47,6 +47,6 @@ install:
   - composer install $flags
 
 script:
-  - ( set -e; for f in $(find src/ -name *.php); do php -l "$f" || exit 1; done )
+  - find src/ -type f -name '*.php' -print0 | xargs -0 -L1 -P4 -- php -l -f
   - composer run-script test
   - if [ "$BC_TESTS" == "true" ]; then composer run-script test:bc; fi
