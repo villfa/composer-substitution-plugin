@@ -27,6 +27,11 @@ final class TransformerManager
         $this->transformedScripts = new NonRewindableIterator();
     }
 
+    /**
+     * @param array $scripts
+     * @param string[] $scriptNames
+     * @return array
+     */
     public function applySubstitutions(array $scripts, array $scriptNames)
     {
         $this->transformedScripts->addAll($scriptNames);

@@ -14,6 +14,9 @@ class ProviderType
     const CONSTANT = 'constant';
     const PROCESS = 'process';
 
+    /**
+     * @return string[]
+     */
     public static function all()
     {
         return array(

@@ -3,6 +3,7 @@
 namespace SubstitutionPlugin;
 
 use Composer\Util\Filesystem;
+use PHPUnit\Runner\Version;
 
 class BackwardCompatibilityTest extends BaseTestCase
 {
@@ -99,20 +100,25 @@ class BackwardCompatibilityTest extends BaseTestCase
 
     public function provideComposerVersions()
     {
-        return array(
+        $versions = array(
             array('snapshot'),
             array('1.10.5'),
             array('1.9.3'),
             array('1.8.6'),
             array('1.7.3'),
             array('1.6.5'),
-            array('1.5.6'),
-            array('1.4.3'),
-            array('1.3.3'),
-            array('1.2.4'),
-            array('1.1.3'),
-            array('1.0.3'),
         );
+
+        if (version_compare(PHP_VERSION, '7.3') < 0) {
+            $versions[] = '1.5.6';
+            $versions[] = '1.4.3';
+            $versions[] = '1.3.3';
+            $versions[] = '1.2.4';
+            $versions[] = '1.1.3';
+            $versions[] = '1.0.3';
+        }
+
+        return $versions;
     }
 
     private static function runComposer($dir, $args, $envVars = '')

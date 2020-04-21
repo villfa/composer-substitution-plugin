@@ -28,6 +28,10 @@ final class PluginConfiguration extends AbstractConfiguration implements PluginC
         }
     }
 
+    /**
+     * @param array $conf
+     * @return void
+     */
     private function parseConfiguration(array $conf)
     {
         if (isset($conf['enable'])) {
@@ -56,10 +60,14 @@ final class PluginConfiguration extends AbstractConfiguration implements PluginC
         }
 
         if (isset($conf['priority'])) {
-            $this->priority = self::parseInt('priority', $conf['priority'], $this->priority);
+            $this->priority = (int) self::parseInt('priority', $conf['priority'], $this->priority);
         }
     }
 
+    /**
+     * @param array $conf
+     * @return SubstitutionConfiguration[]
+     */
     private function parseMapping(array $conf)
     {
         $mapping = array();

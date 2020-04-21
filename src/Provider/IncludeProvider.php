@@ -41,6 +41,7 @@ final class IncludeProvider implements AutoloadDependentProviderInterface
  *
  * Prevents access to $this/self from included files.
  *
+ * @param string $file
  * @return mixed
  */
 function returnInclude($file)

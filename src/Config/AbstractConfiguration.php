@@ -10,6 +10,10 @@ abstract class AbstractConfiguration
     /** @var LoggerInterface */
     protected static $logger;
 
+    /**
+     * @param LoggerInterface|null $logger
+     * @return void
+     */
     protected static function setLogger(LoggerInterface $logger = null)
     {
         self::$logger = $logger === null ? new NullLogger() : $logger;
@@ -92,6 +96,12 @@ abstract class AbstractConfiguration
         return $defaultValue;
     }
 
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @param int|null $defaultValue
+     * @return int|null
+     */
     protected static function parseInt($key, $value, $defaultValue = null)
     {
         if (is_int($value)) {

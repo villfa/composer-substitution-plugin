@@ -85,6 +85,7 @@ final class LegacyEventHandler implements EventHandlerInterface
             $input->getOption('version')
             || $input->getOption('help')
             || empty($cmd)
+            || !is_string($cmd)
         ) {
             return array();
         }

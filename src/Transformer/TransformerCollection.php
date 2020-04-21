@@ -15,6 +15,10 @@ final class TransformerCollection implements TransformerInterface
         $this->transformers = $transformers;
     }
 
+    /**
+     * @param TransformerInterface $transformer
+     * @return void
+     */
     public function addTransformer(TransformerInterface $transformer)
     {
         $this->transformers[] = $transformer;

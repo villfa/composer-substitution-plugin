@@ -1,6 +1,7 @@
 composer
 composer.phar
 composer.lock
+phpstan.phar
 vendor/
 
 phpunit.xml

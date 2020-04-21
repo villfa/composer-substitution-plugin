@@ -26,6 +26,7 @@ matrix:
       php: 7.3
     - dist: bionic
       php: 7.4
+      env: PHPSTAN_URL="https://github.com/phpstan/phpstan/releases/download/0.12.19/phpstan.phar"
     - dist: bionic
       php: 7.4
       env: COMPOSER_SNAPSHOT=true
@@ -50,3 +51,4 @@ script:
   - find src/ -type f -name '*.php' -print0 | xargs -0 -L1 -P4 -- php -l -f
   - composer run-script test
   - if [ "$BC_TESTS" == "true" ]; then composer run-script test:bc; fi
+  - if [ ! -z "$PHPSTAN_URL" ]; then curl -sL "$PHPSTAN_URL" -o phpstan.phar && php phpstan.phar analyse; fi

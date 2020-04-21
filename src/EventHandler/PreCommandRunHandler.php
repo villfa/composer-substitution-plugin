@@ -41,6 +41,10 @@ final class PreCommandRunHandler implements EventHandlerInterface
         );
     }
 
+    /**
+     * @param PreCommandRunEvent $event
+     * @return void
+     */
     public function onPreCommandRun(PreCommandRunEvent $event)
     {
         call_user_func($this->callback, $this->getScripts($event));

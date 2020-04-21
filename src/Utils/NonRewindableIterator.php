@@ -4,12 +4,18 @@ namespace SubstitutionPlugin\Utils;
 
 final class NonRewindableIterator implements \Iterator
 {
+    /** @var array<string, int> */
     private $values = array();
+
+    /** @var string|null */
     private $value = null;
+
+    /** @var int */
     private $total = 0;
 
     /**
      * @param string $value
+     * @return void
      */
     public function add($value)
     {
@@ -24,6 +30,7 @@ final class NonRewindableIterator implements \Iterator
 
     /**
      * @param string[] $values
+     * @return void
      */
     public function addAll(array $values)
     {
@@ -33,7 +40,7 @@ final class NonRewindableIterator implements \Iterator
     }
 
     /**
-     * @inheritDoc
+     * @return string|null
      */
     public function current()
     {
@@ -41,7 +48,7 @@ final class NonRewindableIterator implements \Iterator
     }
 
     /**
-     * @inheritDoc
+     * @return void
      */
     public function next()
     {
@@ -50,7 +57,7 @@ final class NonRewindableIterator implements \Iterator
     }
 
     /**
-     * @inheritDoc
+     * @return int
      */
     public function key()
     {
@@ -58,7 +65,7 @@ final class NonRewindableIterator implements \Iterator
     }
 
     /**
-     * @inheritDoc
+     * @return bool
      */
     public function valid()
     {
@@ -66,7 +73,7 @@ final class NonRewindableIterator implements \Iterator
     }
 
     /**
-     * @inheritDoc
+     * @return void
      */
     public function rewind()
     {

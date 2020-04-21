@@ -8,6 +8,11 @@ use Symfony\Component\Console\Input\InputInterface;
 
 final class CommandHelper
 {
+    /**
+     * @param string $command
+     * @param InputInterface $input
+     * @return string[]
+     */
     public function getScripts($command, InputInterface $input)
     {
         $command = $this->normalizeName($command);
@@ -53,7 +58,7 @@ final class CommandHelper
         } catch (CommandNotFoundException $e) {
         }
 
-        return $commandName;
+        return (string) $commandName;
     }
 
     /**

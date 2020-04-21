@@ -4,12 +4,16 @@ namespace SubstitutionPlugin\Provider;
 
 final class EscapeDecoratorProvider implements AutoloadDependentProviderInterface
 {
-    /** @var callable */
+    /** @var string */
     private $callback;
 
     /** @var ProviderInterface */
     private $provider;
 
+    /**
+     * @param string $callback
+     * @param ProviderInterface $provider
+     */
     public function __construct($callback, ProviderInterface $provider)
     {
         $this->callback = $callback;
