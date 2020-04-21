@@ -7,6 +7,7 @@ use Psr\Log\LoggerInterface;
 
 final class AutoloaderDecoratorProvider implements ProviderInterface
 {
+    /** @var bool */
     private static $autoload = false;
 
     /** @var Composer */
@@ -41,6 +42,9 @@ final class AutoloaderDecoratorProvider implements ProviderInterface
         return $this->provider->getValue();
     }
 
+    /**
+     * @return void
+     */
     private function autoload()
     {
         $files = array();
@@ -64,6 +68,9 @@ final class AutoloaderDecoratorProvider implements ProviderInterface
  * Scope isolated include.
  *
  * Prevents access to $this/self from included files.
+ *
+ * @param string $file
+ * @return void
  */
 function includeFile($file)
 {

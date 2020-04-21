@@ -55,6 +55,6 @@ final class LoggerDecoratorProvider implements ProviderInterface
             $this->configuration->getPlaceholder(),
             $value
         ));
-        return $value;
+        return (string) $value;
     }
 }

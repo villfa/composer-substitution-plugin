@@ -11,9 +11,18 @@ interface EventHandlerInterface
      */
     public function getSubscribedEvents();
 
+    /**
+     * @return void
+     */
     public function activate();
 
+    /**
+     * @return void
+     */
     public function deactivate();
 
+    /**
+     * @return void
+     */
     public function uninstall();
 }

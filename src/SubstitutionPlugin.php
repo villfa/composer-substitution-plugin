@@ -32,7 +32,9 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
     private $transformerManager;
 
     /**
-     * @inheritDoc
+     * @param Composer $composer
+     * @param IOInterface $io
+     * @return void
      */
     public function activate(Composer $composer, IOInterface $io)
     {
@@ -58,7 +60,9 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
     }
 
     /**
-     * @inheritDoc
+     * @param Composer $composer
+     * @param IOInterface $io
+     * @return void
      */
     public function deactivate(Composer $composer, IOInterface $io)
     {
@@ -66,7 +70,9 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
     }
 
     /**
-     * @inheritDoc
+     * @param Composer $composer
+     * @param IOInterface $io
+     * @return void
      */
     public function uninstall(Composer $composer, IOInterface $io)
     {
@@ -90,11 +96,15 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
      */
     public function __call($name, array $args)
     {
-        return call_user_func_array(array(self::$eventHandler, $name), $args);
+        /** @var callable $callback */
+        $callback = array(self::$eventHandler, $name);
+
+        return call_user_func_array($callback, $args);
     }
 
     /**
      * @param string[] $scriptNames
+     * @return void
      */
     public function execute(array $scriptNames) {
         if (empty($scriptNames)) {
@@ -123,6 +133,9 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
         return $this->transformerManager->applySubstitutions($scripts, $scriptNames);
     }
 
+    /**
+     * @return void
+     */
     private function includeRequiredFiles()
     {
         $files = array(
