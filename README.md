@@ -110,7 +110,7 @@ This library defines a Composer script which uses [PHP_CodeSniffer](https://gith
 "scripts": {
     "phpcs": "phpcs --standard=PSR12 --parallel=$(nproc) src/ tests/",
 ```
-Unfortunately because of the usage of `nproc` it is not cross-platform.
+Unfortunately it is not cross-platform because of the usage of `nproc`.
 
 This is solved by the substitution plugin in combination with [Linfo](https://github.com/jrgp/linfo)
 (See also the tiny script [nproc.php](https://github.com/villfa/phpunit-extra-constraints/blob/a2c8e5a6f5079f4a2c9d83f45283ad25330ae16b/scripts/nproc.php)).
