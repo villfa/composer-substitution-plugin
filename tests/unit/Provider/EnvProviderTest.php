@@ -6,6 +6,9 @@ use SubstitutionPlugin\BaseUnitTestCase;
 
 class EnvProviderTest extends BaseUnitTestCase
 {
+    /**
+     * @return void
+     */
     public function testGetValue()
     {
         putenv('FOO=BAR');

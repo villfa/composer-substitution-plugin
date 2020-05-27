@@ -6,6 +6,9 @@ use SubstitutionPlugin\BaseUnitTestCase;
 
 class IncludeProviderTest extends BaseUnitTestCase
 {
+    /**
+     * @return void
+     */
     public function testWithInvalidPath()
     {
         $path = __DIR__ . '/invalid/path.php';
@@ -17,6 +20,9 @@ class IncludeProviderTest extends BaseUnitTestCase
         $provider->getValue();
     }
 
+    /**
+     * @return void
+     */
     public function testWithValidPath()
     {
         $path = self::getFixturesDir() . '/return-foo.php';
@@ -25,6 +31,9 @@ class IncludeProviderTest extends BaseUnitTestCase
         self::assertTrue($provider->mustAutoload());
     }
 
+    /**
+     * @return void
+     */
     public function testScope()
     {
         $path = self::getFixturesDir() . '/is-in-class.php';

@@ -7,18 +7,27 @@ use SubstitutionPlugin\BaseUnitTestCase;
 
 class TransformerCollectionTest extends BaseUnitTestCase
 {
+    /**
+     * @return void
+     */
     public static function doSetUpBeforeClass()
     {
         parent::doSetUpBeforeClass();
         require_once self::getFixturesDir() . '/DummyTransformer.php';
     }
 
+    /**
+     * @return void
+     */
     public function testEmptyCollection()
     {
         $transformer = new TransformerCollection();
         self::assertEquals('foo', $transformer->transform('foo'));
     }
 
+    /**
+     * @return void
+     */
     public function testWithOneTransformer()
     {
         $innerTransformer = new DummyTransformer('bar');
@@ -27,6 +36,9 @@ class TransformerCollectionTest extends BaseUnitTestCase
         self::assertEquals(1, $innerTransformer->getCount());
     }
 
+    /**
+     * @return void
+     */
     public function testAddTransformer()
     {
         $innerTransformer = new DummyTransformer('bar');
@@ -36,6 +48,9 @@ class TransformerCollectionTest extends BaseUnitTestCase
         self::assertEquals(1, $innerTransformer->getCount());
     }
 
+    /**
+     * @return void
+     */
     public function testWithSeveralTransformers()
     {
         $innerTransformer01 = new DummyTransformer('bar');
@@ -46,6 +61,9 @@ class TransformerCollectionTest extends BaseUnitTestCase
         self::assertEquals(1, $innerTransformer02->getCount());
     }
 
+    /**
+     * @return void
+     */
     public function testWithSeveralTransformersAndAddTransformer()
     {
         $innerTransformer01 = new DummyTransformer('bar');

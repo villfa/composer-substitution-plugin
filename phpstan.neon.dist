@@ -2,5 +2,10 @@ parameters:
   level: max
   paths:
     - src
+    - tests/unit
+  autoload_directories:
+    - tests/Fixtures
   checkGenericClassInNonGenericObjectType: false
   checkMissingIterableValueType: false
+  ignoreErrors:
+    - '#spl_autoload_register expects callable#'

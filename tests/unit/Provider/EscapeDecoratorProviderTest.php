@@ -6,12 +6,18 @@ use SubstitutionPlugin\BaseUnitTestCase;
 
 class EscapeDecoratorProviderTest extends BaseUnitTestCase
 {
+    /**
+     * @return void
+     */
     public static function doSetUpBeforeClass()
     {
         parent::doSetUpBeforeClass();
         require_once self::getFixturesDir() . '/DummyProvider.php';
     }
 
+    /**
+     * @return void
+     */
     public function testGetValue()
     {
         $innerProvider = new \DummyProvider('   trimmed   ');
@@ -19,6 +25,9 @@ class EscapeDecoratorProviderTest extends BaseUnitTestCase
         self::assertEquals('trimmed', $provider->getValue());
     }
 
+    /**
+     * @return void
+     */
     public function testInvalidCallback()
     {
         $callback = 'not_a_valid_callback';
@@ -32,6 +41,7 @@ class EscapeDecoratorProviderTest extends BaseUnitTestCase
      * @dataProvider provideMustAutoload
      * @param string $callback
      * @param bool $expectedResult
+     * @return void
      */
     public function testMustAutoload($callback, $expectedResult)
     {
@@ -40,6 +50,9 @@ class EscapeDecoratorProviderTest extends BaseUnitTestCase
         self::assertEquals($expectedResult, $provider->mustAutoload());
     }
 
+    /**
+     * @return array<array>
+     */
     public function provideMustAutoload()
     {
         return array(

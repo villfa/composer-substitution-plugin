@@ -10,6 +10,9 @@ use SubstitutionPlugin\Config\PluginConfiguration;
 
 class TransformerManagerTest extends BaseUnitTestCase
 {
+    /**
+     * @return void
+     */
     protected function doSetUp()
     {
         parent::doSetUp();
@@ -17,6 +20,10 @@ class TransformerManagerTest extends BaseUnitTestCase
         require_once self::getFixturesDir() . '/DummyTransformerFactory.php';
     }
 
+    /**
+     * @param TransformerInterface $transformer
+     * @return TransformerManager
+     */
     private function buildTransformerManager(TransformerInterface $transformer)
     {
         $logger = new NullLogger();
@@ -25,6 +32,9 @@ class TransformerManagerTest extends BaseUnitTestCase
         return new TransformerManager($transformerFactory, $config, $logger);
     }
 
+    /**
+     * @return void
+     */
     public function testApplySubstitutionsChangesNothingWithoutNames()
     {
         $scripts = $expectedScripts = array(
@@ -39,6 +49,9 @@ class TransformerManagerTest extends BaseUnitTestCase
         self::assertEquals($expectedScripts, $modifiedScripts);
     }
 
+    /**
+     * @return void
+     */
     public function testApplySubstitutionsChangesNothingWithUnknownScript()
     {
         $scripts = $expectedScripts = array(
@@ -53,6 +66,9 @@ class TransformerManagerTest extends BaseUnitTestCase
         self::assertEquals($expectedScripts, $modifiedScripts);
     }
 
+    /**
+     * @return void
+     */
     public function testApplySubstitutionsChangesOneScript()
     {
         $scripts = array(
@@ -72,6 +88,9 @@ class TransformerManagerTest extends BaseUnitTestCase
         self::assertEquals($expectedScripts, $modifiedScripts);
     }
 
+    /**
+     * @return void
+     */
     public function testApplySubstitutionsWithRecursion()
     {
         $scripts = array(
