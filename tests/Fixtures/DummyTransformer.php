@@ -4,14 +4,14 @@ use SubstitutionPlugin\Transformer\TransformerInterface;
 
 class DummyTransformer implements TransformerInterface
 {
-    /** @var string|null */
+    /** @var mixed */
     private $value;
 
     /** @var int */
     private $count = 0;
 
     /**
-     * @param string|null $value
+     * @param mixed $value
      */
     public function __construct($value = null)
     {

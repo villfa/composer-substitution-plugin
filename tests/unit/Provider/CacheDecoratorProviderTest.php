@@ -6,6 +6,9 @@ use SubstitutionPlugin\BaseUnitTestCase;
 
 class CacheDecoratorProviderTest extends BaseUnitTestCase
 {
+    /**
+     * @return void
+     */
     public function testGetValue()
     {
         $innerProvider = new LiteralProvider('foo');
@@ -14,6 +17,9 @@ class CacheDecoratorProviderTest extends BaseUnitTestCase
         self::assertEquals('foo', $provider->getValue());
     }
 
+    /**
+     * @return void
+     */
     public function testCache()
     {
         require_once self::getFixturesDir() . '/DummyProvider.php';

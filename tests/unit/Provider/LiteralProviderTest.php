@@ -6,6 +6,9 @@ use SubstitutionPlugin\BaseUnitTestCase;
 
 class LiteralProviderTest extends BaseUnitTestCase
 {
+    /**
+     * @return void
+     */
     public function testGetValue()
     {
         $value = 'foo bar';

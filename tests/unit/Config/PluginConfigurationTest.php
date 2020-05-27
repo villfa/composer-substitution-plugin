@@ -9,6 +9,7 @@ class PluginConfigurationTest extends BaseUnitTestCase
     /**
      * @dataProvider provideInvalidConfiguration
      * @param array $extra
+     * @return void
      */
     public function testInvalidConfiguration(array $extra)
     {
@@ -16,6 +17,9 @@ class PluginConfigurationTest extends BaseUnitTestCase
         self::assertFalse($config->isEnabled());
     }
 
+    /**
+     * @return array<array>
+     */
     public function provideInvalidConfiguration()
     {
         return array(
@@ -90,6 +94,9 @@ class PluginConfigurationTest extends BaseUnitTestCase
         );
     }
 
+    /**
+     * @return void
+     */
     public function testWithValidConfiguration()
     {
         $extra = array('substitution' => array(

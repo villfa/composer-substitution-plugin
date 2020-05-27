@@ -15,6 +15,9 @@ class LoggerDecoratorProviderTest extends BaseUnitTestCase
     /** @var SubstitutionConfiguration */
     private static $configuration;
 
+    /**
+     * @return void
+     */
     public static function doSetUpBeforeClass()
     {
         parent::doSetUpBeforeClass();
@@ -27,6 +30,9 @@ class LoggerDecoratorProviderTest extends BaseUnitTestCase
         );
     }
 
+    /**
+     * @return void
+     */
     public function testWithString()
     {
         $innerProvider = new LiteralProvider('foo');
@@ -42,6 +48,7 @@ class LoggerDecoratorProviderTest extends BaseUnitTestCase
     /**
      * @dataProvider provideInvalidValues
      * @param mixed $value
+     * @return void
      */
     public function testWithInvalidValues($value)
     {
@@ -55,6 +62,9 @@ class LoggerDecoratorProviderTest extends BaseUnitTestCase
         self::assertEquals('', $provider->getValue());
     }
 
+    /**
+     * @return array<array>
+     */
     public function provideInvalidValues()
     {
         return array(

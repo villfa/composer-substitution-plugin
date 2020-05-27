@@ -6,6 +6,9 @@ use SubstitutionPlugin\BaseUnitTestCase;
 
 class ProcessProviderTest extends BaseUnitTestCase
 {
+    /**
+     * @return void
+     */
     public function testValidCommand()
     {
         $command = 'echo TEST';
@@ -13,6 +16,9 @@ class ProcessProviderTest extends BaseUnitTestCase
         self::assertEquals('TEST', rtrim($provider->getValue()));
     }
 
+    /**
+     * @return void
+     */
     public function testInvalidCommand()
     {
         $command = 'echoechoecho';
