@@ -41,7 +41,7 @@ class BaseTestCase extends TestCase
      */
     public function setExpectedException($exception, $message = '', $code = null)
     {
-        if (method_exists(get_parent_class(), 'setExpectedException')) {
+        if (method_exists(get_parent_class(__CLASS__), 'setExpectedException')) {
             parent::setExpectedException($exception, $message, $code);
         } else {
             $this->expectException($exception);
