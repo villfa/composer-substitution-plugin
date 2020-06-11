@@ -23,10 +23,8 @@ final class CommandHelper
             }
 
             $scriptNames = array($input->getArgument('script'));
-        } else {
-            if (!$this->tryGetScriptsFromCommand($command, $scriptNames)) {
-                $scriptNames = array($command);
-            }
+        } elseif (!$this->tryGetScriptsFromCommand($command, $scriptNames)) {
+            $scriptNames = array($command);
         }
 
         $scriptNames = array_filter($scriptNames);

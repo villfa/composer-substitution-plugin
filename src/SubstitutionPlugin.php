@@ -138,12 +138,6 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
      */
     private function includeRequiredFiles()
     {
-        $files = array(
-            __DIR__ . '/utils-functions.php',
-        );
-
-        foreach ($files as $file) {
-            require_once $file;
-        }
+        require_once __DIR__ . '/utils-functions.php';
     }
 }
