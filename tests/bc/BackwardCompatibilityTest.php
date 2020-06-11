@@ -3,7 +3,6 @@
 namespace SubstitutionPlugin;
 
 use Composer\Util\Filesystem;
-use PHPUnit\Runner\Version;
 
 class BackwardCompatibilityTest extends BaseTestCase
 {
