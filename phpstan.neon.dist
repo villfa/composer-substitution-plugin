@@ -3,7 +3,7 @@ parameters:
   paths:
     - src
     - tests/unit
-  autoload_directories:
+  scanDirectories:
     - tests/Fixtures
   checkGenericClassInNonGenericObjectType: false
   checkMissingIterableValueType: false
