@@ -75,6 +75,9 @@ final class CommandHelper
                     'post-dependencies-solving',
                     'pre-package-install',
                     'post-package-install',
+                    'pre-operations-exec',
+                    'pre-pool-create',
+                    'post-file-download',
                 );
                 break;
             case 'update':
@@ -87,12 +90,16 @@ final class CommandHelper
                     'post-package-update',
                     'pre-package-uninstall',
                     'post-package-uninstall',
+                    'pre-operations-exec',
+                    'pre-pool-create',
+                    'post-file-download',
                 );
                 break;
             case 'remove':
                 $scriptNames = array(
                     'pre-package-uninstall',
                     'post-package-uninstall',
+                    'pre-operations-exec',
                 );
                 break;
             case 'dump-autoload':
