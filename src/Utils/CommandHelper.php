@@ -40,12 +40,10 @@ final class CommandHelper
     private function normalizeName($commandName)
     {
         global $application;
-        if ($application === null) {
-            $application = new Application();
-        }
+        $app = $application === null ? new Application() : $application;
 
         try {
-            $cmd = $application->find($commandName);
+            $cmd = $app->find($commandName);
             $name = $cmd->getName();
             if ($name === null && is_callable(array($cmd, 'getDefaultName'))) {
                 $name = call_user_func(array($cmd, 'getDefaultName'));
