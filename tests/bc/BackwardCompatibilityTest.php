@@ -101,7 +101,7 @@ class BackwardCompatibilityTest extends BaseTestCase
     {
         $versions = array(
             array('snapshot'),
-            array('1.10.8'),
+            array('1.10.9'),
             array('1.9.3'),
             array('1.8.6'),
             array('1.7.3'),
