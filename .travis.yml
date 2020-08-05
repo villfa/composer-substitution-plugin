@@ -26,7 +26,7 @@ matrix:
       php: 7.3
     - dist: bionic
       php: 7.4
-      env: PHPSTAN_URL="https://github.com/phpstan/phpstan/releases/download/0.12.28/phpstan.phar"
+      env: PHPSTAN_URL="https://github.com/phpstan/phpstan/releases/download/0.12.35/phpstan.phar"
     - dist: bionic
       php: 7.4
       env: COMPOSER_SNAPSHOT=true
