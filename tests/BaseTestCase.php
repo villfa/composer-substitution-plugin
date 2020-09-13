@@ -36,16 +36,18 @@ class BaseTestCase extends TestCase
 
     /**
      * @param string $exception Exception class name
-     * @param string $message
+     * @param null|string $message
      * @param int|string $code
      */
-    public function setExpectedException($exception, $message = '', $code = null)
+    public function setExpectedException($exception, $message = null, $code = null)
     {
         if (method_exists(get_parent_class(__CLASS__), 'setExpectedException')) {
             parent::setExpectedException($exception, $message, $code);
         } else {
             $this->expectException($exception);
-            $this->expectExceptionMessage($message);
+            if ($message !== null) {
+                $this->expectExceptionMessage($message);
+            }
             if ($code !== null) {
                 $this->expectExceptionCode($code);
             }
