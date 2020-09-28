@@ -1,11 +1,12 @@
 language: php
-sudo: false
+os: linux
+dist: bionic
 
 cache:
   directories:
     - $HOME/.composer/cache
 
-matrix:
+jobs:
   include:
     - dist: precise
       php: 5.3
@@ -17,21 +18,15 @@ matrix:
       php: 5.6
     - dist: xenial
       php: 7.0
-    - dist: bionic
-      php: 7.1
-    - dist: bionic
-      php: 7.2
+    - php: 7.1
+    - php: 7.2
       env: BC_TESTS=true
-    - dist: bionic
-      php: 7.3
-    - dist: bionic
-      php: 7.4
+    - php: 7.3
+    - php: 7.4
       env: PHPSTAN_URL="https://github.com/phpstan/phpstan/releases/download/0.12.42/phpstan.phar"
-    - dist: bionic
-      php: 7.4
+    - php: 7.4
       env: COMPOSER_SNAPSHOT=true
-    - dist: bionic
-      php: nightly
+    - php: nightly
       env: platform=ignore
   fast_finish: true
   allow_failures:
