@@ -1,4 +1,5 @@
 * text=auto eol=lf
+*.php diff=php
 
 .appveyor.yml export-ignore
 .editorconfig export-ignore
