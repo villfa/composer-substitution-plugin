@@ -1,4 +1,13 @@
 build: false
+
+skip_commits:
+  files:
+    - '.gitattributes'
+    - '.gitignore'
+    - '.travis.yml'
+    - 'LICENSE'
+    - '*.md'
+
 platform:
   - x64
 clone_folder: c:\projects\composer-substitution-plugin
