@@ -4,7 +4,7 @@ namespace SubstitutionPlugin\Compatibility\Prestissimo;
 
 use SubstitutionPlugin\BaseEndToEndTestCase;
 
-class CompatibilityPrestissimoTest extends BaseEndToEndTestCase
+class CompatibilityPrestissimoTestSkip extends BaseEndToEndTestCase
 {
     public static function doSetUpBeforeClass()
     {
