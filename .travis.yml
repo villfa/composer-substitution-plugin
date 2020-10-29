@@ -23,7 +23,7 @@ jobs:
       env: BC_TESTS=true
     - php: 7.3
     - php: 7.4
-      env: PHPSTAN_URL="https://github.com/phpstan/phpstan/releases/download/0.12.42/phpstan.phar"
+      env: PHPSTAN_URL="https://github.com/phpstan/phpstan/releases/download/0.12.52/phpstan.phar"
     - php: 7.4
       env: COMPOSER_SNAPSHOT=true
     - php: nightly
