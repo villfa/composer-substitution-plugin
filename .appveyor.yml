@@ -3,6 +3,7 @@ build: false
 skip_commits:
   files:
     - '.gitattributes'
+    - '.github/**'
     - '.gitignore'
     - '.travis.yml'
     - 'LICENSE'

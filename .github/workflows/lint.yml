@@ -1,0 +1,24 @@
+name: "Linting"
+
+on: [push, pull_request]
+
+jobs:
+  normalizer:
+    name: "Normalizing composer.json"
+
+    runs-on: "ubuntu-latest"
+
+    steps:
+
+      - name: "Checkout"
+        uses: "actions/checkout@v2"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          coverage: "none"
+          tools: composer-normalize
+          php-version: "7.4"
+
+      - name: "Normalize composer.json"
+        run: "composer-normalize --dry-run --no-check-lock --no-update-lock"
