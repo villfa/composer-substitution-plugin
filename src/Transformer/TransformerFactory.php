@@ -35,6 +35,7 @@ final class TransformerFactory implements TransformerFactoryInterface
                 $transformer->addTransformer($this->buildTransformer($conf));
             }
         } elseif ($nbSubstitutions === 1) {
+            /** @var SubstitutionConfigurationInterface $conf */
             $conf = current($configuration->getMapping());
             $transformer = $this->buildTransformer($conf);
         } else {
