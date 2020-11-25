@@ -4,7 +4,7 @@ The [Composer](https://getcomposer.org/) Substitution plugin replaces placeholde
 
 It also permits to cache these values during the command execution and adds the ability to escape them with the function of your choice.
 
-[![Travis Build Status](https://secure.travis-ci.org/villfa/composer-substitution-plugin.png?branch=master)](http://travis-ci.org/villfa/composer-substitution-plugin)
+[![Build Status](https://github.com/villfa/composer-substitution-plugin/workflows/Build/badge.svg)](https://github.com/villfa/composer-substitution-plugin/actions)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/villfa/composer-substitution-plugin?branch=master&svg=true)](https://ci.appveyor.com/project/villfa/composer-substitution-plugin)
 [![Latest Stable Version](https://poser.pugx.org/villfa/composer-substitution-plugin/v/stable)](https://packagist.org/packages/villfa/composer-substitution-plugin)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.3.2-8892BF.svg?style=flat-square)](https://php.net/)
