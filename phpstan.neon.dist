@@ -7,5 +7,3 @@ parameters:
     - tests/Fixtures
   checkGenericClassInNonGenericObjectType: false
   checkMissingIterableValueType: false
-  ignoreErrors:
-    - '#spl_autoload_register expects callable#'
