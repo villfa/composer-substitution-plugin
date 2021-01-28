@@ -100,8 +100,8 @@ class BackwardCompatibilityTest extends BaseTestCase
     public function provideComposerVersions()
     {
         $versions = array(
-            array('2.0.8'),
-            array('1.10.19'),
+            array('2.0.9'),
+            array('1.10.20'),
             array('1.9.3'),
             array('1.8.6'),
             array('1.7.3'),
