@@ -45,8 +45,9 @@ final class CommandHelper
         try {
             $cmd = $app->find($commandName);
             $name = $cmd->getName();
-            if ($name === null && is_callable(array($cmd, 'getDefaultName'))) {
-                $name = call_user_func(array($cmd, 'getDefaultName'));
+            $getDefaultNameFunc = array($cmd, 'getDefaultName');
+            if ($name === null && is_callable($getDefaultNameFunc)) {
+                $name = call_user_func($getDefaultNameFunc);
             }
             if ($name !== null) {
                 return $name;
