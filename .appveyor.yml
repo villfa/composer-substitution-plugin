@@ -18,6 +18,9 @@ environment:
   - php_ver_target: 7.2
   - php_ver_target: 7.4
 
+cache:
+  - '%LOCALAPPDATA%\Composer\files'
+
 init:
     - SET COMPOSER_NO_INTERACTION=1
 
