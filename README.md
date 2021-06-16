@@ -122,9 +122,9 @@ Here how it is configured:
         "enable": true,
         "mapping": {
             "$(nproc)": {
+                "cached": true,
                 "type": "include",
-                "value": "./scripts/nproc.php",
-                "cached": true
+                "value": "./scripts/nproc.php"
             }
         }
     }
