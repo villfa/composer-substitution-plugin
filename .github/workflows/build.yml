@@ -1,6 +1,20 @@
 name: "Build"
 
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - '.appveyor.yml'
+      - '.editorconfig'
+      - '.gitattributes'
+      - 'LICENSE'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - '.appveyor.yml'
+      - '.editorconfig'
+      - '.gitattributes'
+      - 'LICENSE'
 
 jobs:
   test:
