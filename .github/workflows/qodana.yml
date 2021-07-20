@@ -25,5 +25,4 @@ jobs:
         with:
           results-dir: ${{ github.workspace }}/qodana
 
-      - run: "ls -l ./qodana"
-      - run: "cat ${{ github.workspace }}/qodana/*"
+      - run: "cat ${{ github.workspace }}/qodana/*.json"
