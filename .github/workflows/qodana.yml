@@ -1,0 +1,17 @@
+name: Qodana
+
+on: push
+
+jobs:
+  qodana:
+    name: "Qodana analysis"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Qodana - Code Inspection
+        uses: JetBrains/qodana-action@v2.0-eap
+        with:
+          results-dir: ${{ github.workspace }}/qodana
+
+      - run: "cat ${{ github.workspace }}/qodana/*"
