@@ -64,7 +64,7 @@ class VeryVerboseLogger implements LoggerInterface
             }
             if (null === $val || is_scalar($val) || (\is_object($val) && method_exists($val, '__toString'))) {
                 $replacements["{{$key}}"] = $val;
-            } elseif ($val instanceof \DateTimeInterface) {
+            } elseif ($val instanceof \DateTime || $val instanceof \DateTimeInterface) {
                 $replacements["{{$key}}"] = $val->format(\DateTime::RFC3339);
             } elseif (\is_object($val)) {
                 $replacements["{{$key}}"] = '[object '.\get_class($val).']';
