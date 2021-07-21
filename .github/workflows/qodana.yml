@@ -28,4 +28,5 @@ jobs:
         with:
           results-dir: ${{ github.workspace }}/qodana
 
-      - run: cat ${{ github.workspace }}/qodana/*.json | jq --raw-output '.problems[] | "::error file=\(.file),line=\(.line),pos=\(.offset)::\(.problem_class.name)%0A\(.description)"'
+      - name: "Print errors"
+        run: cat ${{ github.workspace }}/qodana/*Inspection.json | jq --raw-output '.problems[] | "::error file=\(.file),line=\(.line),pos=\(.offset)::\(.problem_class.name)%0A\(.description)"'
