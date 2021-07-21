@@ -9,6 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: "Install jq"
+        run: "sudo apt-get install -y jq"
+
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
@@ -25,4 +28,4 @@ jobs:
         with:
           results-dir: ${{ github.workspace }}/qodana
 
-      - run: "cat ${{ github.workspace }}/qodana/*.json"
+      - run: cat ${{ github.workspace }}/qodana/*.json | jq --raw-output '.problems[] | "::error file=\(.file),line=\(.line),pos=\(.offset)::\(.problem_class.name)%0A\(.description)"'
