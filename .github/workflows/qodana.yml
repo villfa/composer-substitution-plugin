@@ -9,9 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: "Install jq"
-        run: "sudo apt-get install -y jq"
-
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
@@ -29,4 +26,4 @@ jobs:
           results-dir: ${{ github.workspace }}/qodana
 
       - name: "Print errors"
-        run: cat ${{ github.workspace }}/qodana/*Inspection.json | jq --raw-output '.problems[] | "::error file=\(.file),line=\(.line),pos=\(.offset)::\(.problem_class.name)%0A\(.description)"'
+        run: cat ${{ github.workspace }}/qodana/*Inspection.json | jq --raw-output '.problems[] | "::\(if .problem_class.severity == "ERROR" then "error" else "warning" end) file=\(.file | sub(".{21}";"")),line=\(.line),pos=\(.offset)::\(.problem_class.name)%0A\(.description)"'
