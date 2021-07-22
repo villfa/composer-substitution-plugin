@@ -92,4 +92,4 @@ jobs:
         run: "composer-normalize --dry-run --no-check-lock --no-update-lock"
 
       - name: "PHPStan Analyse"
-        run: "phpstan analyse"
+        run: "phpstan analyse --error-format=github"
