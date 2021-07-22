@@ -17,7 +17,7 @@ final class SubstitutionConfiguration extends AbstractConfiguration implements S
     private $value;
 
     /** @var bool */
-    private $cached = false;
+    private $cached;
 
     /**
      * Callback to a function/method to escape the value
