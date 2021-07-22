@@ -1,6 +1,14 @@
 name: Qodana
 
-on: push
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - '.appveyor.yml'
+      - '.editorconfig'
+      - '.gitattributes'
+      - '.github/workflows/build.yml'
+      - 'LICENSE'
 
 jobs:
   qodana:

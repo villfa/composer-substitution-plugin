@@ -2,9 +2,9 @@ build: false
 
 skip_commits:
   files:
+    - '.editorconfig'
     - '.gitattributes'
     - '.github/**'
-    - '.gitignore'
     - '.travis.yml'
     - 'LICENSE'
     - '*.md'
