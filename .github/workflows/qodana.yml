@@ -9,6 +9,8 @@ on:
       - '.gitattributes'
       - '.github/workflows/build.yml'
       - 'LICENSE'
+  # Allow manually triggering the workflow
+  workflow_dispatch:
 
 jobs:
   qodana:

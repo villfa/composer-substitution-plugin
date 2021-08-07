@@ -17,6 +17,8 @@ on:
       - '.gitattributes'
       - '.github/workflows/qodana.yml'
       - 'LICENSE'
+  # Allow manually triggering the workflow
+  workflow_dispatch:
 
 jobs:
   test:
