@@ -42,6 +42,7 @@ final class NonRewindableIterator implements \Iterator
     /**
      * @return string|null
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->value;
@@ -50,6 +51,7 @@ final class NonRewindableIterator implements \Iterator
     /**
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         next($this->values);
@@ -59,6 +61,7 @@ final class NonRewindableIterator implements \Iterator
     /**
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->values[$this->value];
@@ -67,6 +70,7 @@ final class NonRewindableIterator implements \Iterator
     /**
      * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return $this->value !== null;
@@ -75,6 +79,7 @@ final class NonRewindableIterator implements \Iterator
     /**
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         // no rewind
