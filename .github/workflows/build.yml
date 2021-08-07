@@ -64,7 +64,7 @@ jobs:
         run: "composer update --no-interaction --no-progress --prefer-dist --ignore-platform-reqs"
 
       - name: "Check PHP syntax"
-        run: "find src/ -type f -name '*.php' -print0 | xargs -0 -L1 -P4 -- php -l -f"
+        run: "find src/ -type f -name '*.php' -print0 | xargs -0 -n1 -P4 -- php -l -f"
 
       - name: "Run the test suite"
         run: "composer test"
