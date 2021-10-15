@@ -102,7 +102,7 @@ class BackwardCompatibilityTest extends BaseTestCase
         $versions = array(
             array('2.1.9'),
             array('2.0.14'),
-            array('1.10.22'),
+            array('1.10.23'),
             array('1.9.3'),
             array('1.8.6'),
             array('1.7.3'),
