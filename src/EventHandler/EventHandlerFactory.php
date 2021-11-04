@@ -2,7 +2,6 @@
 
 namespace SubstitutionPlugin\EventHandler;
 
-use Psr\Log\LoggerInterface;
 use SubstitutionPlugin\Config\PluginConfiguration;
 
 final class EventHandlerFactory implements EventHandlerFactoryInterface
@@ -13,19 +12,14 @@ final class EventHandlerFactory implements EventHandlerFactoryInterface
     /** @var PluginConfiguration */
     private $configuration;
 
-    /** @var LoggerInterface */
-    private $logger;
-
     /**
      * @param callable $callback
      * @param PluginConfiguration $configuration
-     * @param LoggerInterface $logger
      */
-    public function __construct($callback, PluginConfiguration $configuration, $logger)
+    public function __construct($callback, PluginConfiguration $configuration)
     {
         $this->callback = $callback;
         $this->configuration = $configuration;
-        $this->logger = $logger;
     }
 
     /**
@@ -39,7 +33,7 @@ final class EventHandlerFactory implements EventHandlerFactoryInterface
             case defined('Composer\\Plugin\\PluginEvents::PRE_COMMAND_RUN'):
                 return new PreCommandRunHandler($this->callback, $this->configuration);
             default:
-                return new LegacyEventHandler($this->callback, $this->configuration);
+                return new LegacyEventHandler($this->callback);
         }
     }
 }

@@ -54,7 +54,7 @@ final class SubstitutionPlugin implements PluginInterface, EventSubscriberInterf
         $providerFactory = new ProviderFactory($composer, $logger);
         $transformerFactory = new TransformerFactory($providerFactory, $logger);
         $this->transformerManager = new TransformerManager($transformerFactory, $config, $logger);
-        $eventHandlerFactory = new EventHandlerFactory(array($this, 'execute'), $config, $logger);
+        $eventHandlerFactory = new EventHandlerFactory(array($this, 'execute'), $config);
         self::$eventHandler = $eventHandlerFactory->getEventHandler();
         self::$eventHandler->activate();
     }

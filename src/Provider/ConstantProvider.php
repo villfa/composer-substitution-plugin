@@ -2,7 +2,7 @@
 
 namespace SubstitutionPlugin\Provider;
 
-final class ConstantProvider implements AutoloadDependentProviderInterface
+final class ConstantProvider implements AutoloadDependentProviderInterface, TolerantProviderInterface
 {
     /** @var string */
     private $constantName;

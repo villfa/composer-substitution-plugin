@@ -2,7 +2,7 @@
 
 namespace SubstitutionPlugin\Provider;
 
-final class IncludeProvider implements AutoloadDependentProviderInterface
+final class IncludeProvider implements AutoloadDependentProviderInterface, TolerantProviderInterface
 {
     /** @var string */
     private $path;

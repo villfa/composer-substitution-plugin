@@ -2,7 +2,7 @@
 
 namespace SubstitutionPlugin\Provider;
 
-interface AutoloadDependentProviderInterface extends ProviderInterface
+interface AutoloadDependentProviderInterface
 {
     /**
      * @return bool

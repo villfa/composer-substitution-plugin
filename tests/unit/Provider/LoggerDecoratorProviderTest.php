@@ -52,7 +52,7 @@ class LoggerDecoratorProviderTest extends BaseUnitTestCase
      */
     public function testWithInvalidValues($value)
     {
-        $innerProvider = new LiteralProvider($value);
+        $innerProvider = new DummyProvider($value);
         $provider = new LoggerDecoratorProvider(
             self::$logger,
             self::$configuration,

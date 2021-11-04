@@ -7,8 +7,8 @@ final class CacheDecoratorProvider implements ProviderInterface
     /** @var ProviderInterface */
     private $provider;
 
-    /** @var string|null */
-    private $value;
+    /** @var string */
+    private $value = '';
 
     /** @var bool */
     private $hasValue = false;

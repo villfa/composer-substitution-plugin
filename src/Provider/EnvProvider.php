@@ -2,7 +2,7 @@
 
 namespace SubstitutionPlugin\Provider;
 
-final class EnvProvider implements ProviderInterface
+final class EnvProvider implements TolerantProviderInterface
 {
     /** @var string */
     private $envVarName;

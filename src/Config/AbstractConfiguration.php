@@ -30,11 +30,11 @@ abstract class AbstractConfiguration
         if (is_bool($value)) {
             return $value;
         }
-        if ($value === 1 || in_array(strtolower($value), array('true', 'on', '1'))) {
+        if ($value === 1 || (is_string($value) && in_array(strtolower($value), array('true', 'on', '1')))) {
             self::$logger->notice("Configuration extra.substitution.$key should be a boolean.");
             return true;
         }
-        if ($value === 0 || in_array(strtolower($value), array('false', 'off', '0'))) {
+        if ($value === 0 || (is_string($value) && in_array(strtolower($value), array('false', 'off', '0')))) {
             self::$logger->notice("Configuration extra.substitution.$key should be a boolean.");
             return false;
         }

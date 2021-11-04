@@ -2,7 +2,6 @@
 
 namespace SubstitutionPlugin\EventHandler;
 
-use SubstitutionPlugin\Config\PluginConfiguration;
 use SubstitutionPlugin\Utils\CommandHelper;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputArgument;
@@ -14,20 +13,15 @@ final class LegacyEventHandler implements EventHandlerInterface
     /** @var callable */
     private $callback;
 
-    /** @var PluginConfiguration */
-    private $configuration;
-
     /** @var CommandHelper */
     private $cmdHelper;
 
     /**
      * @param callable $callback
-     * @param PluginConfiguration $configuration
      */
-    public function __construct($callback, PluginConfiguration $configuration)
+    public function __construct($callback)
     {
         $this->callback = $callback;
-        $this->configuration = $configuration;
         $this->cmdHelper = new CommandHelper();
     }
 

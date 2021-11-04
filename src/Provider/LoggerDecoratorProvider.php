@@ -13,13 +13,13 @@ final class LoggerDecoratorProvider implements ProviderInterface
     /** @var SubstitutionConfigurationInterface */
     private $configuration;
 
-    /** @var ProviderInterface */
+    /** @var TolerantProviderInterface */
     private $provider;
 
     public function __construct(
         LoggerInterface $logger,
         SubstitutionConfigurationInterface $configuration,
-        ProviderInterface $provider
+        TolerantProviderInterface $provider
     ) {
         $this->logger = $logger;
         $this->configuration = $configuration;

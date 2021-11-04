@@ -5,7 +5,7 @@ namespace SubstitutionPlugin\Provider;
 use Composer\Composer;
 use Psr\Log\LoggerInterface;
 
-final class AutoloaderDecoratorProvider implements ProviderInterface
+final class AutoloaderDecoratorProvider implements TolerantProviderInterface
 {
     /** @var bool */
     private static $autoload = false;
@@ -16,13 +16,13 @@ final class AutoloaderDecoratorProvider implements ProviderInterface
     /** @var LoggerInterface */
     private $logger;
 
-    /** @var ProviderInterface */
+    /** @var TolerantProviderInterface */
     private $provider;
 
     public function __construct(
         Composer $composer,
         LoggerInterface $logger,
-        ProviderInterface $provider
+        TolerantProviderInterface $provider
     ) {
         $this->composer = $composer;
         $this->logger = $logger;
