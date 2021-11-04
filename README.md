@@ -86,9 +86,9 @@ extra.substitution.enable | yes | bool | false | Enables the plugin when true
 extra.substitution.mapping | yes | object | empty object | Mapping between placeholders (the keys) and substitution rules (the values). There is no restriction with the placeholders format.
 extra.substitution.mapping.*.type | yes | string | n/a | Substitution type (see the related section below)
 extra.substitution.mapping.*.value | yes | string | n/a | Substitution value (depends on the type)
-extra.substitution.mapping.*.cached | false | bool | false | Indicates whether the value provided after the first substitution must be cached
-extra.substitution.mapping.*.escape | false | string | null | Escaping function that will receive the substitute value as argument
-extra.substitution.priority | false | integer | 0 | Plugin's event handler priority (see [Composer documentation](https://getcomposer.org/doc/articles/plugins.md#event-handler))
+extra.substitution.mapping.*.cached | no | bool | false | Indicates whether the value provided after the first substitution must be cached
+extra.substitution.mapping.*.escape | no | string | null | Escaping function that will receive the substitute value as argument
+extra.substitution.priority | no | integer | 0 | Plugin's event handler priority (see [Composer documentation](https://getcomposer.org/doc/articles/plugins.md#event-handler))
 
 ### Substitution types
 
