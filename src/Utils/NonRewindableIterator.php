@@ -14,6 +14,14 @@ final class NonRewindableIterator implements \Iterator
     private $total = 0;
 
     /**
+     * @param string[] $values
+     */
+    public function __construct(array $values = array())
+    {
+        $this->addAll($values);
+    }
+
+    /**
      * @param string $value
      * @return void
      */

@@ -45,6 +45,27 @@ class NonRewindableIteratorTest extends BaseUnitTestCase
     /**
      * @return void
      */
+    public function testSimpleIterationWithConstructor()
+    {
+        $it = new NonRewindableIterator(array('a'));
+        $it->add('b');
+        $it->add('c');
+
+        $keys = array();
+        $values = array();
+
+        foreach ($it as $k => $v) {
+            $keys[] = $k;
+            $values[] = $v;
+        }
+
+        self::assertEquals(array(0, 1, 2), $keys);
+        self::assertEquals(array('a', 'b', 'c'), $values);
+    }
+
+    /**
+     * @return void
+     */
     public function testSimpleIterationWithDuplicates()
     {
         $it = new NonRewindableIterator();
