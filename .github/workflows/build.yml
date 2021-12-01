@@ -23,8 +23,8 @@ on:
 jobs:
   test:
     name: "Run the test suite"
-
     runs-on: "ubuntu-latest"
+    continue-on-error: ${{ matrix.experimental == true }}
 
     strategy:
       matrix:
@@ -46,6 +46,10 @@ jobs:
           - php-version: "8.1"
             tools: "composer:v2"
 
+          - php-version: "8.2"
+            tools: "composer:v2"
+            experimental: true
+
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v2"
@@ -59,11 +63,11 @@ jobs:
           php-version: "${{ matrix.php-version }}"
 
       - name: "Install dependencies"
-        if: "matrix.php-version != '8.1'"
+        if: "matrix.php-version != '8.2'"
         run: "composer install --no-interaction --no-progress --prefer-dist"
 
       - name: "Install dependencies ignoring PHP requirement"
-        if: "matrix.php-version == '8.1'"
+        if: "matrix.php-version == '8.2'"
         run: "composer update --no-interaction --no-progress --prefer-dist --ignore-platform-reqs"
 
       - name: "Check PHP syntax"
@@ -73,7 +77,7 @@ jobs:
         run: "composer test"
 
       - name: "Run the backward compatibility tests"
-        if: "matrix.php-version == '7.4'"
+        if: "matrix.php-version == '8.0'"
         run: "composer test:bc"
 
   analysis:
@@ -90,7 +94,7 @@ jobs:
         with:
           coverage: "none"
           tools: "composer:v2, composer-normalize, phpstan"
-          php-version: "7.4"
+          php-version: "8.0"
 
       - name: "Install dependencies"
         run: "composer install --no-interaction --no-progress --prefer-dist"
