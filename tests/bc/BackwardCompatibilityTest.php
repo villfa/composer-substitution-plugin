@@ -105,23 +105,23 @@ class BackwardCompatibilityTest extends BaseTestCase
         );
 
         if (version_compare(PHP_VERSION, '8.1') < 0) {
-            $versions[] = '1.10.23';
+            $versions[] = array('1.10.23');
         }
 
         if (version_compare(PHP_VERSION, '8.0') < 0) {
-            $versions[] = '1.9.3';
-            $versions[] = '1.8.6';
-            $versions[] = '1.7.3';
-            $versions[] = '1.6.5';
+            $versions[] = array('1.9.3');
+            $versions[] = array('1.8.6');
+            $versions[] = array('1.7.3');
+            $versions[] = array('1.6.5');
         }
 
         if (version_compare(PHP_VERSION, '7.3') < 0) {
-            $versions[] = '1.5.6';
-            $versions[] = '1.4.3';
-            $versions[] = '1.3.3';
-            $versions[] = '1.2.4';
-            $versions[] = '1.1.3';
-            $versions[] = '1.0.3';
+            $versions[] = array('1.5.6');
+            $versions[] = array('1.4.3');
+            $versions[] = array('1.3.3');
+            $versions[] = array('1.2.4');
+            $versions[] = array('1.1.3');
+            $versions[] = array('1.0.3');
         }
 
         return $versions;
