@@ -1,7 +1,10 @@
 {
     "name": "villfa/composer-substitution-plugin",
-    "type": "composer-plugin",
     "description": "Composer plugin replacing placeholders in the scripts section by dynamic values",
+    "license": [
+        "MIT"
+    ],
+    "type": "composer-plugin",
     "keywords": [
         "composer",
         "plugin",
@@ -9,16 +12,13 @@
         "replacement",
         "scripts"
     ],
-    "homepage": "https://github.com/villfa/composer-substitution-plugin",
-    "license": [
-        "MIT"
-    ],
     "authors": [
         {
             "name": "Fabien VILLEPINTE",
             "email": "fabien.villepinte@gmail.com"
         }
     ],
+    "homepage": "https://github.com/villfa/composer-substitution-plugin",
     "require": {
         "php": ">=5.3.2",
         "ext-ctype": "*",
@@ -30,13 +30,8 @@
         "composer/composer": ">=1.1",
         "phpunit/phpunit": "4.8.36 || 5.7.27 || 6.5.14 || 8.5.16 || ^9.5.5"
     },
-    "config": {
-        "optimize-autoloader": true,
-        "sort-packages": true
-    },
-    "extra": {
-        "class": "SubstitutionPlugin\\SubstitutionPlugin"
-    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "SubstitutionPlugin\\": "src/"
@@ -56,8 +51,13 @@
             "tests/BaseTestCase.php"
         ]
     },
-    "minimum-stability": "stable",
-    "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "extra": {
+        "class": "SubstitutionPlugin\\SubstitutionPlugin"
+    },
     "scripts": {
         "test": [
             "@composer validate --no-interaction --strict",
