@@ -31,9 +31,14 @@ jobs:
         run: "composer update --no-interaction --no-progress --prefer-dist --ignore-platform-reqs"
 
       - name: Qodana - Code Inspection
-        uses: JetBrains/qodana-action@v2.0-eap
+        uses: JetBrains/qodana-action@@v3.2.1
         with:
           results-dir: ${{ github.workspace }}/qodana
+
+      - name: Debug
+        run: |
+          cat ${{ github.workspace }}/qodana/report
+          cat ${{ github.workspace }}/qodana/report.sarif
 
       - name: "Print check annotations"
         run: cat ${{ github.workspace }}/qodana/*Inspection.json | jq --raw-output '.problems[] | "::\(if .problem_class.severity == "ERROR" then "error" else "warning" end) file=\(.file | sub(".{21}";"")),line=\(.line),pos=\(.offset)::\(.problem_class.name)%0A\(.description)"'
