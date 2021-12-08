@@ -1,10 +1,11 @@
 build: false
 
+# https://www.appveyor.com/docs/how-to/filtering-commits/#file-matching-rules
 skip_commits:
   files:
     - '.editorconfig'
     - '.gitattributes'
-    - '.github/**'
+    - '.github/'
     - '.travis.yml'
     - 'LICENSE'
     - '*.md'
