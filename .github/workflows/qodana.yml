@@ -34,6 +34,10 @@ jobs:
         uses: JetBrains/qodana-action@v3.2.1
         with:
           results-dir: ${{ github.workspace }}/qodana
+      
+      - name: Debug
+        run: |
+          ls -l ${{ github.workspace }}/qodana
 
       - name: "Print check annotations"
         run: cat ${{ github.workspace }}/qodana/*Inspection.json | jq --raw-output '.problems[] | "::\(if .problem_class.severity == "ERROR" then "error" else "warning" end) file=\(.file | sub(".{21}";"")),line=\(.line),pos=\(.offset)::\(.problem_class.name)%0A\(.description)"'
