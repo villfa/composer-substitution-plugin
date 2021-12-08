@@ -37,8 +37,11 @@ jobs:
 
       - name: Debug
         run: |
-          cat ${{ github.workspace }}/qodana/report.sarif
-          ls -l ${{ github.workspace }}/qodana/report
+          ls -lR ${{ github.workspace }}/qodana/report
+
+      - uses: actions/upload-artifact@v2
+        with:
+          path: qodana/report
 
       - name: "Print check annotations"
         run: cat ${{ github.workspace }}/qodana/*Inspection.json | jq --raw-output '.problems[] | "::\(if .problem_class.severity == "ERROR" then "error" else "warning" end) file=\(.file | sub(".{21}";"")),line=\(.line),pos=\(.offset)::\(.problem_class.name)%0A\(.description)"'
