@@ -37,7 +37,11 @@ jobs:
       
       - name: Debug
         run: |
-          ls -l ${{ github.workspace }}/qodana
+          ls -lR ${{ github.workspace }}/qodana
+          cat ${{ github.workspace }}/qodana/qodana-short.sarif.json
+          cat ${{ github.workspace }}/qodana/qodana.sarif.json
+          cat ${{ github.workspace }}/qodana/report
+          cat ${{ github.workspace }}/qodana/report.sarif
 
       - name: "Print check annotations"
         run: cat ${{ github.workspace }}/qodana/*Inspection.json | jq --raw-output '.problems[] | "::\(if .problem_class.severity == "ERROR" then "error" else "warning" end) file=\(.file | sub(".{21}";"")),line=\(.line),pos=\(.offset)::\(.problem_class.name)%0A\(.description)"'
