@@ -39,13 +39,11 @@ jobs:
           - "7.3"
           - "7.4"
           - "8.0"
+          - "8.1"
         tools:
           - "composer:v1"
           - "composer:v2"
         include:
-          - php-version: "8.1"
-            tools: "composer:v2"
-
           - php-version: "8.2"
             tools: "composer:v2"
             experimental: true
