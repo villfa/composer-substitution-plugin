@@ -10,6 +10,5 @@
 phpstan.neon.dist export-ignore
 phpunit.xml.dist export-ignore
 psalm.xml export-ignore
-qodana.yaml export-ignore
 README.md export-ignore
 tests/ export-ignore

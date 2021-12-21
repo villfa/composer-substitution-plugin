@@ -1,5 +1,0 @@
-exclude:
-  - name: All
-    paths:
-      - tests
-      - vendor/bin
