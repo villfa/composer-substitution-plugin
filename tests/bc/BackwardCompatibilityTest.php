@@ -102,11 +102,8 @@ class BackwardCompatibilityTest extends BaseTestCase
         $versions = array(
             array('2.1.14'),
             array('2.0.14'),
+            array('1.10.24'),
         );
-
-        if (version_compare(PHP_VERSION, '8.1') < 0) {
-            $versions[] = array('1.10.23');
-        }
 
         if (version_compare(PHP_VERSION, '8.0') < 0) {
             $versions[] = array('1.9.3');
