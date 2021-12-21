@@ -7,7 +7,6 @@ on:
       - '.appveyor.yml'
       - '.editorconfig'
       - '.gitattributes'
-      - '.github/workflows/qodana.yml'
       - 'LICENSE'
   pull_request:
     paths-ignore:
@@ -15,7 +14,6 @@ on:
       - '.appveyor.yml'
       - '.editorconfig'
       - '.gitattributes'
-      - '.github/workflows/qodana.yml'
       - 'LICENSE'
   # Allow manually triggering the workflow
   workflow_dispatch:
