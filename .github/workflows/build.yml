@@ -23,6 +23,8 @@ jobs:
     name: "Run the test suite"
     runs-on: "ubuntu-latest"
     continue-on-error: ${{ matrix.experimental == true }}
+    # We want to run on external PRs, but not on our own internal PRs as they'll be run by the push to the branch.
+    if: ${{ !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) }}
 
     strategy:
       matrix:
@@ -78,8 +80,9 @@ jobs:
 
   analysis:
     name: "Run static analysis"
-
     runs-on: "ubuntu-latest"
+    # We want to run on external PRs, but not on our own internal PRs as they'll be run by the push to the branch.
+    if: ${{ !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) }}
 
     steps:
       - name: "Checkout"
