@@ -23,6 +23,7 @@ class PluginConfigurationTest extends BaseUnitTestCase
     public function provideInvalidConfiguration()
     {
         return array(
+            // no configuration
             array(array()),
             // wrong format
             array(array('substitution' => false)),
@@ -112,6 +113,34 @@ class PluginConfigurationTest extends BaseUnitTestCase
         $config = new PluginConfiguration($extra);
         self::assertTrue($config->isEnabled());
         self::assertEquals(0, $config->getPriority());
+        /** @var SubstitutionConfiguration $subConf */
+        $subConf = current($config->getMapping());
+        self::assertEquals('ph', $subConf->getPlaceholder());
+        self::assertEquals('foo', $subConf->getValue());
+        self::assertEquals('literal', $subConf->getType());
+        self::assertEquals('addslashes', $subConf->getEscapeCallback());
+        self::assertFalse($subConf->isCached());
+    }
+
+    /**
+     * @return void
+     */
+    public function testWithValidConfigurationButDisabled()
+    {
+        $extra = array('substitution' => array(
+            'enable' => false,
+            'mapping' => array(
+                'ph' => array(
+                    'value' => 'foo',
+                    'type' => 'literal',
+                    'escape' => 'addslashes',
+                ),
+            ),
+            'priority' => 1,
+        ));
+        $config = new PluginConfiguration($extra);
+        self::assertFalse($config->isEnabled());
+        self::assertEquals(1, $config->getPriority());
         /** @var SubstitutionConfiguration $subConf */
         $subConf = current($config->getMapping());
         self::assertEquals('ph', $subConf->getPlaceholder());

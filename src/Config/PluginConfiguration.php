@@ -24,8 +24,10 @@ final class PluginConfiguration extends AbstractConfiguration implements PluginC
 
         if (!isset($extra['substitution'])) {
             self::$logger->debug('Configuration extra.substitution is missing.');
+            $this->enabled = false;
         } elseif (!is_array($extra['substitution'])) {
             self::$logger->warning('Configuration extra.substitution must be an object.');
+            $this->enabled = false;
         } else {
             $this->parseConfiguration($extra['substitution']);
         }
