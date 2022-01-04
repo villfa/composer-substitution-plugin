@@ -90,10 +90,9 @@ extra.substitution.mapping.*.cached | no | bool | false | Indicates whether the 
 extra.substitution.mapping.*.escape | no | string | null | Escaping function that will receive the substitute value as argument
 extra.substitution.priority | no | integer | 0 | Plugin's event handler priority (see [Composer documentation](https://getcomposer.org/doc/articles/plugins.md#event-handler))
 
-<Warning>
-:warning: From Composer 2.2+ you'll have to configure your `composer.json` file to allow the plugin to run:
-</Warning>
+| :warning: **From Composer 2.2+ you'll have to configure your `composer.json` file to allow the plugin to run** |
 
+Example:
 ```json
 {
     "config": {
