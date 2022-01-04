@@ -2,6 +2,7 @@
 
 namespace SubstitutionPlugin\Config;
 
+use Composer\Composer;
 use Psr\Log\LoggerInterface;
 
 final class PluginConfiguration extends AbstractConfiguration implements PluginConfigurationInterface
@@ -17,12 +18,16 @@ final class PluginConfiguration extends AbstractConfiguration implements PluginC
 
     public function __construct(array $extra, LoggerInterface $logger = null)
     {
+        // Change the default value to true if Composer >= 2.2
+        $this->enabled = version_compare(Composer::VERSION, '2.2', '>=');
         self::setLogger($logger);
 
         if (!isset($extra['substitution'])) {
             self::$logger->debug('Configuration extra.substitution is missing.');
+            $this->enabled = false;
         } elseif (!is_array($extra['substitution'])) {
             self::$logger->warning('Configuration extra.substitution must be an object.');
+            $this->enabled = false;
         } else {
             $this->parseConfiguration($extra['substitution']);
         }
