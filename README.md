@@ -91,6 +91,7 @@ extra.substitution.mapping.*.escape | no | string | null | Escaping function tha
 extra.substitution.priority | no | integer | 0 | Plugin's event handler priority (see [Composer documentation](https://getcomposer.org/doc/articles/plugins.md#event-handler))
 
 | :warning: **From Composer 2.2+ you'll have to configure your `composer.json` file to allow the plugin to run** |
+| --- |
 
 Example:
 ```json
