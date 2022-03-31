@@ -46,6 +46,7 @@ jobs:
         include:
           - php-version: "8.2"
             tools: "composer:v2"
+            composer-options: "--ignore-platform-reqs"
             experimental: true
 
     steps:
@@ -61,12 +62,10 @@ jobs:
           php-version: "${{ matrix.php-version }}"
 
       - name: "Install dependencies"
-        if: "matrix.php-version != '8.2'"
-        run: "composer install --no-interaction --no-progress --prefer-dist"
-
-      - name: "Install dependencies ignoring PHP requirement"
-        if: "matrix.php-version == '8.2'"
-        run: "composer update --no-interaction --no-progress --prefer-dist --ignore-platform-reqs"
+        uses: "ramsey/composer-install@v2"
+        with:
+          dependency-versions: "highest"
+          composer-options: "${{ matrix.composer-options }}"
 
       - name: "Check PHP syntax"
         run: "find src/ -type f -name '*.php' -print0 | xargs -0 -n1 -P4 -- php -l -f"
@@ -74,8 +73,29 @@ jobs:
       - name: "Run the test suite"
         run: "composer test"
 
+  bc-tests:
+    name: "Run backward compatibility tests"
+    runs-on: "ubuntu-latest"
+    # We want to run on external PRs, but not on our own internal PRs as they'll be run by the push to the branch.
+    if: ${{ !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) }}
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v3"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          coverage: "none"
+          tools: "composer:v2"
+          php-version: "8.0"
+
+      - name: "Install dependencies"
+        uses: "ramsey/composer-install@v2"
+        with:
+          dependency-versions: "highest"
+
       - name: "Run the backward compatibility tests"
-        if: "matrix.php-version == '8.0'"
         run: "composer test:bc"
 
   analysis:
@@ -96,7 +116,9 @@ jobs:
           php-version: "8.0"
 
       - name: "Install dependencies"
-        run: "composer install --no-interaction --no-progress --prefer-dist"
+        uses: "ramsey/composer-install@v2"
+        with:
+          dependency-versions: "highest"
 
       - name: "Normalize composer.json"
         run: "composer-normalize --dry-run --no-check-lock --no-update-lock"
