@@ -15,6 +15,7 @@
     },
     "config": {
         "allow-plugins": {
+            "hirak/prestissimo": true,
             "villfa/composer-substitution-plugin": true
         }
     },
