@@ -11,6 +11,11 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "villfa/composer-substitution-plugin": true
+        }
+    },
     "extra": {
         "scripts-dev": {
             "test": "echo {text}"

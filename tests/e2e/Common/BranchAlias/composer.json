@@ -13,6 +13,11 @@
     "scripts": {
         "test": "echo {text}"
     },
+    "config": {
+        "allow-plugins": {
+            "villfa/composer-substitution-plugin": true
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "99.0.0-dev"
