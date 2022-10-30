@@ -123,5 +123,8 @@ jobs:
       - name: "Normalize composer.json"
         run: "composer-normalize --dry-run --no-check-lock --no-update-lock"
 
+      - name: "Check for PSR-4 violations"
+        run: "composer dump-autoload --optimize --strict-psr --no-scripts"
+
       - name: "PHPStan Analyse"
         run: "phpstan analyse --error-format=github"

@@ -49,6 +49,9 @@
         },
         "files": [
             "tests/BaseTestCase.php"
+        ],
+        "exclude-from-classmap": [
+            "**/vendor/"
         ]
     },
     "config": {
