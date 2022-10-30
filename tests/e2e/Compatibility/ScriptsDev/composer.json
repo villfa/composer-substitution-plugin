@@ -13,6 +13,7 @@
     "prefer-stable": true,
     "config": {
         "allow-plugins": {
+            "neronmoon/scriptsdev": true,
             "villfa/composer-substitution-plugin": true
         }
     },
