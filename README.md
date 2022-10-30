@@ -82,7 +82,7 @@ Hi John Doe, the database is OK.
 
 Configuration key | Mandatory | Type | Default value | Description
 ----------------- | --------- | ---- | ------------- | -----------
-extra.substitution.enable | false | bool | true with Composer 2.2+, false otherwise | Disables the plugin when false
+extra.substitution.enable | no | bool | true with Composer 2.2+, false otherwise | Disables the plugin when false
 extra.substitution.mapping | yes | object | empty object | Mapping between placeholders (the keys) and substitution rules (the values). There is no restriction with the placeholders format.
 extra.substitution.mapping.*.type | yes | string | n/a | Substitution type (see [the related section](#substitution-types) below)
 extra.substitution.mapping.*.value | yes | string | n/a | Substitution value (depends on the type)
