@@ -13,6 +13,11 @@
     "scripts": {
         "test": "echo PLACEHOLDER"
     },
+    "config": {
+        "allow-plugins": {
+            "villfa/composer-substitution-plugin": true
+        }
+    },
     "extra": {
         "substitution": {
             "enable": true,

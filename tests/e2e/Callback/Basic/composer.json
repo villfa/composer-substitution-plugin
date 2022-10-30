@@ -19,6 +19,11 @@
         "test-native-func": "echo #PHP_VERSION",
         "test-ud-func": "echo #BAR"
     },
+    "config": {
+        "allow-plugins": {
+            "villfa/composer-substitution-plugin": true
+        }
+    },
     "extra": {
         "substitution": {
             "enable": true,

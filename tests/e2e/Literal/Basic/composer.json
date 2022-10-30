@@ -24,6 +24,11 @@
         "test_recursion": "@{test_cmd}",
         "test_abbreviation": "echo {test_abbreviation}"
     },
+    "config": {
+        "allow-plugins": {
+            "villfa/composer-substitution-plugin": true
+        }
+    },
     "extra": {
         "substitution": {
             "enable": true,

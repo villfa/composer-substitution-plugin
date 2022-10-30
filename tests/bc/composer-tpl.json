@@ -22,6 +22,11 @@
             "echo {pre-status-cmd}"
         ]
     },
+    "config": {
+        "allow-plugins": {
+            "villfa/composer-substitution-plugin": true
+        }
+    },
     "extra": {
         "substitution": {
             "enable": true,

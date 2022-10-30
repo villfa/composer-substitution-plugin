@@ -19,6 +19,11 @@
         "class-const": "echo {COMPOSER_VERSION}",
         "autoload-const": "echo {FOO}"
     },
+    "config": {
+        "allow-plugins": {
+            "villfa/composer-substitution-plugin": true
+        }
+    },
     "extra": {
         "substitution": {
             "enable": true,

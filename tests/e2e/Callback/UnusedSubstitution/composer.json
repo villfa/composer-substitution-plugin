@@ -15,6 +15,11 @@
         "uncalled": "echo count: (COUNT)",
         "redirect-test": "@test"
     },
+    "config": {
+        "allow-plugins": {
+            "villfa/composer-substitution-plugin": true
+        }
+    },
     "extra": {
         "substitution": {
             "enable": true,
