@@ -104,6 +104,11 @@ Example:
 }
 ```
 
+You can just execute this command:
+```
+composer config allow-plugins.villfa/composer-substitution-plugin true
+```
+
 For more details, see https://getcomposer.org/doc/06-config.md#allow-plugins
 
 ### Substitution types
