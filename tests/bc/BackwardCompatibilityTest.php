@@ -97,34 +97,45 @@ class BackwardCompatibilityTest extends BaseTestCase
         self::assertContains('PRE STATUS SUBSTITUTION', $output);
     }
 
+    /**
+     * @return iterable<string, array{string}>
+     */
     public function provideComposerVersions()
     {
-        $versions = array(
-            array('2.2.18'),
-            array('2.1.14'),
-            array('2.0.14'),
-            array('1.10.26'),
+        $allVersions = array(
+            '2.5.0' => array('7.2.5', null),
+            '2.4.4' => array('7.2.5', null),
+            '2.3.10' => array('7.2.5', null),
+            '2.2.18' => array('5.3', null),
+            '2.1.14' => array('5.3', null),
+            '2.0.14' => array('5.3', null),
+            '1.10.26' => array('5.3', null),
+            '1.9.3' => array('5.3', '8.0'),
+            '1.8.6' => array('5.3', '8.0'),
+            '1.7.3' => array('5.3', '8.0'),
+            '1.6.5' => array('5.3', '8.0'),
+            '1.5.6' => array('5.3', '7.3'),
+            '1.4.3' => array('5.3', '7.3'),
+            '1.3.3' => array('5.3', '7.3'),
+            '1.2.4' => array('5.3', '7.3'),
+            '1.1.3' => array('5.3', '7.3'),
+            '1.0.3' => array('5.3', '7.3'),
         );
-        
-        if (version_compare(PHP_VERSION, '7.2.5') >= 0) {
-            array_unshift($versions, array('2.4.4'));
-            array_unshift($versions, array('2.3.10'));
-        }
 
-        if (version_compare(PHP_VERSION, '8.0') < 0) {
-            $versions[] = array('1.9.3');
-            $versions[] = array('1.8.6');
-            $versions[] = array('1.7.3');
-            $versions[] = array('1.6.5');
-        }
+        $versions = array();
 
-        if (version_compare(PHP_VERSION, '7.3') < 0) {
-            $versions[] = array('1.5.6');
-            $versions[] = array('1.4.3');
-            $versions[] = array('1.3.3');
-            $versions[] = array('1.2.4');
-            $versions[] = array('1.1.3');
-            $versions[] = array('1.0.3');
+        foreach ($allVersions as $versionNumber => $constraints) {
+            list($phpMinVersion, $phpMaxVersion) = $constraints;
+
+            if (version_compare(PHP_VERSION, $phpMinVersion) < 0) {
+                continue;
+            }
+
+            if ($phpMaxVersion !== null && version_compare(PHP_VERSION, $phpMaxVersion) >= 0) {
+                continue;
+            }
+
+            $versions[$versionNumber] = array($versionNumber);
         }
 
         return $versions;
