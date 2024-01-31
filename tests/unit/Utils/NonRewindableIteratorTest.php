@@ -16,7 +16,6 @@ class NonRewindableIteratorTest extends BaseUnitTestCase
             throw new \LogicException('Should not enter the loop');
         }
 
-        /** @phpstan-ignore-next-line */
         self::assertFalse(isset($k, $v));
     }
 
