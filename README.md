@@ -126,7 +126,7 @@ For each type of substitution the value replacing the placeholder comes from a d
 
 ### [PHPUnit Extra Constraints](https://github.com/villfa/phpunit-extra-constraints)
 
-This library defines a Composer script which uses [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) this way:
+This library defines a Composer script which uses [PHP_CodeSniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer) this way:
 ```sh
 "scripts": {
     "phpcs": "phpcs --standard=PSR12 --parallel=$(nproc) src/ tests/",
